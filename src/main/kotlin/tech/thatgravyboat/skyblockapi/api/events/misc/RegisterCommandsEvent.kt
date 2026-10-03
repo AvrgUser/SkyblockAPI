@@ -94,7 +94,7 @@ open class CommandBuilder<B : ArgumentBuilder<FabricClientCommandSource, B>>(
         return this
     }
 
-    open fun <T> then(
+    open fun <T : Any> then(
         name: String,
         argument: ArgumentType<T>,
         suggestions: Collection<String>,
@@ -106,7 +106,7 @@ open class CommandBuilder<B : ArgumentBuilder<FabricClientCommandSource, B>>(
         action,
     )
 
-    open fun <T> then(
+    open fun <T : Any> then(
         name: String,
         argument: ArgumentType<T>,
         suggestions: SuggestionProvider<FabricClientCommandSource>? = null,
@@ -118,8 +118,9 @@ open class CommandBuilder<B : ArgumentBuilder<FabricClientCommandSource, B>>(
             this.builder.then(builder.builder)
             return this
         }
+        val argumentBuilder: RequiredArgumentBuilder<FabricClientCommandSource, T> = ClientCommands.argument(name, argument)
         val builder = CommandBuilder(
-            ClientCommands.argument(name, argument).apply {
+            argumentBuilder.apply {
                 if (suggestions != null) suggests(suggestions)
             },
         )
@@ -134,7 +135,7 @@ open class CommandBuilder<B : ArgumentBuilder<FabricClientCommandSource, B>>(
         }
     }
 
-    open fun <T> thenCallback(
+    open fun <T : Any> thenCallback(
         name: String,
         argument: ArgumentType<T>,
         suggestions: Collection<String>,
@@ -144,7 +145,7 @@ open class CommandBuilder<B : ArgumentBuilder<FabricClientCommandSource, B>>(
     }
 
 
-    open fun <T> thenCallback(
+    open fun <T : Any> thenCallback(
         name: String,
         argument: ArgumentType<T>,
         suggestions: SuggestionProvider<FabricClientCommandSource>? = null,

@@ -219,7 +219,7 @@ object PartyAPI {
 
                 val member = PartyMember(name.cleanPlayerName(), partyRole)
                 add(member)
-                member.isOnline = statusStyles.color.value == TextColor.GREEN
+                member.isOnline = statusStyles.color?.value == TextColor.GREEN
                 debugMessage { "Updated party player member: $member" }
                 if (partyRole == PartyRole.LEADER) this.leader = member
             }

@@ -77,7 +77,7 @@ internal class SelectButton<T>(width: Int, height: Int) : AbstractButton(0, 0, w
         }
     }
 
-    override fun updateWidgetNarration(output: NarrationElementOutput?) {}
+    override fun updateWidgetNarration(output: NarrationElementOutput) {}
 
     override fun extractContents(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, partialTicks: Float) {
         val text = this.getMessage()

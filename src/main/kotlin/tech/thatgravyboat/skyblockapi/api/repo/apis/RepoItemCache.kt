@@ -178,9 +178,12 @@ internal data object RepoQueryCommands {
         field: SchemaField<Query, Type>,
         callback: CommandBuilder<out ArgumentBuilder<FabricClientCommandSource, *>>.() -> Unit,
     ) {
-        then(
-            field.name, field.argument,
-            LayeredSuggestionProvider(
+        @Suppress("UNCHECKED_CAST")
+        val argument = field.argument as ArgumentType<Any>
+        then<Any>(
+            field.name,
+            argument,
+            suggestions = LayeredSuggestionProvider(
                 ArgumentTypeSuggestionProvider(field.argument),
                 SuggestionProvider<FabricClientCommandSource> { _, builder ->
                     field.suggestionProvider(builder::suggest)

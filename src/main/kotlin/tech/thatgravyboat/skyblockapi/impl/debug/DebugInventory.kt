@@ -84,7 +84,9 @@ internal object DebugInventory {
             InputConstants.KEY_R,
             {
                 if (McScreen.isShiftDown) {
-                    NbtUtils.structureToSnbt(it.item.toNbt(ItemStack.CODEC)?.asCompound()?.get())
+                    val compound = it.item.toNbt(ItemStack.CODEC)?.asCompound()?.orElse(null)
+                        ?: error("Item stack did not encode to a compound tag")
+                    NbtUtils.structureToSnbt(compound)
                 } else {
                     it.item.toJson(ItemStack.CODEC).toPrettyString()
                 }
