@@ -12,7 +12,7 @@ public enum class CorpseType(val key: String? = null) {
     private val string = toFormattedName()
     override fun toString(): String = string
 
-    companion object {
+    public companion object {
         public fun byName(name: String): CorpseType? = entries.find { it.name.equals(name, true) }
     }
 }

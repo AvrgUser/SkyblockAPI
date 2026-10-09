@@ -25,7 +25,7 @@ public enum class MineshaftType(val id: String) {
     private val string = toFormattedName()
     override fun toString() = string
 
-    companion object {
+    public companion object {
         public fun fromId(id: String): MineshaftType? = entries.find { it.id.equals(id, true) }
     }
 }
@@ -35,7 +35,7 @@ public enum class MineshaftVariant(val id: String) {
     TWO("2"),
     CRYSTAL("C");
 
-    companion object {
+    public companion object {
         public fun fromId(id: String): MineshaftVariant = entries.find { it.id.equals(id, true) } ?: ONE
     }
 }

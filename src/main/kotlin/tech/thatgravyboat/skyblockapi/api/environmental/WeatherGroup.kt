@@ -395,7 +395,7 @@ public enum class WeatherGroup(
 
     public fun inLocation(): Boolean = island.inIsland() && (areas.isEmpty() || SkyBlockArea.inAnyArea(areas))
 
-    companion object {
+    public companion object {
         public fun getGroupsFor(island: SkyBlockIsland): List<WeatherGroup> = entries.filter { it.island == island }
         public fun getGroupFor(island: SkyBlockIsland, area: SkyBlockArea?): WeatherGroup? = entries.find { it.island == island && (area == null || area in it.areas) }
 

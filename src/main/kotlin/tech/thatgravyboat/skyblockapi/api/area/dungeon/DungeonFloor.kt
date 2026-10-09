@@ -29,7 +29,7 @@ public enum class DungeonFloor(
 
     constructor(bossName: String, floorNumber: Int, longName: String) : this(bossName, bossName, floorNumber, longName)
 
-    companion object {
+    public companion object {
         public fun getByName(name: String) = valueOfOrNull<DungeonFloor>(name.uppercase())
         public fun getByLongName(name: String) = DungeonFloor.entries.firstOrNull { it.longName == name }
     }

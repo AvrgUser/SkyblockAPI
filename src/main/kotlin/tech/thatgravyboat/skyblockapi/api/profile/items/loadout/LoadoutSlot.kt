@@ -22,9 +22,9 @@ public data class LoadoutSlot(
 ) {
     public constructor(id: Int) : this(id, null,null,null,null,null,null,null,null)
 
-    context(source: DataSource)
+    public context(source: DataSource)
     fun value(value: Int?) = NumberMatch(value, source, currentInstant())
-    context(source: DataSource)
+    public context(source: DataSource)
     fun value(value: String?) = StringMatch(value, source, currentInstant())
 }
 

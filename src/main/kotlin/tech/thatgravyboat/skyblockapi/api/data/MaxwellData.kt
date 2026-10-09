@@ -30,7 +30,7 @@ public data class MaxwellData(
     @Deprecated("Use accessoryPower instead", ReplaceWith("accessoryPower"), level = HIDDEN)
     var magicalPower: Int by ::accessoryPower
 
-    companion object {
+    public companion object {
         public val CODEC: Codec<MaxwellData> = SkyblockAPICodecs.getCodec<MaxwellData>()
     }
 }

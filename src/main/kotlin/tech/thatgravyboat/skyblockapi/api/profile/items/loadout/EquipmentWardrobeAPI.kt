@@ -162,7 +162,7 @@ public object EquipmentWardrobeAPI {
     }
 
     @Subscription
-    context(event: LoadoutChangeEvent)
+    public context(event: LoadoutChangeEvent)
     fun onLoadoutSwitch() {
         LoadoutStorage.equipment?.currentSlot = event.new?.equipment.value() ?: return
         if (currentSlot != -1) EquipmentStorage.setEquipment(LoadoutStorage.equipment?.slots[currentSlot!!])

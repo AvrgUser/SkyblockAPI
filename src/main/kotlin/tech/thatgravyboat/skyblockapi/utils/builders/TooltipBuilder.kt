@@ -10,7 +10,7 @@ public class TooltipBuilder() {
         this.lines.addAll(lines)
     }
 
-    companion object {
+    public companion object {
         public fun multiline(init: TooltipBuilder.() -> Unit): MutableComponent = Text.multiline(TooltipBuilder().also(init).lines)
     }
 

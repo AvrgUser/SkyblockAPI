@@ -11,7 +11,7 @@ public data class StorageData(
     val normal: PlayerStorageData = PlayerStorageData(),
     val rift: MutableList<PlayerStorageInstance> = mutableListOf(),
 ) {
-    companion object {
+    public companion object {
         internal val CODEC = SkyblockAPICodecs.getCodec<StorageData>()
     }
 }

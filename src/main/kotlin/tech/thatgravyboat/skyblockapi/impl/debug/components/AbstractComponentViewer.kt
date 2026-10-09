@@ -38,7 +38,7 @@ public class AbstractComponentViewer(val map: Map<ComponentViewerCategory, Compo
     public var scroll = 0
 
     @Module
-    companion object {
+    public companion object {
         private val toggle by debugToggle("item_component_viewer", "Enables item component viewer Keybind, press \"C\".")
 
         public fun open(item: ComponentViewable) = McClient.setScreenAsync {

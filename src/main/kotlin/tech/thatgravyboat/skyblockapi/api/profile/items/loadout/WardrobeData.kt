@@ -8,7 +8,7 @@ public data class WardrobeData(
     var currentSlot: Int = -1,
     var slots: MutableList<WardrobeSlot> = mutableListOf(),
 ) {
-    companion object {
+    public companion object {
         public val CODEC = SkyblockAPICodecs.getCodec<WardrobeData>()
     }
 }

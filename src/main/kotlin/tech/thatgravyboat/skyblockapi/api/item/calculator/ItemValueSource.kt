@@ -32,7 +32,7 @@ public enum class ItemValueSource(val calc: Calculator) : Calculator by calc {
     OVERCLOCKER(OverclockerCalculator)
     ;
 
-    companion object {
+    public companion object {
         public fun calculate(lowestBin: Long, stack: ItemStack): ItemValueResult {
             val id = stack.getSkyBlockId() ?: return ItemValueResult.EMPTY
             val sources = entries.associateWith { it.calc.calculate(id, stack) }.mapNotNull { (key, value) -> value?.let { GroupedEntry(key, value) } }
@@ -50,7 +50,7 @@ public data class ItemValueResult(
     val price: Long,
     val entryTree: List<GroupedEntry>,
 ) {
-    companion object {
+    public companion object {
         @JvmField
         public val EMPTY = ItemValueResult(0L, 0L, listOf())
     }

@@ -18,7 +18,7 @@ public data class SkyBlockBiome(val biome: Identifier) {
     public operator fun contains(position: Vec3): Boolean = contains(BlockPos(position.x().toInt(), position.y().toInt(), position.z().toInt()))
     public operator fun contains(position: BlockPos): Boolean = McLevel.self?.getBiome(position)?.unwrapKey()?.getOrNull()?.identifier == biome
 
-    companion object {
+    public companion object {
         public fun inAnyBiome(vararg biomes: SkyBlockBiome) = LocationAPI.biome in biomes
         public fun inAnyBiome(biomes: Collection<SkyBlockBiome>) = LocationAPI.biome in biomes
     }

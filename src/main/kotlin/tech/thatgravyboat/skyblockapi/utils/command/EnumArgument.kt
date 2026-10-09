@@ -45,7 +45,7 @@ public class EnumArgument<E : Enum<E>> private constructor(
 
     override fun getExamples(): Collection<String> = entries.map { it.name }
 
-    companion object {
+    public companion object {
         public fun <E : Enum<E>> create(clazz: Class<E>): EnumArgument<E> = EnumArgument(clazz)
 
         public inline operator fun <reified E : Enum<E>> invoke(): EnumArgument<E> {

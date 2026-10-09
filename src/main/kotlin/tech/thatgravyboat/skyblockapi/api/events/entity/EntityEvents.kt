@@ -28,7 +28,7 @@ public object EntityEvents {
     public var remainingPerTick: Long = 40
 
     @Subscription
-    context(_: TickEvent)
+    public context(_: TickEvent)
     fun tick() {
         remainingPerTick = 40
     }

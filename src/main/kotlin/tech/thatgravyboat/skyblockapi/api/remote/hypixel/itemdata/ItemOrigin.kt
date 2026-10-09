@@ -10,7 +10,7 @@ public enum class ItemOrigin {
     UNKNOWN,
     ;
 
-    companion object {
+    public companion object {
         @IncludedCodec
         public val CODEC: Codec<ItemOrigin> = EnumCodec.forKCodec(entries.toTypedArray()).orElse(UNKNOWN)
     }

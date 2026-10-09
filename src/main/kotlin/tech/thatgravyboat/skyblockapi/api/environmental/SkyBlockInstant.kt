@@ -70,7 +70,7 @@ public data class SkyBlockInstant(val instant: Instant) {
         second: Int = this.second,
     ): SkyBlockInstant = SkyBlockInstant(year, month, day, hour, minute, second)
 
-    companion object {
+    public companion object {
 
         public fun now(): SkyBlockInstant = SkyBlockInstant(currentInstant())
     }

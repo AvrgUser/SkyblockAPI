@@ -29,7 +29,7 @@ public class ItemBuilder {
     public var foregroundColor: Int = 0
     public var borderColor: Int = 0
 
-    companion object {
+    public companion object {
         public operator fun invoke(item: ItemLike, init: ItemBuilder.() -> Unit): ItemStack {
             return ItemBuilder().apply {
                 this.item = item.asItem()

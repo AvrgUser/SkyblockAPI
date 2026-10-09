@@ -5,7 +5,7 @@ import me.owdding.ktcodecs.IncludedCodec
 import tech.thatgravyboat.skyblockapi.generated.SkyblockAPICodecs
 
 public data class FameRank(val id: String, val name: String, val multiplier: Double) {
-    companion object {
+    public companion object {
 
         @IncludedCodec(keyable = true)
         public val CODEC: Codec<FameRank> = SkyblockAPICodecs.getCodec<String>().xmap(FameRanks::getById, FameRank::id)

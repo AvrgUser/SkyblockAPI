@@ -124,7 +124,7 @@ public enum class SkyBlockStat(
         this@of.color = this@SkyBlockStat.color
     }
 
-    companion object {
+    public companion object {
         public fun fromName(name: String): SkyBlockStat? {
             return entries.find { it.displayName.equals(name, ignoreCase = true) }
         }

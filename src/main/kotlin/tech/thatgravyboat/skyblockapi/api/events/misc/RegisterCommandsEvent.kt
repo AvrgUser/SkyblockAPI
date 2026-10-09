@@ -63,7 +63,7 @@ public class RegisterCommandsEvent(private val dispatcher: CommandDispatcher<Fab
         }
     }
 
-    companion object {
+    public companion object {
         public inline fun <reified T> CommandContext<*>.argument(name: String): T = this.getArgument(name, T::class.java)
     }
 }

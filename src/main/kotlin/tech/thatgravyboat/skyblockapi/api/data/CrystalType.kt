@@ -27,7 +27,7 @@ public enum class CrystalType(val textColor: Int, skyblockId: String? = null) {
         this.color = textColor
     }
 
-    companion object {
+    public companion object {
         public fun byName(name: String): CrystalType? {
             return entries.find { it.name.equals(name, true) || "${it.name} Crystal".equals(name, true) }
         }
@@ -40,7 +40,7 @@ public enum class CrystalStatus {
     PLACED,
     ;
 
-    companion object {
+    public companion object {
         public fun fromString(str: String): CrystalStatus? = when (str) {
             "Not Found", "✖ Not Found" -> NOT_FOUND
             "Found", "✔ Found" -> FOUND

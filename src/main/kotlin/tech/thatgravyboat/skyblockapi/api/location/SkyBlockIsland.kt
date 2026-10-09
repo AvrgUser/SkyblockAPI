@@ -36,7 +36,7 @@ public enum class SkyBlockIsland(val id: String, displayName: String? = null) {
 
     override fun toString() = displayName
 
-    companion object {
+    public companion object {
 
         public fun getById(input: String) = entries.firstOrNull { it.id == input }
 

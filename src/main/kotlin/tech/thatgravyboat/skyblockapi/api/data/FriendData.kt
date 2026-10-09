@@ -9,7 +9,7 @@ import tech.thatgravyboat.skyblockapi.generated.SkyblockAPICodecs
 public data class FriendData(
     val friends: MutableList<Friend> = mutableListOf()
 ) {
-    companion object {
+    public companion object {
         public val CODEC: Codec<FriendData> = SkyblockAPICodecs.getCodec<FriendData>()
     }
 }

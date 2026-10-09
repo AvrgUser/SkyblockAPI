@@ -18,7 +18,7 @@ public enum class CostTypes(override val type: KClass<out Cost>) : DispatchHelpe
     ESSENCE(EssenceCost::class),
     ;
 
-    companion object {
+    public companion object {
         public fun getType(id: String) = entries.first { it.id.equals(id, true) }
     }
 }
@@ -28,7 +28,7 @@ public data class EssenceCost(
     @FieldName("essence_type") val essenceType: Essence,
     val amount: Int,
 ) : Cost(CostTypes.ESSENCE) {
-    companion object {
+    public companion object {
         internal val CODEC: MapCodec<EssenceCost> = SkyblockAPICodecs.EssenceCostCodec
     }
 }
@@ -38,7 +38,7 @@ public data class ItemCost(
     @FieldName("item_id") val itemId: String,
     val amount: Int,
 ) : Cost(CostTypes.ITEM) {
-    companion object {
+    public companion object {
         internal val CODEC: MapCodec<ItemCost> = SkyblockAPICodecs.ItemCostCodec
     }
 }
@@ -47,13 +47,13 @@ public data class ItemCost(
 public data class CoinCost(
     @FieldName("coins") val amount: Int,
 ) : Cost(CostTypes.COINS) {
-    companion object {
+    public companion object {
         internal val CODEC: MapCodec<CoinCost> = SkyblockAPICodecs.CoinCostCodec
     }
 }
 
 public abstract class Cost(val type: CostTypes) {
-    companion object {
+    public companion object {
         internal val CODEC: Codec<Cost> = SkyblockAPICodecs.CostCodec.codec()
 
         public fun calculateCost(cost: Cost) = when (cost) {

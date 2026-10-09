@@ -24,7 +24,7 @@ public enum class CommissionArea(val area: String, val areaCheck: () -> Boolean)
     GLACITE_TUNNELS("Glacite Tunnels", { GlaciteAPI.inGlaciteTunnels() }),
     ;
 
-    companion object {
+    public companion object {
 
         public val currentArea: CommissionArea?
             get() = entries.find { it.areaCheck() }

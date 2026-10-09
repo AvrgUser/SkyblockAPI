@@ -41,7 +41,7 @@ public class DataType<T> private constructor(
         return resolver.invoke(context, stack)
     }
 
-    companion object {
+    public companion object {
 
         public fun <T> of(id: String, type: KType, autoRegister: Boolean = true, resolver: (ResolutionContext, ItemStack) -> T?): DataType<T> {
             return DataType(id, autoRegister, resolver, type)

@@ -408,7 +408,7 @@ public abstract class DevUtils {
         allDevUtils.add(this)
     }
 
-    companion object {
+    public companion object {
         public val allDevUtils = mutableListOf<DevUtils>()
     }
 }

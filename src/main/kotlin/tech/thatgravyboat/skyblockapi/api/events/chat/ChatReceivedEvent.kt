@@ -24,7 +24,7 @@ public abstract class ChatReceivedEvent : SkyBlockEvent() {
 
     override fun post(bus: EventBus) = bus.post(this, null, onError)
 
-    companion object {
+    public companion object {
         private val onError: ((Throwable) -> Unit)? = if (McClient.isDev) null else {
             { SkyBlockAPI.logger.error("Error posting ChatReceivedEvent", it) }
         }

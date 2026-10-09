@@ -22,10 +22,10 @@ public enum class StateResult(val match: Boolean, val continuation: Boolean) {
 public interface ComponentStateMachinePart<State> {
     public fun createState(): State
 
-    context(state: State, _: GroupSink)
+    public context(state: State, _: GroupSink)
     fun tryConsumeState(index: Int, char: Char, style: Style): StateResult
 
-    context(state: State)
+    public context(state: State)
     fun endState(groupSink: GroupSink) {
     }
 }
@@ -33,7 +33,7 @@ public interface ComponentStateMachinePart<State> {
 public interface ComponentStatelessMachinePart : ComponentStateMachinePart<Unit> {
     override fun createState() = Unit
 
-    context(_: GroupSink)
+    public context(_: GroupSink)
     fun tryConsume(index: Int, char: Char, style: Style): StateResult
 
     context(state: Unit, _: GroupSink)
@@ -251,7 +251,7 @@ public data class CapturingComponentPart(
         return State(StateMachinePosition(children))
     }
 
-    context(state: State)
+    public context(state: State)
     fun capture(char: Char, style: Style) {
         state.result.add(Pair(char, style))
     }
@@ -346,7 +346,7 @@ public class StateMachinePosition<Type>(
     public val state: Type = part.createState(),
     public var index: Int = 0,
 ) {
-    context(groupSink: GroupSink)
+    public context(groupSink: GroupSink)
     fun tryConsume(char: Char, style: Style): StateResult = context(state) {
         part.tryConsumeState(index++, char, style)
     }
@@ -355,7 +355,7 @@ public class StateMachinePosition<Type>(
         end()
     }
 
-    context(groupSink: GroupSink)
+    public context(groupSink: GroupSink)
     fun end() = context(state) {
         part.endState(groupSink)
     }
@@ -364,7 +364,7 @@ public class StateMachinePosition<Type>(
 public class ComponentStateMachine(
     public val parts: ComponentStateMachinePart<*>,
 ) {
-    companion object {
+    public companion object {
         public fun build(builder: StateMachineBuilder.() -> Unit): ComponentStateMachine = ComponentStateMachine(StateMachineBuilder().apply(builder).toPart())
     }
 

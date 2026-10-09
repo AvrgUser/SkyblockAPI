@@ -10,7 +10,7 @@ public sealed class SkillTreeType<out API : SkillTreeAPI<*, *, *>>(api: () -> AP
     public object Hotm : SkillTreeType<HotmAPI>({ HotmAPI })
     public object Hotf : SkillTreeType<HotfAPI>({ HotfAPI })
 
-    companion object {
+    public companion object {
         public val types: List<SkillTreeType<*>> = listOf(Hotm, Hotf)
     }
 }

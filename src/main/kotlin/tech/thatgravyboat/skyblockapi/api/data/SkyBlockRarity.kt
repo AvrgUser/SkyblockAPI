@@ -27,7 +27,7 @@ public enum class SkyBlockRarity(val color: Int, val skyBlockColor: Int, vararg 
 
     override fun toString(): String = displayName
 
-    companion object {
+    public companion object {
         public fun fromNameOrNull(name: String) = entries.find { r -> r.name.equals(name, true) || r.alternativeNames.any { name.equals(it, true) } }
         public fun fromName(name: String) = fromNameOrNull(name) ?: COMMON
 

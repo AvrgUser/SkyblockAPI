@@ -264,6 +264,7 @@ abstract class CommandFileTask @Inject constructor(layout: ProjectLayout) : Defa
         val commands = dir.resolve("commands.kt")
         commands.writeText(
             buildString {
+                appendLine("@file:Suppress(\"NO_EXPLICIT_VISIBILITY_IN_API_MODE\")")
                 append("package ").appendLine(packageName.get())
                 appendLine()
                 append(createCommandFile(maxDepth.get()))

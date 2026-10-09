@@ -10,7 +10,7 @@ public data class CommunityCenterData(
     var gems: Long = 0,
     val bitsAvailable: MutableMap<String, Long> = mutableMapOf(),
 ) {
-    companion object {
+    public companion object {
         public val CODEC: Codec<CommunityCenterData> = SkyblockAPICodecs.getCodec<CommunityCenterData>()
     }
 }

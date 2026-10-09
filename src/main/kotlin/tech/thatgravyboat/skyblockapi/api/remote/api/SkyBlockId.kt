@@ -30,7 +30,7 @@ public typealias SkyBlockItemId = SkyBlockId
 
 @JvmInline
 public value class SkyBlockId private constructor(val id: String) {
-    companion object Companion {
+    public companion object Companion {
         @JvmStatic
         @get:JvmName("getIdResolverKind")
         internal val idResolverKind: ThreadLocal<IdResolverKind> = ThreadLocal.withInitial { IdResolverKind.Unknown }

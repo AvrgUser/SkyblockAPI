@@ -11,7 +11,7 @@ public enum class TrophyFishRank(val displayName: Component) {
     EXPERT(displayName = Text.of("Expert") { withStyle(ChatFormatting.GOLD) }),
     MASTER(displayName = Text.of("Master") { withStyle(ChatFormatting.AQUA) });
 
-    companion object {
+    public companion object {
         public fun getById(id: Int): TrophyFishRank? {
             return entries.find { it.ordinal == id }
         }

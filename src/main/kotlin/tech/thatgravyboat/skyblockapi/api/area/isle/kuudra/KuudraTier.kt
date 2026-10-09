@@ -9,7 +9,7 @@ public enum class KuudraTier(val tier: Int) {
     FIERY(4),
     INFERNAL(5);
 
-    companion object {
+    public companion object {
         public fun getByName(name: String) = valueOfOrNull<KuudraTier>(name.uppercase())
     }
 }

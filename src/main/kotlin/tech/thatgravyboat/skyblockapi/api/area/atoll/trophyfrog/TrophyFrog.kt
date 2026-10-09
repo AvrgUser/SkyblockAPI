@@ -23,7 +23,7 @@ public data class TrophyFrog(val type: TrophyFrogType, val tier: TrophyTier) {
         "${type.internalName.lowercase()}_${tier.name.lowercase()}"
     }
 
-    companion object {
+    public companion object {
         public fun fromString(fish: String): TrophyFrog? {
             if (fish.contains("/")) {
                 return fish.split("/").let {

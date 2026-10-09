@@ -25,7 +25,7 @@ public enum class SkyBlockSeason {
 
     override fun toString() = string
 
-    companion object {
+    public companion object {
         public fun parse(value: String): SkyBlockSeason? = valueOfOrNull(value.replace(" ", "_").uppercase())
     }
 }

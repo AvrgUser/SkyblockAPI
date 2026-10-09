@@ -150,7 +150,7 @@ public object ChestDump {
         val items: List<ItemStack>,
         val type: Identifier,
     ) {
-        companion object {
+        public companion object {
             public val DEFAULT = ChestDumpStorage(CommonText.EMPTY, emptyList(), BuiltInRegistries.MENU.getKey(MenuType.GENERIC_9x6)!!)
         }
     }

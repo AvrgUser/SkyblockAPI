@@ -10,7 +10,7 @@ public data class EffectsData(
     var boosterCookieExpireTime: Instant = Instant.DISTANT_PAST,
     var godPotionDuration: Duration = Duration.ZERO,
 ) {
-    companion object {
+    public companion object {
         public val CODEC = SkyblockAPICodecs.getCodec<EffectsData>()
     }
 }

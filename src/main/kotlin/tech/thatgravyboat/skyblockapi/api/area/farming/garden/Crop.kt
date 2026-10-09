@@ -42,7 +42,7 @@ public enum class Crop(val tool: FarmingTool, vararg block: Block, skyBlockId: S
 
     public val item: ItemStack get() = this.skyBlockId.toItem()
 
-    companion object {
+    public companion object {
         private fun isStemOfAge(state: BlockState, vararg ages: Int): Boolean = state.getValue(StemBlock.AGE) in ages
         private fun isSunflowerOrMoonFlower(state: BlockState): Boolean {
             return when (state.block) {

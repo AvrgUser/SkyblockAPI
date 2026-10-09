@@ -5,7 +5,7 @@ import me.owdding.ktcodecs.IncludedCodec
 import tech.thatgravyboat.skyblockapi.generated.SkyblockAPICodecs
 
 public data class MaxwellPower(val name: String, val internalName: String) {
-    companion object {
+    public companion object {
         @IncludedCodec(keyable = true)
         public val CODEC: Codec<MaxwellPower> = SkyblockAPICodecs.getCodec<String>().xmap(MaxwellPowers::getById, MaxwellPower::internalName)
     }

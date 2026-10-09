@@ -8,7 +8,7 @@ import tech.thatgravyboat.skyblockapi.generated.SkyblockAPICodecs
 public data class TrophyFrogData(
     val data: MutableMap<TrophyFrogType, MutableMap<TrophyTier, Int>> = mutableMapOf(),
 ) {
-    companion object {
+    public companion object {
         public val CODEC = SkyblockAPICodecs.getCodec<TrophyFrogData>()
     }
 }

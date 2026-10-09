@@ -15,7 +15,7 @@ public sealed class CurrencyUpdateEvent<N : Number>(val new: N, val old: N) : Sk
     public class NorthStars(new: Long, old: Long) : CurrencyUpdateEvent<Long>(new, old)
     public class Gems(new: Long, old: Long) : CurrencyUpdateEvent<Long>(new, old)
 
-    companion object {
+    public companion object {
         @get:JvmName("diffLong")
         public val CurrencyUpdateEvent<Long>.diff get() = new - old
 

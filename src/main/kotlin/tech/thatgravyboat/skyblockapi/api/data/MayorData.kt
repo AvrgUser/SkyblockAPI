@@ -122,7 +122,7 @@ public enum class FoxyExtraEventType(val eventName: String) {
     FISHING_FESTIVAL("Fishing Festival"),
     UNKNOWN("Unknown");
 
-    companion object {
+    public companion object {
         public fun fromDescription(description: String): FoxyExtraEventType {
             val strippedDescription = description.stripColor()
             return entries.firstOrNull { it != UNKNOWN && it.eventName in strippedDescription } ?: UNKNOWN

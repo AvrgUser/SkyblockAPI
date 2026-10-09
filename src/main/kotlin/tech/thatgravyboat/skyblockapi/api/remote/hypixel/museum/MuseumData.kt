@@ -68,7 +68,7 @@ public data class RepoMuseumData(
     @FieldName("all_items") val allItems: Set<String> = emptySet(),
     @FieldName("armor_sets") val armorSets: Map<String, List<String>> = emptyMap(),
 ) {
-    companion object {
+    public companion object {
         public val CODEC: Codec<RepoMuseumData> = SkyblockAPICodecs.RepoMuseumDataCodec.codec()
     }
 }

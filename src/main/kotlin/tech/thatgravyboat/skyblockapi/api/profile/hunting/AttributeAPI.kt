@@ -451,7 +451,7 @@ public data object AttributeAPI : ItemDebugCategory {
     @Subscription
     @OnlyOnSkyBlock
     @OptIn(SkyBlockPvRequired::class)
-    context(event: SkyBlockPvOpenedEvent)
+    public context(event: SkyBlockPvOpenedEvent)
     fun udpateAttributes() {
         var hasLoadedAny = false
 

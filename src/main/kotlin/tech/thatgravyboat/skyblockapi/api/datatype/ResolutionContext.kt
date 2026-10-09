@@ -24,7 +24,7 @@ public class ResolutionContext internal constructor(private val stack: ItemStack
 
         public fun resolve(stack: ItemStack): T = this.resolver.invoke(stack)
 
-        companion object {
+        public companion object {
 
             public val RAW_LORE: Resolver<List<String>> = Resolver("raw_lore", ItemStack::computeRawLore)
             public val ID: Resolver<String?> = Resolver("id") { it.unsafeTag?.getStringOrNull("id") }

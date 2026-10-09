@@ -10,7 +10,7 @@ public class RegexGroup(private val prefix: String) {
 
     public fun group(subgroup: String) = RegexGroup("$prefix.$subgroup")
 
-    companion object {
+    public companion object {
         public val SCOREBOARD = RegexGroup("scoreboard")
         public val TABLIST = RegexGroup("tablist")
         public val TABLIST_WIDGET = TABLIST.group("widget")

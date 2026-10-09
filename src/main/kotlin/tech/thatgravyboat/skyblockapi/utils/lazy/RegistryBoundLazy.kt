@@ -37,7 +37,7 @@ public class RegistryBoundLazy<out T : Any>(private val factory: () -> T) : Lazy
     }
 
     @Module
-    companion object {
+    public companion object {
 
         private var registryCacheKey = -1
 

@@ -18,7 +18,7 @@ public class RaffleMiningEvent : MiningEvent {
     override val name: String = "Raffle"
 
     @Module
-    companion object {
+    public companion object {
 
         private val patternGroup = RegexGroup.SCOREBOARD.group("mining.events.raffle")
 

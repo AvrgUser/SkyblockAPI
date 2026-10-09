@@ -131,7 +131,7 @@ public object ArmorWardrobeAPI {
     }
 
     @Subscription
-    context(event: LoadoutChangeEvent)
+    public context(event: LoadoutChangeEvent)
     fun onLoadoutSwitch() {
         LoadoutStorage.armor?.currentSlot = event.new?.armor.value() ?: return
         debugString(loadoutDebug) { "Setting wardrobe!" }

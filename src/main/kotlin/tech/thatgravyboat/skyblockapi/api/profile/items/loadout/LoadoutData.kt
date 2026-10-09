@@ -9,7 +9,7 @@ public data class LoadoutData(
     var equipment: WardrobeData = WardrobeData(),
     var loadouts: Loadout = Loadout(),
 ) {
-    companion object {
+    public companion object {
         public val CODEC = SkyblockAPICodecs.getCodec<LoadoutData>()
     }
 }

@@ -10,7 +10,7 @@ public data class QuiverData(
 ) {
     public constructor() : this(null)
 
-    companion object {
+    public companion object {
         public val CODEC = SkyblockAPICodecs.getCodec<QuiverData>()
     }
 }

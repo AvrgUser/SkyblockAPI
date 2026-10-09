@@ -8,7 +8,7 @@ import tech.thatgravyboat.skyblockapi.generated.SkyblockAPICodecs
 public data class SlayerData(
     var slayers: MutableMap<SlayerType, SlayerEntry> = mutableMapOf(),
 ) {
-    companion object {
+    public companion object {
         public val CODEC = SkyblockAPICodecs.getCodec<SlayerData>()
     }
 }

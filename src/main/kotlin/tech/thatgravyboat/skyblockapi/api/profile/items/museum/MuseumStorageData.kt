@@ -13,7 +13,7 @@ public data class MuseumStorageData(
     val categories: MutableMap<MuseumCategory, MutableMap<SkyBlockId, MuseumItemData>> = enumMapOf(),
     val specialItems: MutableList<ItemStack> = mutableListOf(),
 ) {
-    companion object {
+    public companion object {
         public val CODEC: Codec<MuseumStorageData> = SkyblockAPICodecs.getCodec()
     }
 }

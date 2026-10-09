@@ -15,7 +15,7 @@ public data class ProfileData(
     val profileId: MutableMap<String, UUID> = mutableMapOf(),
     var bingoRank: SkyBlockRarity?,
 ) {
-    companion object {
+    public companion object {
         public val CODEC: Codec<ProfileData> = SkyblockAPICodecs.getCodec<ProfileData>()
     }
 }

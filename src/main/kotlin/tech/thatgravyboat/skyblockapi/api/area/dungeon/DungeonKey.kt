@@ -7,7 +7,7 @@ public enum class DungeonKey(private val getter: () -> Int) {
 
     public val current: Int get() = getter()
 
-    companion object {
+    public companion object {
         public fun getById(id: String) = entries.firstOrNull { it.name.equals(id, ignoreCase = true) }
     }
 }

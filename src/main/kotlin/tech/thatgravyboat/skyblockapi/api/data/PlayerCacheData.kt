@@ -8,7 +8,7 @@ import java.util.UUID
 public data class PlayerCacheData(
     val players: MutableMap<UUID, CachedPlayer> = mutableMapOf()
 ) {
-    companion object {
+    public companion object {
         public val CODEC = SkyblockAPICodecs.getCodec<PlayerCacheData>()
     }
 }

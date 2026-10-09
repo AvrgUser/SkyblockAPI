@@ -31,7 +31,7 @@ public data class TrophyFish(val type: TrophyFishType, @get:JvmName("getTrophyTi
         "${type.internalName.lowercase()}_${tier.name.lowercase()}"
     }
 
-    companion object {
+    public companion object {
         public fun fromString(fish: String): TrophyFish? {
             if (fish.contains("/")) {
                 return fish.split("/").let {

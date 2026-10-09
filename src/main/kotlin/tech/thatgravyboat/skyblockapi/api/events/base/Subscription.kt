@@ -26,7 +26,7 @@ public annotation class Subscription(
     val receiveCancelled: Boolean = false,
 ) {
 
-    companion object {
+    public companion object {
         public const val HIGHEST = -2000000
         public const val HIGH = -100000
         public const val LOW = 100000

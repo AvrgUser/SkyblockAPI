@@ -225,7 +225,7 @@ public enum class SlayerType(override val displayName: String, val otherName: St
 
     public val apiName = otherName.lowercase()
 
-    companion object {
+    public companion object {
         public fun fromDisplayName(displayName: String): SlayerType? = entries.find {
             it.displayName.equals(displayName, ignoreCase = true)
         }

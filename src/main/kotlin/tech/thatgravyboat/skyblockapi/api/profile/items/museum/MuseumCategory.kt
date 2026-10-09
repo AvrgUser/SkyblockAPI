@@ -31,7 +31,7 @@ public enum class MuseumCategory(internal val deprecated: Boolean = false) {
     private val displayName = toFormattedName()
     override fun toString(): String = displayName
 
-    companion object {
+    public companion object {
         public fun fromName(name: String): MuseumCategory? = entries.find { !it.deprecated && it.displayName.equals(name, ignoreCase = true) }
     }
 }

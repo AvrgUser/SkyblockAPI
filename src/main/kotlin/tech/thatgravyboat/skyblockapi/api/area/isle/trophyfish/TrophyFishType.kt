@@ -134,7 +134,7 @@ public enum class TrophyFishType(
     public fun getId(tier: TrophyFishTier, default: TrophyFishTier = TrophyFishTier.BRONZE): SkyBlockId =
         getId(TrophyTier.valueOf(tier.name), TrophyTier.valueOf(default.name))
 
-    companion object {
+    public companion object {
         public fun getByInternalName(internalName: String): TrophyFishType? {
             return entries.find { internalName.equals(it.internalName, ignoreCase = true) }
         }

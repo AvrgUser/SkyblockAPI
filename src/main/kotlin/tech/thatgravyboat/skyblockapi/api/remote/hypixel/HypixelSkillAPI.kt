@@ -35,7 +35,7 @@ public object HypixelSkillAPI {
         override val id: String = name
 
         @Module
-        companion object {
+        public companion object {
             init {
                 runCatchBlocking {
                     val skillsObject = Http.getResult<JsonObject>(url = API_URL).getOrNull()?.getAsJsonObject("skills") ?: return@runCatchBlocking
@@ -62,7 +62,7 @@ public object HypixelSkillAPI {
         public fun getXpForLevel(level: Int): Long = skillLevels[level]?.let { xpAtLevel -> xpAtLevel - (skillLevels[level - 1] ?: 0L) } ?: 0L
         public fun getLevelForExp(exp: Long): Int = skillLevels.entries.lastOrNull { exp >= it.value }?.key ?: 0
 
-        companion object {
+        public companion object {
             internal val EMPTY = SkillData("", 0, emptyMap())
 
             internal fun JsonObject.toSkillData() = SkillData(

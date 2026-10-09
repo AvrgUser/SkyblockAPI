@@ -70,7 +70,7 @@ public abstract class RepoItemCache<K>(private val name: String) {
         cache.clear()
     }
 
-    companion object {
+    public companion object {
 
         private val repos: MutableSet<String> = mutableSetOf()
 

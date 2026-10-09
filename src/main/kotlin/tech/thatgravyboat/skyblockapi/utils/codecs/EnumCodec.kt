@@ -10,7 +10,7 @@ public class EnumCodec<T> private constructor(private val codec: Codec<T>) : Cod
     override fun <T1 : Any?> encode(input: T, ops: DynamicOps<T1>?, prefix: T1): DataResult<T1> = codec.encode(input, ops, prefix)
     override fun <T1 : Any?> decode(ops: DynamicOps<T1>?, input: T1): DataResult<Pair<T, T1>> = codec.decode(ops, input)
 
-    companion object {
+    public companion object {
 
         public fun <T : Enum<T>> of(constants: Array<T>): EnumCodec<T> =
             EnumCodec(Codec.withAlternative(constantCodec(constants), intCodec(constants)))

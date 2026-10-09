@@ -33,7 +33,7 @@ public enum class PurseType(scoreboardName: String? = null) {
 
     private val scoreboardName: String = scoreboardName ?: name
 
-    companion object {
+    public companion object {
         public fun fromName(name: String): PurseType = entries.find { it.scoreboardName.equals(name, true) } ?: UNKNOWN
     }
 }

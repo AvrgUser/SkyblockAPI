@@ -96,7 +96,7 @@ public enum class TrophyFrogType(
 
     public fun getId(tier: TrophyTier, default: TrophyTier = TrophyTier.BRONZE): SkyBlockId = SkyBlockId.item("${this.internalName}_${tier.takeUnless { it == TrophyTier.NONE } ?: default}")
 
-    companion object {
+    public companion object {
         public fun getByInternalName(internalName: String): TrophyFrogType? {
             return entries.find { internalName.equals(it.internalName, ignoreCase = true) }
         }

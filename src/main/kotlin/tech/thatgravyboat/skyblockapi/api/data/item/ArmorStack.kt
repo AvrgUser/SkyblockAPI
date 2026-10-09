@@ -8,7 +8,7 @@ public enum class ArmorStack(val char: Char) {
     CRIMSON('ᝐ'),
     ;
 
-    companion object {
+    public companion object {
         public fun fromString(string: String?): ArmorStack? {
             val char = string?.firstOrNull() ?: return null
             return entries.find { it.char == char }

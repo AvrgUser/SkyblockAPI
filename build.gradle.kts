@@ -19,7 +19,10 @@ plugins {
 kotlin {
     explicitApi()
     compilerOptions {
-        freeCompilerArgs.add("-Xrender-internal-diagnostic-names")
+        freeCompilerArgs.addAll(
+            "-Xrender-internal-diagnostic-names",
+            "-Xwarning-level=NO_EXPLICIT_RETURN_TYPE_IN_API_MODE:disabled",
+        )
     }
 
     abiValidation {

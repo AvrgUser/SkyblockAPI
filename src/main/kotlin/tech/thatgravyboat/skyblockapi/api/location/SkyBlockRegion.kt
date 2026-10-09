@@ -16,7 +16,7 @@ public data class SkyBlockRegion(
 
     public fun inAnyRegion() = inArea() || inIsland() || inBiome()
 
-    companion object {
+    public companion object {
         public val CODEC: Codec<SkyBlockRegion> = SkyblockAPICodecs.getCodec<SkyBlockRegion>()
     }
 }

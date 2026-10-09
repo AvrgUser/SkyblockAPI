@@ -14,7 +14,7 @@ public class SkyBlockCategory private constructor(
     override fun toString(): String = if (isDungeon) "dungeon $name" else name
 
     @Suppress("unused")
-    companion object {
+    public companion object {
         private val registeredCategories = mutableMapOf<String, SkyBlockCategory>()
         public val categories: Collection<SkyBlockCategory>
             get() = registeredCategories.values

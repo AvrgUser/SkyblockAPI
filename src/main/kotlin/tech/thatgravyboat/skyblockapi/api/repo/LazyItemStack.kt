@@ -72,7 +72,7 @@ public class LazyItemStack {
         this.cached = null
     }
 
-    companion object {
+    public companion object {
 
         public val CODEC: Codec<LazyItemStack> = ItemStackTemplate.MAP_CODEC.codec().xmap(
             { template ->

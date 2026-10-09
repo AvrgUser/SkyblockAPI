@@ -72,7 +72,7 @@ public data class HypixelApiItem(
     @param:FieldName("rift_transferrable") val riftTransferable: Boolean = false,
     val origin: ItemOrigin?,
 ) {
-    companion object {
+    public companion object {
         public val CODEC: Codec<HypixelApiItem> = SkyblockAPICodecs.HypixelApiItemCodec.codec()
     }
 }

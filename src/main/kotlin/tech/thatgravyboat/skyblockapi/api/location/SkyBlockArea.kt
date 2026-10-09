@@ -6,7 +6,7 @@ import me.owdding.ktcodecs.GenerateCodec
 public data class SkyBlockArea(val name: String) {
     public fun inArea() = LocationAPI.area == this
 
-    companion object {
+    public companion object {
 
         public fun inAnyArea(vararg areas: SkyBlockArea) = LocationAPI.area in areas
         public fun inAnyArea(areas: Collection<SkyBlockArea>) = LocationAPI.area in areas

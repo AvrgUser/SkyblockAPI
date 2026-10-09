@@ -338,7 +338,7 @@ public enum class MiningBlock(
     )
 
     @Module
-    companion object {
+    public companion object {
         private val MINING_ISLANDS = setOf(
             HUB,
             GOLD_MINES,

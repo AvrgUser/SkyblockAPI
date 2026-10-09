@@ -15,7 +15,7 @@ public enum class TrapperAnimalType {
     private val string = toFormattedName()
     override fun toString(): String = string
 
-    companion object {
+    public companion object {
         public fun fromString(string: String): TrapperAnimalType = valueOfOrNull(string.uppercase()) ?: UNKNOWN
     }
 }

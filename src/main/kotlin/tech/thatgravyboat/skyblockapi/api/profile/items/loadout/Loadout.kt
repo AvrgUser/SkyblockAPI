@@ -11,7 +11,7 @@ public data class Loadout(
     var currentSlot: Int = -1,
     @NamedCodec("loadout_slots") var slots: MutableMap<Int, LoadoutSlot> = mutableMapOf(),
 ) {
-    companion object {
+    public companion object {
         @IncludedCodec(named = "loadout_slots")
         public val slotCodec: Codec<MutableMap<Int, LoadoutSlot>> = SkyblockAPICodecs.getCodec<LoadoutSlot>().listOf().xmap(
             { it.associateByTo(mutableMapOf(), LoadoutSlot::id) },

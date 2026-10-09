@@ -21,7 +21,7 @@ public enum class Essence(val canBeSold: Boolean = true) {
 
     public val bazaarId: String? = "ESSENCE_${this.name}".takeIf { canBeSold }
 
-    companion object {
+    public companion object {
         public val actualEntries = entries.filterNot { it == UNKNOWN }
 
         @IncludedCodec

@@ -12,7 +12,7 @@ public enum class DungeonClass {
 
     public val displayName = toFormattedName()
 
-    companion object {
+    public companion object {
         public fun getByName(name: String) = entries.find { it.displayName == name }
     }
 }

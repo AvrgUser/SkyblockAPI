@@ -58,7 +58,7 @@ public enum class GemstoneSlot(vararg val gemstones: Gemstone) {
     UNKNOWN,
     ;
 
-    companion object {
+    public companion object {
         @IncludedCodec
         public val CODEC: Codec<GemstoneSlot> = EnumCodec.forKCodec(entries.toTypedArray()).orElse(UNKNOWN)
     }

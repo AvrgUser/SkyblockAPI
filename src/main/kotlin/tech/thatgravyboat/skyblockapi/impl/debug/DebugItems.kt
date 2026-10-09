@@ -123,7 +123,7 @@ public object DebugItems {
     }
 
     @Subscription
-    context(event: TickEvent)
+    public context(event: TickEvent)
     fun tick() {
         if (this.lastItem != null && this.lastSet.since() > 5.seconds) {
             updateItem(null)
@@ -207,7 +207,7 @@ public inline fun ItemDebugAttachable.addDebug(category: ItemDebugCategory, entr
 
 @OptIn(ExperimentalContracts::class)
 @JvmName("categoryAddDebug")
-context(category: ItemDebugCategory)
+public context(category: ItemDebugCategory)
 inline fun ItemDebugAttachable.addDebug(entry: () -> Component) {
     contract {
         callsInPlace(entry, InvocationKind.AT_MOST_ONCE)
@@ -217,7 +217,7 @@ inline fun ItemDebugAttachable.addDebug(entry: () -> Component) {
 
 @OptIn(ExperimentalContracts::class)
 @JvmName("categoryAddDebugString")
-context(category: ItemDebugCategory)
+public context(category: ItemDebugCategory)
 inline fun ItemDebugAttachable.addDebugString(entry: () -> String) {
     contract {
         callsInPlace(entry, InvocationKind.AT_MOST_ONCE)
@@ -247,11 +247,11 @@ public fun ItemStack.addStringDebug0(category: ItemDebugCategory, entry: () -> S
 
 @JvmName("categoryAddDebug")
 @Deprecated(message = "Use interface method instead!")
-context(category: ItemDebugCategory) fun ItemStack.addDebug0(entry: () -> Component) = addDebug(category, entry)
+public context(category: ItemDebugCategory) fun ItemStack.addDebug0(entry: () -> Component) = addDebug(category, entry)
 
 @Deprecated(message = "Use interface method instead!")
 @JvmName("categoryAddDebugString")
-context(category: ItemDebugCategory) fun ItemStack.addDebugString0(entry: () -> String) = addStringDebug(category, entry)
+public context(category: ItemDebugCategory) fun ItemStack.addDebugString0(entry: () -> String) = addStringDebug(category, entry)
 
 
 public fun interface ItemDebugAttachable {
@@ -260,7 +260,7 @@ public fun interface ItemDebugAttachable {
 }
 
 public fun interface ItemDebugCategory : ComponentViewerCategory {
-    companion object {
+    public companion object {
         public val fork: BiFunction<ItemDebugCategory, String, ItemDebugCategory> = Util.memoize { parent, name ->
             return@memoize ItemDebugCategory { "$parent/$name" }
         }

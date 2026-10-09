@@ -11,7 +11,7 @@ public data class MaxwellTuning(
     val value: Double,
 ) {
     val isEmpty: Boolean get() = value == 0.0
-    companion object {
+    public companion object {
         public val ALLOWED_STATS: Set<SkyBlockStat> = enumSetOf(
             SkyBlockStat.HEALTH,
             SkyBlockStat.DEFENSE,

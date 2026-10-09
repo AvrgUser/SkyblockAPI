@@ -27,7 +27,7 @@ public object RepoSlayerData {
 
         public fun getLevel(xp: Long) = leveling.indexOfLast { it <= xp } + 1
 
-        companion object {
+        public companion object {
             public val CODEC: Codec<RepoSlayerData> = SkyblockAPICodecs.getCodec<RepoSlayerData>()
         }
     }

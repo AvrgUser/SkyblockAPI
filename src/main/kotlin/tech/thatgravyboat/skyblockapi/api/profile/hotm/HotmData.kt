@@ -11,7 +11,7 @@ public data class HotmData(
     override var tokens: Int = 0,
     override var tier: Int = 0,
 ) : SkillTreeData<HotmPerk> {
-    companion object {
+    public companion object {
         public val CODEC = SkyblockAPICodecs.getCodec<HotmData>()
     }
 }

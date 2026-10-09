@@ -26,7 +26,7 @@ public data class ContainerRegion(
         pagesRange: IntRange = 1..Int.MAX_VALUE,
         contentFlow: ContentFlow = ContentFlow.topLeft().rows()
     ) : this(startColumn..<startColumn + width, startRow..<startRow + height, pagesRange, contentFlow)
-    companion object : ItemDebugCategory {
+    public companion object : ItemDebugCategory {
         override fun toString(): String = "Container Region"
     }
 
@@ -65,7 +65,7 @@ public data class ContainerRegion(
      *
      *  If iterated on multiple times in the same container, debug strings will be added multiple times
      */
-    context(category: ItemDebugCategory)
+    public context(category: ItemDebugCategory)
     fun iterateSlots(
         screen: AbstractContainerScreen<*>,
         page: Int = 1,
@@ -144,7 +144,7 @@ public data class ContainerPosition(
     val row: Int,
     val column: Int
 ) {
-    companion object {
+    public companion object {
         public fun of(row: Int, column: Int, index: Int): ContainerPosition {
             val position = ContainerPosition(row, column)
             position.index = index
@@ -185,7 +185,7 @@ public data class ContentFlow private constructor(val anchor: Anchor, val direct
         }
     }
 
-    companion object {
+    public companion object {
         private val cache: BiFunction<Anchor, ContentDirection, ContentFlow> = Util.memoize { anchor, direction ->
             ContentFlow(anchor, direction)
         }

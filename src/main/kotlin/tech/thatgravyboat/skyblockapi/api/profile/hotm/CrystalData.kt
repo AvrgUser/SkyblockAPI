@@ -10,7 +10,7 @@ import tech.thatgravyboat.skyblockapi.generated.SkyblockAPICodecs
 public data class CrystalData(
     var crystals: MutableMap<CrystalType, CrystalStatus> = mutableMapOf(),
 ) {
-    companion object {
+    public companion object {
         public val CODEC: Codec<CrystalData> = SkyblockAPICodecs.getCodec<CrystalData>()
     }
 }

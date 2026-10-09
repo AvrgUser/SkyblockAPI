@@ -34,7 +34,7 @@ public data class PlayerHotbarChangeEvent(
     //val slot get() = slotIndex
     val slotIndex get() = inventorySlot.index - FIRST_HOTBAR_SLOT
 
-    companion object {
+    public companion object {
         internal const val FIRST_HOTBAR_SLOT = 36
     }
 }
