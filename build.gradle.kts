@@ -17,10 +17,11 @@ plugins {
 }
 
 kotlin {
-    explicitApi()
+    explicitApiWarning()
     compilerOptions {
         freeCompilerArgs.addAll(
             "-Xrender-internal-diagnostic-names",
+            "-Xwarning-level=NO_EXPLICIT_VISIBILITY_IN_API_MODE:error",
             "-Xwarning-level=NO_EXPLICIT_RETURN_TYPE_IN_API_MODE:disabled",
         )
     }
