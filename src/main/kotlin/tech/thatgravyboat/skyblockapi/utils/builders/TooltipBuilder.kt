@@ -16,17 +16,17 @@ public class TooltipBuilder() {
 
     private val lines = mutableListOf<Component>()
 
-    public fun add(line: Component) = lines.add(line)
+    public fun add(line: Component): Boolean = lines.add(line)
 
-    public fun space() = lines.add(CommonText.EMPTY)
+    public fun space(): Boolean = lines.add(CommonText.EMPTY)
 
-    public fun add(number: Number, init: MutableComponent.() -> Unit = {}) = lines.add(Text.of(number.toString(), init))
-    public fun add(boolean: Boolean, init: MutableComponent.() -> Unit = {}) = lines.add(Text.of(boolean.toString(), init))
-    public fun add(text: String, init: MutableComponent.() -> Unit = {}) = lines.add(Text.of(text, init))
-    public fun add(text: String, color: Int) = lines.add(Text.of(text).withColor(color))
-    public fun add(init: MutableComponent.() -> Unit) = lines.add(Text.of("", init))
+    public fun add(number: Number, init: MutableComponent.() -> Unit = {}): Boolean = lines.add(Text.of(number.toString(), init))
+    public fun add(boolean: Boolean, init: MutableComponent.() -> Unit = {}): Boolean = lines.add(Text.of(boolean.toString(), init))
+    public fun add(text: String, init: MutableComponent.() -> Unit = {}): Boolean = lines.add(Text.of(text, init))
+    public fun add(text: String, color: Int): Boolean = lines.add(Text.of(text).withColor(color))
+    public fun add(init: MutableComponent.() -> Unit): Boolean = lines.add(Text.of("", init))
 
-    public fun isEmpty() = lines.isEmpty()
+    public fun isEmpty(): Boolean = lines.isEmpty()
     public fun build(): Component = Text.multiline(*lines.toTypedArray())
-    public fun lines() = lines
+    public fun lines(): List = lines
 }

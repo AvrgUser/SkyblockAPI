@@ -36,7 +36,7 @@ public object CarnivalAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.HUB)
-    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent) {
+    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent): Unit {
         carnivalTokensRegex.anyMatch(event.added, "tokens") { (tokens) ->
             this.tokens = tokens.parseFormattedInt()
         }
@@ -51,5 +51,5 @@ public object CarnivalAPI {
     }
 
     @Subscription(ProfileChangeEvent::class, ServerDisconnectEvent::class)
-    public fun onProfileChange() = reset()
+    public fun onProfileChange(): Unit = reset()
 }

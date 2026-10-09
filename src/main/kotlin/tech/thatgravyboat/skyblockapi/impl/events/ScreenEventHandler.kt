@@ -22,14 +22,14 @@ public object ScreenEventHandler {
     }
 
     @Subscription
-    public fun preScreenClick(event: ScreenMouseClickEvent.Pre) {
+    public fun preScreenClick(event: ScreenMouseClickEvent.Pre): Unit {
         val screen = event.screen as? AbstractContainerScreen<*> ?: return
         val slot = screen.getHoveredSlot() ?: return
         if (SlotClickEvent(slot.item, slot, event.button, screen).post()) event.cancel()
     }
 
     @Subscription(priority = Subscription.HIGHEST)
-    public fun onSlotClick(event: SlotClickEvent) {
+    public fun onSlotClick(event: SlotClickEvent): Unit {
         val consumer = event.item.getVisualItem()?.getClickAction() ?: return
         if (consumer.accept(event.button) != null) event.cancel()
     }

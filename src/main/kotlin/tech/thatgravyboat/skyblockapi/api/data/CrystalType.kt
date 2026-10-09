@@ -23,7 +23,7 @@ public enum class CrystalType(public val textColor: Int, skyblockId: String? = n
 
     public val id = SkyBlockId.item(skyblockId ?: "${name.lowercase()}_crystal")
 
-    public val displayName = Text.of("${toFormattedName()} Crystal") {
+    public val displayName: MutableComponent = Text.of("${toFormattedName()} Crystal") {
         this.color = textColor
     }
 

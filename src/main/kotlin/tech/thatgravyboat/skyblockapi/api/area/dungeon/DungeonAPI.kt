@@ -138,7 +138,7 @@ public object DungeonAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.THE_CATACOMBS)
-    public fun onAreaChange(event: AreaChangeEvent) {
+    public fun onAreaChange(event: AreaChangeEvent): Unit {
         dungeonFloorRegex.find(event.new.name, "floor") { (floor) ->
             dungeonFloor = DungeonFloor.getByName(floor)
             val floor = dungeonFloor ?: return@find
@@ -148,7 +148,7 @@ public object DungeonAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.THE_CATACOMBS)
-    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent) {
+    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent): Unit {
         for (line in event.added) {
             timeRegex.findThenNull(line, "time") { (time) ->
                 this.time = time.parseDuration() ?: return@findThenNull
@@ -161,7 +161,7 @@ public object DungeonAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.THE_CATACOMBS)
-    public fun onChat(event: ChatReceivedEvent.Pre) {
+    public fun onChat(event: ChatReceivedEvent.Pre): Unit {
         val message = event.text
         if (!started && startRegex.matches(message)) {
             started = true
@@ -200,7 +200,7 @@ public object DungeonAPI {
         }
     }
 
-    public fun handleGetKey(type: String) {
+    public fun handleGetKey(type: String): Unit {
         val post = when {
             type.equals("wither", true) -> {
                 ++witherKeys
@@ -226,7 +226,7 @@ public object DungeonAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.THE_CATACOMBS)
-    public fun onTablistUpdate(event: TabListChangeEvent) {
+    public fun onTablistUpdate(event: TabListChangeEvent): Unit {
         // first column
         val firstColumn = event.new.firstOrNull() ?: return
         val first = firstColumn.firstOrNull() ?: return
@@ -279,7 +279,7 @@ public object DungeonAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.THE_CATACOMBS)
-    public fun onPlayerHotbarUpdate(event: PlayerHotbarChangeEvent) {
+    public fun onPlayerHotbarUpdate(event: PlayerHotbarChangeEvent): Unit {
         if (event.slotIndex != 0) return
         val id = event.item.getData(DataTypes.ID)
         ownPlayer?.dead = id == "HAUNT_ABILITY"
@@ -303,7 +303,7 @@ public object DungeonAPI {
     }
 
     @Subscription(IslandChangeEvent::class)
-    public fun onIslandChange() = reset()
+    public fun onIslandChange(): Unit = reset()
 
     private fun milestoneCharToInt(char: Char): Int = if (char in '❶'..'❾') '❶'.code - char.code + 1 else 0
 

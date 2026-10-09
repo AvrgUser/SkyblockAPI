@@ -21,7 +21,7 @@ public typealias ArgumentCommandBuilder<T> = CommandBuilder<RequiredArgumentBuil
 
 @CommandClass
 public data class BuilderDsl<Consumer>(val consumer: (Consumer) -> Unit) {
-    public infix fun executes(callback: Consumer) {
+    public infix fun executes(callback: Consumer): Unit {
         consumer(callback)
     }
 }

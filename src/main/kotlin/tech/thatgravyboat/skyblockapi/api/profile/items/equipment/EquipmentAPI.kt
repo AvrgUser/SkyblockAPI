@@ -45,7 +45,7 @@ public object EquipmentAPI {
     public fun getIslandEquipment(slot: EquipmentSlot): ItemStack = islandEquipment[slot] ?: ItemStack.EMPTY
 
     @Subscription
-    public fun onInventoryFullyLoad(event: ContainerInitializedEvent) {
+    public fun onInventoryFullyLoad(event: ContainerInitializedEvent): Unit {
         if (!inventoryNameRegex.matches(event.title)) return
         EquipmentSlot.entries.forEach {
             handleInventoryItem(it, event.containerItems[it.slot])
@@ -53,7 +53,7 @@ public object EquipmentAPI {
     }
 
     @Subscription
-    public fun onInventoryChange(event: InventoryChangeEvent) {
+    public fun onInventoryChange(event: InventoryChangeEvent): Unit {
         if (!inventoryNameRegex.matches(event.title)) return
         if (event.isInPlayerInventory) return
         val slot = EquipmentSlot.entries.find { it.slot == event.slot.index } ?: return
@@ -73,14 +73,14 @@ public object EquipmentAPI {
     }
 
     @Subscription
-    public fun onRightClick(event: RightClickEvent) {
+    public fun onRightClick(event: RightClickEvent): Unit {
         val category = event.stack.getData(DataTypes.CATEGORY) ?: return
         val slot = EquipmentSlot.entries.find { category in it.categories } ?: return
         lastClickedEquipment = event.stack to slot
     }
 
     @Subscription
-    public fun onChat(event: ChatReceivedEvent.Pre) {
+    public fun onChat(event: ChatReceivedEvent.Pre): Unit {
         val (item, slot) = lastClickedEquipment ?: return
         chatEquipRegex.find(event.text, "item") { (itemName) ->
             if (item.cleanName != itemName) return@find

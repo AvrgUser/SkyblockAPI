@@ -1,6 +1,5 @@
 package tech.thatgravyboat.skyblockapi.api.profile.garden
 
-import me.owdding.dfu.item.LegacyTextFixer
 import me.owdding.ktcodecs.GenerateCodec
 import me.owdding.ktmodules.Module
 import net.minecraft.core.BlockPos
@@ -16,13 +15,10 @@ import tech.thatgravyboat.skyblockapi.api.events.info.ScoreboardUpdateEvent
 import tech.thatgravyboat.skyblockapi.api.events.info.TabWidget
 import tech.thatgravyboat.skyblockapi.api.events.info.TabWidgetChangeEvent
 import tech.thatgravyboat.skyblockapi.api.events.misc.DebugBuilder
-import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterCommandsEvent
 import tech.thatgravyboat.skyblockapi.api.events.misc.RegisterSkyblockApiCommandsEvent
 import tech.thatgravyboat.skyblockapi.api.events.screen.InventoryChangeEvent
 import tech.thatgravyboat.skyblockapi.api.location.SkyBlockIsland
-import tech.thatgravyboat.skyblockapi.helpers.McClient
 import tech.thatgravyboat.skyblockapi.helpers.McPlayer
-import tech.thatgravyboat.skyblockapi.helpers.McPlayer.contains
 import tech.thatgravyboat.skyblockapi.impl.tagkey.ItemTag
 import tech.thatgravyboat.skyblockapi.utils.ApiDebug
 import tech.thatgravyboat.skyblockapi.utils.extentions.*
@@ -35,9 +31,7 @@ import tech.thatgravyboat.skyblockapi.utils.regex.component.toComponentRegex
 import tech.thatgravyboat.skyblockapi.utils.regex.matchWhen
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.Text.sendWithPrefix
-import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
-import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 import kotlin.math.floor
 
 @Module
@@ -100,7 +94,7 @@ public object PlotAPI {
 
     private var currentPlotSlot = 1
 
-    public val plots = listOf(
+    public val plots: List<Plot> = listOf(
         listOf(21, 13, 9, 14, 22),
         listOf(15, 5, 1, 6, 16),
         listOf(10, 2, 0, 3, 11),
@@ -118,7 +112,7 @@ public object PlotAPI {
         }.also { currentPlotSlot += 4 }
     }
 
-    public var currentPestAmount = 0
+    public var currentPestAmount: Int = 0
         private set
     public var hasPestDebuff: Boolean = false
         private set
@@ -162,7 +156,7 @@ public object PlotAPI {
     @Subscription
     @OnlyNonGuest
     @OnlyIn(SkyBlockIsland.GARDEN)
-    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent) {
+    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent): Unit {
         if (scoreboardNoPestsRegex.anyMatch(event.new)) {
             clearPests()
             return
@@ -176,7 +170,7 @@ public object PlotAPI {
         }
 
         scoreboardPlotPestAmountRegex.anyMatch(event.new, "name", "amount") { (name, amount) ->
-            val plot = plots.find { it.data?.name == name } ?: return@anyMatch
+            val plot: Plot = plots.find { it.data?.name == name } ?: return@anyMatch
             val pest = Pest(amount.toIntValue(), inaccurate = false)
             plot.data?.pest = pest
             plot.data?.save()
@@ -219,17 +213,17 @@ public object PlotAPI {
     @Subscription
     @OnlyNonGuest
     @OnlyIn(SkyBlockIsland.GARDEN)
-    public fun onChat(event: ChatReceivedEvent.Pre) {
+    public fun onChat(event: ChatReceivedEvent.Pre): Unit {
         val shouldSynch = matchWhen(event.text) {
             case(chatSingularSpawnRegex, "name") { (name) ->
-                val plot = getPlotByName(name) ?: return@case
+                val plot: Plot = getPlotByName(name) ?: return@case
                 plot.data?.pest?.let {
                     it.pest += 1
                     plot.data?.save()
                 }
             }
             case(chatPluralSpawnRegex, "amount", "name") { (amount, name) ->
-                val plot = getPlotByName(name) ?: return@case
+                val plot: Plot = getPlotByName(name) ?: return@case
                 plot.data?.pest?.let {
                     it.pest += amount.toIntValue()
                     plot.data?.save()
@@ -257,7 +251,7 @@ public object PlotAPI {
     @Subscription
     @OnlyNonGuest
     @OnlyWidget(TabWidget.PESTS)
-    public fun onTabWidget(event: TabWidgetChangeEvent) {
+    public fun onTabWidget(event: TabWidgetChangeEvent): Unit {
         val plots = mutableListOf<Int>()
         var alive = 0
 

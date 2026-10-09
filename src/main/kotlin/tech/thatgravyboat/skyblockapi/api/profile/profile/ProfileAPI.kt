@@ -121,14 +121,14 @@ public object ProfileAPI {
 
 
     @Subscription
-    public fun onServerChange(event: ServerChangeEvent) {
+    public fun onServerChange(event: ServerChangeEvent): Unit {
         this.isLoaded = false
         this.lastWorldSwap = System.currentTimeMillis()
     }
 
     @OnlyWidget(TabWidget.PROFILE)
     @Subscription(priority = Int.MIN_VALUE)
-    public fun onTabListWidgetChange(event: TabWidgetChangeEvent) {
+    public fun onTabListWidgetChange(event: TabWidgetChangeEvent): Unit {
         profileRegex.anyMatch(event.new, "name") { (name) ->
             val oldName = this.profileName
             when (name.last()) {
@@ -178,7 +178,7 @@ public object ProfileAPI {
     @Subscription
     @OnlyIn(SkyBlockIsland.PRIVATE_ISLAND)
     @OnlyNonGuest
-    public fun onTablistUpdate(event: TabListChangeEvent) {
+    public fun onTablistUpdate(event: TabListChangeEvent): Unit {
         val line = event.new.firstOrNull()?.firstOrNull()?.stripped ?: return
         coopRegex.match(line) {
             ProfileStorage.setCoop(true)
@@ -186,7 +186,7 @@ public object ProfileAPI {
     }
 
     @Subscription(priority = Int.MIN_VALUE, receiveCancelled = true)
-    public fun onChatMessage(event: ChatReceivedEvent.Pre) {
+    public fun onChatMessage(event: ChatReceivedEvent.Pre): Unit {
         profileChatRegex.match(event.text) { groups ->
             val name = groups["name"] ?: return@match
             if (name != this.profileName) {
@@ -208,14 +208,14 @@ public object ProfileAPI {
     @Subscription
     @OnlyOnSkyBlock
     @TimePassed("5s")
-    public fun onTick(event: TickEvent) {
+    public fun onTick(event: TickEvent): Unit {
         if (lastWorldSwap + 2500 < System.currentTimeMillis() && !this.isLoaded && !LocationAPI.forceOnSkyblock) {
             SkyBlockAPI.logger.error("Could not find way to determine profile name.")
         }
     }
 
     @Subscription
-    public fun onProfileLevelChange(event: ProfileLevelChangeEvent) {
+    public fun onProfileLevelChange(event: ProfileLevelChangeEvent): Unit {
         ProfileStorage.setSkyBlockLevel(event.level)
     }
 

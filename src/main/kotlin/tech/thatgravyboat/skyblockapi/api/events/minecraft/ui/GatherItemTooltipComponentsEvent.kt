@@ -7,6 +7,6 @@ import tech.thatgravyboat.skyblockapi.api.events.base.SkyBlockEvent
 
 public class GatherItemTooltipComponentsEvent(public val item: ItemStack, public val components: MutableList<ClientTooltipComponent>) : SkyBlockEvent() {
 
-    public fun add(component: ClientTooltipComponent) = components.add(component)
-    public fun add(component: Component) = components.add(ClientTooltipComponent.create(component.visualOrderText))
+    public fun add(component: ClientTooltipComponent): Boolean = components.add(component)
+    public fun add(component: Component): Boolean = components.add(ClientTooltipComponent.create(component.visualOrderText))
 }

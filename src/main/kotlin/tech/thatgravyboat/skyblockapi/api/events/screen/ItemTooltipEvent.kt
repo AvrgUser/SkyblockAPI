@@ -6,7 +6,7 @@ import tech.thatgravyboat.skyblockapi.api.events.base.SkyBlockEvent
 
 public class ItemTooltipEvent(public val item: ItemStack, public val tooltip: MutableList<Component>) : SkyBlockEvent() {
 
-    public fun add(line: Component) = tooltip.add(line)
+    public fun add(line: Component): Boolean = tooltip.add(line)
 
 }
 

@@ -23,7 +23,7 @@ public object SkyBlockAttributesRepo : RepoItemCache<String>("Attributes") {
 
     @Subscription(RepoEvent.Reload::class)
     @OnRepoStatus(RepoStatus.SUCCESS)
-    public fun onRepoReady() {
+    public fun onRepoReady(): Unit {
         this.attributes.putAll(this.repo.attributes().values.flatMap { listOf(it.attributeId().lowercase() to it, it.id().lowercase() to it, it.shardId().lowercase() to it) }.toMap())
     }
 

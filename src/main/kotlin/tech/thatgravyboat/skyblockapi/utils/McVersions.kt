@@ -15,7 +15,7 @@ public enum class McVersion {
     //add new version!
     ;
 
-    public val stringVersion = name.substringAfter("_").replace("_", ".")
+    public val stringVersion: String = name.substringAfter("_").replace("_", ".")
 
     /** should match both yy.drop and yy.drop.patch */
     public val isActive: Boolean = this.stringVersion == McClient.version.substringBefore(" ") || this.stringVersion == McClient.version.substringBefore(" ").substringBeforeLast(".")

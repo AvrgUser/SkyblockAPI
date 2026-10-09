@@ -33,20 +33,20 @@ public object StorageAPI {
     /**
      * Note: The index of the storage are stored in the PlayerStorageInstance and the index in the list is not representative of the page.
      */
-    public val enderchests get(): List<PlayerStorageInstance> = PlayerStorageStorage.enderchests
+    public val enderchests: List get(): List<PlayerStorageInstance> = PlayerStorageStorage.enderchests
 
     /**
      * Note: The index of the storage are stored in the PlayerStorageInstance and the index in the list is not representative of the page.
      */
-    public val backpacks get(): List<PlayerStorageInstance> = PlayerStorageStorage.backpacks
+    public val backpacks: List get(): List<PlayerStorageInstance> = PlayerStorageStorage.backpacks
 
     /**
      * Note: The index of the storage are stored in the PlayerStorageInstance and the index in the list is not representative of the page.
      */
-    public val riftStorage get(): List<PlayerStorageInstance> = PlayerStorageStorage.riftStorage
+    public val riftStorage: List get(): List<PlayerStorageInstance> = PlayerStorageStorage.riftStorage
 
     @Subscription
-    public fun onInventoryLoad(event: ContainerInitializedEvent) {
+    public fun onInventoryLoad(event: ContainerInitializedEvent): Unit {
         val size = McScreen.asMenu?.menu?.slots?.size?.let { it - 36 } ?: return
         enderchestRegex.match(event.title, "page") { (page) ->
             val pageId = page.toIntValue().takeIf { it > 0 } ?: return@match
@@ -69,7 +69,7 @@ public object StorageAPI {
     }
 
     @Subscription
-    public fun onInventoryChange(event: InventoryChangeEvent) {
+    public fun onInventoryChange(event: InventoryChangeEvent): Unit {
         if (event.isInPlayerInventory) return
         if (event.isInTopRow) return
         val index = event.slot.index

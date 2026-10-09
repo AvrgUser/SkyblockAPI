@@ -16,12 +16,12 @@ private const val URL = "https://api.hypixel.net/v2/skyblock/bazaar"
 @Module
 public object BazaarAPI {
 
-    public var products = listOf<BazaarProduct>()
+    public var products: List<BazaarProduct> = listOf()
         private set
 
-    public fun getProduct(skyBlockId: SkyBlockId) = getProduct(skyBlockId.bazaarId)
+    public fun getProduct(skyBlockId: SkyBlockId): BazaarProduct = getProduct(skyBlockId.bazaarId)
 
-    public fun getProduct(id: String?) = products.find { it.productId.equals(id, true) }
+    public fun getProduct(id: String?): BazaarProduct? = products.find { it.productId.equals(id, true) }
 
     init {
         Scheduling.schedule(0.seconds, 2.hours) {

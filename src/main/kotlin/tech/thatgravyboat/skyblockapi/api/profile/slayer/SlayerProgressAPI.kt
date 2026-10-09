@@ -44,7 +44,7 @@ public object SlayerProgressAPI {
 
     @Subscription
     @OnlyOnSkyBlock
-    public fun onChat(event: ChatReceivedEvent.Pre) {
+    public fun onChat(event: ChatReceivedEvent.Pre): Unit {
         val found = matchWhen(event.text) {
             case(chatXpRegex, "type", "level", "xp") { (type, level, xp) ->
                 lastType = SlayerType.fromName(type)
@@ -56,7 +56,7 @@ public object SlayerProgressAPI {
             case(chatXpMaxedRegex, "type", "maxedLevel") { (type, _) ->
                 lastType = SlayerType.fromName(type)
                 lastType?.let {
-                    val slayerData = RepoSlayerData.getData(it)
+                    val slayerData: Map = RepoSlayerData.getData(it)
                     val lastXp = SlayerStorage.getXp(it).coerceAtLeast(slayerData.leveling.max())
                     val gain = (slayerData.bossXp.getOrNull(SlayerAPI.lastLevel - 1) ?: 0).let { xp ->
                         if (MayorPerks.SLAYER_XP_BUFF.active) (xp * 1.25).toInt() else xp
@@ -75,7 +75,7 @@ public object SlayerProgressAPI {
     @Subscription
     @OnlyOnSkyBlock
     @MustBeContainer
-    public fun onInventory(event: InventoryChangeEvent) {
+    public fun onInventory(event: InventoryChangeEvent): Unit {
         if (!SlayerType.entries.map { it.displayName }.contains(event.title)) return
         val slayerType = SlayerType.entries.find { it.displayName == event.title } ?: return
 
@@ -107,7 +107,7 @@ public object SlayerProgressAPI {
     @OnlyOnSkyBlock
     @MustBeContainer
     @InventoryTitle("Slayer")
-    public fun onSlayerInventory(event: InventoryChangeEvent) {
+    public fun onSlayerInventory(event: InventoryChangeEvent): Unit {
         if (event.slot.index != 29) return
         if (event.slot.item.cleanName != "Slayer Leaderboards") return
         inventoryLeaderBoardXp.findAll(event.getLoreLines(), "type", "xp") { (type, xp) ->
@@ -123,7 +123,7 @@ public object SlayerProgressAPI {
     @Subscription
     @OnlyOnSkyBlock
     @OptIn(SkyBlockPvRequired::class)
-    public fun onPv(event: SkyBlockPvOpenedEvent) {
+    public fun onPv(event: SkyBlockPvOpenedEvent): Unit {
         event.member.getPath("slayer.slayer_bosses").asMap { k, v ->
             SlayerType.fromName(k) to v.asJsonObject["xp"].asLong(0)
         }.filter { (key, xp) -> key != null && xp > SlayerStorage.getXp(key) }.mapKeys { it.key!! }.apply {

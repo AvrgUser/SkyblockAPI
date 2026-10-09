@@ -33,9 +33,9 @@ import tech.thatgravyboat.skyblockapi.utils.text.asComponent
 public val BACKGROUND = Identifier.withDefaultNamespace("popup/background")
 
 public class AbstractComponentViewer(public val map: Map<ComponentViewerCategory, ComponentViewerData>) : Screen(CommonComponents.EMPTY) {
-    public val categories = map.keys
-    public var selectedCategory = map.keys.firstOrNull()
-    public var scroll = 0
+    public val categories: Set = map.keys
+    public var selectedCategory: ComponentViewerCategory = map.keys.firstOrNull()
+    public var scroll: Int = 0
 
     @Module
     public companion object {
@@ -134,7 +134,7 @@ public class AbstractComponentViewer(public val map: Map<ComponentViewerCategory
         super.extractRenderState(graphics, mouseX, mouseY, a)
     }
 
-    public val widgetHeight get() = (height / 4) * 3
+    public val widgetHeight: Int get() = (height / 4) * 3
 
     override fun extractBackground(graphics: GuiGraphicsExtractor, mouseX: Int, mouseY: Int, a: Float) {
         super.extractBackground(graphics, mouseX, mouseY, a)

@@ -88,7 +88,7 @@ public object McClient {
 
     public val scoreboard: Collection<Component>
         get() {
-            val scoreboard = self.level?.scoreboard ?: return emptyList()
+            val scoreboard: Collection = self.level?.scoreboard ?: return emptyList()
             val objective = scoreboard.getDisplayObjective(DisplaySlot.SIDEBAR) ?: return emptyList()
             return scoreboard.listPlayerScores(objective)
                 .sortedBy { -it.value() }
@@ -107,7 +107,7 @@ public object McClient {
                 }
         }
 
-    public val scoreboardTitle get() = self.level?.scoreboard?.getDisplayObjective(DisplaySlot.SIDEBAR)?.displayName
+    public val scoreboardTitle: Component get() = self.level?.scoreboard?.getDisplayObjective(DisplaySlot.SIDEBAR)?.displayName
     public val serverCommands: CommandDispatcher<out SharedSuggestionProvider>? get() = connection?.commands
 
     public val toasts: ToastManager get() =/*? if >= 26.2 {*/gui.toastManager()/*? } else *///self.toastManager
@@ -125,7 +125,7 @@ public object McClient {
         openUri(URI.create(uri))
     }.isSuccess
 
-    public fun reloadResourcePacks() {
+    public fun reloadResourcePacks(): Unit {
         self.reloadResourcePacks()
     }
 
@@ -139,7 +139,7 @@ public object McClient {
     /**
      * Runs the next render tick.
      */
-    public fun runNextTick(action: () -> Unit) {
+    public fun runNextTick(action: () -> Unit): Unit {
         self.schedule(action)
     }
 
@@ -147,15 +147,15 @@ public object McClient {
      * Runs either on the current or next render tick
      * depending on if it's executed from the render thread.
      */
-    public fun runOrNextTick(action: () -> Unit) {
+    public fun runOrNextTick(action: () -> Unit): Unit {
         self.executeIfPossible(action)
     }
 
-    public fun playSound(sound: SoundEvent, volume: Float = 1f, pitch: Float = 1f) {
+    public fun playSound(sound: SoundEvent, volume: Float = 1f, pitch: Float = 1f): Unit {
         McPlayer.self?.playSound(sound, volume, pitch)
     }
 
-    public fun setTitle(title: Component, subtitle: Component? = null, fadeInTime: Float = 1f, stayTime: Float = 3f, fadeOutTime: Float = 1f) {
+    public fun setTitle(title: Component, subtitle: Component? = null, fadeInTime: Float = 1f, stayTime: Float = 3f, fadeOutTime: Float = 1f): Unit {
         //~ if >= 26.2 'gui.' -> 'hud.' {
         hud.setTimes((fadeInTime * 20).toInt(), (stayTime * 20).toInt(), (fadeOutTime * 20).toInt())
         hud.setSubtitle(subtitle ?: CommonText.EMPTY)
@@ -163,7 +163,7 @@ public object McClient {
         //~ }
     }
 
-    public fun setScreenAsync(screen: () -> Screen?) = runNextTick {
+    public fun setScreenAsync(screen: () -> Screen?): Unit = runNextTick {
         val next = screen()
         (McScreen.self as? AbstractContainerScreen<*>)?.onClose()
         //~ if >= 26.2 'self' -> 'gui'
@@ -172,12 +172,12 @@ public object McClient {
 
     //? < 26.2 {
     /*@Deprecated("Use setScreenAsync to avoid creating screens off the main thread")
-    fun setScreenAsync(screen: Screen?) = runNextTick {
+    fun setScreenAsync(screen: Screen?): Unit = runNextTick {
         (self.screen as? AbstractContainerScreen<*>)?.onClose()
         self.setScreen(screen)
     }*///? }
 
-    public fun setScreen(screen: Screen?) {
+    public fun setScreen(screen: Screen?): Unit {
         if (McScreen.self is ChatScreen) {
             setScreenAsync { screen }
         } else {
@@ -186,16 +186,16 @@ public object McClient {
         }
     }
 
-    public fun sendCommand(command: String) {
+    public fun sendCommand(command: String): Unit {
         connection?.send(ServerboundChatCommandPacket(command.removePrefix("/")))
     }
 
     /** Sends a command that first goes through client side commands, and then server commands */
-    public fun sendClientCommand(command: String) {
+    public fun sendClientCommand(command: String): Unit {
         connection?.sendCommand(command.removePrefix("/"))
     }
 
-    public fun registerClientReloadListener(id: Identifier, listener: PreparableReloadListener) {
+    public fun registerClientReloadListener(id: Identifier, listener: PreparableReloadListener): Unit {
         ResourceLoader.get(PackType.CLIENT_RESOURCES).registerReloadListener(id, listener)
     }
 

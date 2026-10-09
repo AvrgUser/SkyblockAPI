@@ -24,7 +24,7 @@ public object HotmAPI : SkillTreeAPI<HotmData, HotmPerk, HotmAPI>(
     private var holdingBlueOmelette = false
 
     @Subscription
-    public fun onInventoryOpen(event: ContainerInitializedEvent) {
+    public fun onInventoryOpen(event: ContainerInitializedEvent): Unit {
         holdingBlueOmelette = McPlayer.self?.mainHandItem?.getData(DataTypes.UPGRADE_MODULE).equals("GOBLIN_OMELETTE_BLUE_CHEESE", true)
     }
 
@@ -32,5 +32,5 @@ public object HotmAPI : SkillTreeAPI<HotmData, HotmPerk, HotmAPI>(
 
     override fun isUnlocked(item: ItemStack): Boolean = !item.`is`(Items.COAL) && !item.`is`(Items.COAL_BLOCK)
 
-    override fun createPerk(level: Int, unlocked: Boolean, disabled: Boolean) = HotmPerk(level, unlocked, disabled)
+    override fun createPerk(level: Int, unlocked: Boolean, disabled: Boolean): SkillTreePerk = HotmPerk(level, unlocked, disabled)
 }

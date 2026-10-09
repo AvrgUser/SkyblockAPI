@@ -135,7 +135,7 @@ public object MuseumAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.HUB)
-    public fun onSlotClick(event: SlotClickEvent) {
+    public fun onSlotClick(event: SlotClickEvent): Unit {
         if (event.isInPlayerInventory) return
         if (!donateTitleRegex.match(event.title)) return
         val item = event.item
@@ -158,7 +158,7 @@ public object MuseumAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.HUB)
-    public fun onInventoryOpen(event: ContainerInitializedEvent) {
+    public fun onInventoryOpen(event: ContainerInitializedEvent): Unit {
         val items = event.containerItems
         if (!inventoryTitleRegex.contains(event.title)) return
         val filtered = items.filterNot { it.isSkyblockFiller() }
@@ -222,7 +222,7 @@ public object MuseumAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.HUB)
-    public fun onInventoryUpdate(event: InventoryChangeEvent) {
+    public fun onInventoryUpdate(event: InventoryChangeEvent): Unit {
         if (!mainMuseumTitleRegex.match(event.title)) return
         if (!museumRewardsItem.match(event.item.cleanName)) return
 
@@ -233,7 +233,7 @@ public object MuseumAPI {
 
     @OptIn(SkyBlockPvRequired::class)
     @Subscription
-    public fun onPvOpen(event: SkyBlockPvMuseumOpenedEvent) {
+    public fun onPvOpen(event: SkyBlockPvMuseumOpenedEvent): Unit {
         CompletableFuture.runAsync {
             MuseumStorage.reset()
             PvLoadingHelper.markLoaded(LoadedData.MUSEUM)

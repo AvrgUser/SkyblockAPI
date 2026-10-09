@@ -34,12 +34,12 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextProperties.stripped
 @Module
 public object ChestDump {
 
-    public val enabled by debugToggle("chest_dumps", "Allows you to save inventories by pressing 'S'")
+    public val enabled: Boolean by debugToggle("chest_dumps", "Allows you to save inventories by pressing 'S'")
 
     private val storage = FolderStorage("chest_dumps", ChestDumpStorage.DEFAULT, SkyblockAPICodecs.ChestDumpStorageCodec.codec())
 
     @Subscription
-    public fun onKey(event: ScreenKeyPressedEvent.Pre) {
+    public fun onKey(event: ScreenKeyPressedEvent.Pre): Unit {
         if (!enabled) return
         if (event.key != InputConstants.KEY_S) return
 
@@ -97,7 +97,7 @@ public object ChestDump {
         else -> throw UnsupportedOperationException("Unsupported menu type: $type")
     }
 
-    public fun openDump(dump: ChestDumpStorage) {
+    public fun openDump(dump: ChestDumpStorage): Unit {
         val type = BuiltInRegistries.MENU.getValue(dump.type)!!
         val screen = createScreen(type, dump)
         McClient.setScreenAsync { screen }

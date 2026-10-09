@@ -123,7 +123,7 @@ public object PartyFinderAPI {
     @InventoryTitle("Group Builder")
     @MustBeContainer
     @IgnoreFiller
-    public fun onInventoryChange(event: InventoryChangeEvent) {
+    public fun onInventoryChange(event: InventoryChangeEvent): Unit {
         if (!event.isInMainPart) return
 
         val cleanedLore = event.item.getLore().map { component -> component.string }
@@ -180,7 +180,7 @@ public object PartyFinderAPI {
     }
 
     @Subscription
-    public fun onChatMessage(event: ChatReceivedEvent.Pre) {
+    public fun onChatMessage(event: ChatReceivedEvent.Pre): Unit {
         matchWhen(event.text) {
             case(partyFinderQueueRegex) {
                 DungeonPartyFinderQueueEvent(

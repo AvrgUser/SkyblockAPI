@@ -25,7 +25,7 @@ public object ForgeAPI {
     @Subscription
     @IgnoreFiller
     @InventoryTitle("The Forge")
-    public fun onInvUpdate(event: InventoryChangeEvent) {
+    public fun onInvUpdate(event: InventoryChangeEvent): Unit {
         if (!event.isInMainPart) return
 
         val index = event.slot.index - 9

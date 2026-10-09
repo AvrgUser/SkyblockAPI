@@ -159,7 +159,7 @@ public data object MaxwellAPI : ItemDebugCategory {
 
     @OnlyOnSkyBlock
     @Subscription
-    public fun onChat(event: ChatReceivedEvent.Pre) {
+    public fun onChat(event: ChatReceivedEvent.Pre): Unit {
         val message = event.text
         selectPowerRegex.findThenNull(message, "power") { (power) ->
             val newPower = MaxwellPowers.getByName(power) ?: return@findThenNull
@@ -170,7 +170,7 @@ public data object MaxwellAPI : ItemDebugCategory {
     // These need to be on ContainerChangeEvent because you can interact with the GUI and update data
     @OnlyOnSkyBlock
     @Subscription
-    public fun onInventoryUpdate(event: InventoryChangeEvent) {
+    public fun onInventoryUpdate(event: InventoryChangeEvent): Unit {
         if (event.isInPlayerInventory) return
 
         if (handleThaumaturgyGui(event)) return
@@ -180,12 +180,12 @@ public data object MaxwellAPI : ItemDebugCategory {
 
     @OnlyOnSkyBlock
     @Subscription
-    public fun onInventoryFullyOpened(event: ContainerInitializedEvent) {
+    public fun onInventoryFullyOpened(event: ContainerInitializedEvent): Unit {
         if (handleBagsGui(event)) return
     }
 
     @Subscription(ServerChangeEvent::class, ServerDisconnectEvent::class)
-    public fun onServerChange() = MaxwellStorage.fixEmptyAccessories()
+    public fun onServerChange(): Unit = MaxwellStorage.fixEmptyAccessories()
 
     @Subscription(priority = Subscription.HIGHEST)
     context(event: LoadoutChangeEvent)
@@ -228,7 +228,7 @@ public data object MaxwellAPI : ItemDebugCategory {
                 }
             }
             THAUMATURGY_STATS_TUNING_SLOT -> {
-                val tunings = buildList {
+                val tunings: List = buildList {
                     item.getRawLore().forEach { line ->
                         addIfNotNull(handleTuningsLine(line))
                     }
@@ -238,7 +238,7 @@ public data object MaxwellAPI : ItemDebugCategory {
             }
             in thaumaturgyPowerStonesRegion -> {
                 if (item == ItemStack.EMPTY) return true
-                val power = MaxwellPowers.getByName(item.cleanName) ?: return true
+                val power: MaxwellPower = MaxwellPowers.getByName(item.cleanName) ?: return true
                 val last = item.getRawLore().lastOrNull() ?: return true
                 val isSelected = selectedPowerRegex.contains(last)
                 if (isSelected) MaxwellStorage.updatePower(power)
@@ -275,7 +275,7 @@ public data object MaxwellAPI : ItemDebugCategory {
         var foundPower = false
         var foundTunings = false
         var insideTunings = false
-        val tunings = mutableListOf<MaxwellTuning>()
+        val tunings: List = mutableListOf<MaxwellTuning>()
 
         for (line in item.getRawLore()) {
             if (foundMp && foundPower && foundTunings) break

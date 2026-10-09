@@ -41,7 +41,7 @@ public class ItemBuilder {
     /**
      * Copies the state of the stack to this builder. Replacing existing components, item, and count.
      */
-    public fun copyFrom(data: ItemStack) = apply {
+    public fun copyFrom(data: ItemStack): ItemBuilder = apply {
         this.components = DataComponentPatch.builder()
         this.applyFrom(data)
     }
@@ -49,7 +49,7 @@ public class ItemBuilder {
     /**
      * Applies the state of the stack to this builder. Keeping existing components if already set but replacing item and count.
      */
-    public fun applyFrom(stack: ItemStack) = apply {
+    public fun applyFrom(stack: ItemStack): ItemBuilder = apply {
         this.item = stack.item
         this.count = stack.count
 
@@ -65,30 +65,30 @@ public class ItemBuilder {
     private val customItemName: Component?
         get() = components.build().get(DataComponentMap.EMPTY, DataComponents.CUSTOM_NAME)
 
-    public fun namePrefix(prefix: String) = namePrefix(Component.literal(prefix))
-    public fun namePrefix(prefix: Component) = name(Text.join(prefix, customItemName))
+    public fun namePrefix(prefix: String): ItemBuilder = namePrefix(Component.literal(prefix))
+    public fun namePrefix(prefix: Component): ItemBuilder = name(Text.join(prefix, customItemName))
 
-    public fun name(name: String) = name(Component.literal(name))
-    public fun name(name: Component) = apply {
+    public fun name(name: String): ItemBuilder = name(Component.literal(name))
+    public fun name(name: Component): ItemBuilder = apply {
         components.set(
             DataComponents.CUSTOM_NAME,
             name.copy().setItalic(),
         )
     }
 
-    public fun nameSuffix(suffix: String) = nameSuffix(Component.literal(suffix))
-    public fun nameSuffix(suffix: Component) = name(Text.join(customItemName, suffix))
+    public fun nameSuffix(suffix: String): ItemBuilder = nameSuffix(Component.literal(suffix))
+    public fun nameSuffix(suffix: Component): ItemBuilder = name(Text.join(customItemName, suffix))
 
     private fun MutableComponent.setItalic() = style { this.withItalic(this@setItalic.style.isItalic) }
 
-    public fun tooltip(init: TooltipBuilder.() -> Unit) = apply {
+    public fun tooltip(init: TooltipBuilder.() -> Unit): ItemBuilder = apply {
         val builder = TooltipBuilder()
         builder.init()
         components.set(DataComponents.LORE, ItemLore(builder.lines(), builder.lines()))
     }
 
     /** If [clickAction] returns null, it won't cancel the original click. */
-    public fun onClick(clickAction: ((Int) -> Unit?)?) {
+    public fun onClick(clickAction: ((Int) -> Unit?)?): Unit {
         this.clickAction = clickAction?.let(::ClickConsumer)
     }
 

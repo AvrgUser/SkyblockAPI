@@ -161,7 +161,7 @@ public object MiscEventHandler {
     }
 
     @Subscription
-    public fun onBlockChange(event: BlockChangeEvent) {
+    public fun onBlockChange(event: BlockChangeEvent): Unit {
         if (
             (blocksClicked.getIfPresent(event.pos) != null || event.pos.distSqr(lastBlockClicked) < 25 /* maybe check if 5 block range is good enough */)
             && validMineChange(McLevel[event.pos].block, event.state.block)

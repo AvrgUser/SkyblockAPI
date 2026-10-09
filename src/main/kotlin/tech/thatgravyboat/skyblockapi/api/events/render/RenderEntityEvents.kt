@@ -17,16 +17,16 @@ public abstract class BaseRenderEntityEvent<E : Entity, S : EntityRenderState> :
         internal set
 
     @ApiStatus.Internal
-    public fun setState(state: S?) {
+    public fun setState(state: S?): Unit {
         this.state = state
     }
 
     @ApiStatus.Internal
-    public fun setEntity(entity: E?) {
+    public fun setEntity(entity: E?): Unit {
         this.entity = entity
     }
 
-    public fun clear() {
+    public fun clear(): Unit {
         entity = null
         entity = null
     }

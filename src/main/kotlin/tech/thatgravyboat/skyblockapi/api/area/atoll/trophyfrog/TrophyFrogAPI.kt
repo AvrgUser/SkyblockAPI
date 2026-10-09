@@ -32,7 +32,7 @@ public object TrophyFrogAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.LOTUS_ATOLL)
-    public fun onChat(event: ChatReceivedEvent.Pre) {
+    public fun onChat(event: ChatReceivedEvent.Pre): Unit {
         val content = event.text.trim()
         trophyFrogCaughtRegex.match(content, "type", "tier") { (type, tier) ->
             val frogTier = TrophyTier.valueOf(tier)
@@ -45,14 +45,14 @@ public object TrophyFrogAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.LOTUS_ATOLL)
-    public fun onInventory(event: InventoryChangeEvent) {
+    public fun onInventory(event: InventoryChangeEvent): Unit {
         if (event.title != "Trophy Frogs") return
         if (event.isInPlayerInventory) return
         if (!event.isInMainPart) return
         if (event.isSkyBlockFiller) return
 
         val byName = TrophyFrogType.getByDisplayName(event.item.cleanName) ?: return
-        val caught = mutableMapOf<TrophyTier, Int>()
+        val caught: MutableMap<TrophyTier, Int> = mutableMapOf()
         event.item.getRawLore().forEach {
             trophyFrogDescription.match(it, "tier", "amount") { match ->
                 val (tierName) = match

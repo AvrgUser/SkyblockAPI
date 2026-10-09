@@ -13,23 +13,23 @@ public interface AbstractDataVisualizer<Data, Token : AbstractDataVisualizer.Vis
         return component
     }
 
-    public fun visit(data: Data)
+    public fun visit(data: Data): Unit
 
     public fun VisualizerToken.color(): Int
 
-    public fun append(text: String, color: Int) = apply {
+    public fun append(text: String, color: Int): AbstractDataVisualizer<Data, Token> = apply {
         this.component.append(Text.of(text, color))
     }
 
-    public fun line() = apply {
+    public fun line(): AbstractDataVisualizer<Data, Token> = apply {
         component.append("\n")
     }
 
-    public fun spaces() = apply {
+    public fun spaces(): AbstractDataVisualizer<Data, Token> = apply {
         component.append("  ".repeat(indentCount))
     }
-    public fun appendToken(token: Token) = append(token.token ?: "?", token)
-    public fun append(content: String, token: Token) = apply {
+    public fun appendToken(token: Token): AbstractDataVisualizer<Data, Token> = append(token.token ?: "?", token)
+    public fun append(content: String, token: Token): AbstractDataVisualizer<Data, Token> = apply {
         component.append(Text.of(content, token.color()))
     }
 

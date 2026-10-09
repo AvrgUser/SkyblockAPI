@@ -46,12 +46,12 @@ public object DebugCommands {
     private fun Component?.toPrettyJson(): String = this?.toJson(ComponentSerialization.CODEC).toPrettyString()
 
     @Subscription(receiveCancelled = true)
-    public fun onActionBar(event: ActionBarReceivedEvent.Pre) {
+    public fun onActionBar(event: ActionBarReceivedEvent.Pre): Unit {
         actionbar = event.coloredText
     }
 
     @Subscription(priority = Int.MIN_VALUE)
-    public fun onHeaderFooter(event: TabListHeaderFooterChangeEvent) {
+    public fun onHeaderFooter(event: TabListHeaderFooterChangeEvent): Unit {
         tabListFooter = event.newFooter
         tabListHeader = event.newHeader
     }

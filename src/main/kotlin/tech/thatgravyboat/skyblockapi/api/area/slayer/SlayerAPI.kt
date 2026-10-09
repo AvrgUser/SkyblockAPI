@@ -62,7 +62,7 @@ public object SlayerAPI {
         private set
 
     @Subscription
-    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent) {
+    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent): Unit {
         if (event.removed.any { slayerQuestRegex.matches(it) }) {
             reset()
         } else if (type == null && level == 0) {
@@ -90,7 +90,7 @@ public object SlayerAPI {
     }
 
     @Subscription
-    public fun onChat(event: ChatReceivedEvent.Pre) {
+    public fun onChat(event: ChatReceivedEvent.Pre): Unit {
         matchWhen(event.text) {
             case(questStarted) {
                 if (questFinished.since() < 50.milliseconds) { // we can safely assume that this is auto slayer since it's so fast.
@@ -116,7 +116,7 @@ public object SlayerAPI {
 
 
     @Subscription
-    public fun onSlayerBarUpdate(event: ComponentAttachEvent) {
+    public fun onSlayerBarUpdate(event: ComponentAttachEvent): Unit {
         val slayerInfo: SlayerInfo = if (!isSlayerLine(event.literalComponent)) {
             slayerBosses[event.attachedTo] ?: return
         } else {
@@ -128,7 +128,7 @@ public object SlayerAPI {
     }
 
     @Subscription
-    public fun onNameChangeEvent(event: NameChangedEvent) {
+    public fun onNameChangeEvent(event: NameChangedEvent): Unit {
         event.attachedTo?.let { slayerBosses[it] }?.let {
             event.cancel()
             SlayerInfoLineChangeEvent(event.component, event.infoLineEntity, it).post(SkyBlockAPI.eventBus)
@@ -140,7 +140,7 @@ public object SlayerAPI {
     @ApiDebug("Slayer")
     internal fun debug(builder: DebugBuilder) = with(builder) {
         fields(::type, ::level, ::text)
-        val progress = this@SlayerAPI.progress
+        val progress: SlayerProgress = this@SlayerAPI.progress
         if (progress == null) field(::progress)
         else {
             field("progressType", progress::class.simpleName)
@@ -151,12 +151,12 @@ public object SlayerAPI {
     }
 
     @Subscription
-    public fun onEntityRemoved(event: EntityRemovedEvent) {
+    public fun onEntityRemoved(event: EntityRemovedEvent): Unit {
         slayerBosses.remove(event.entity)
     }
 
     @Subscription(ServerChangeEvent::class, ServerDisconnectEvent::class)
-    public fun onWorldChange() {
+    public fun onWorldChange(): Unit {
         slayerBosses.clear()
     }
 }

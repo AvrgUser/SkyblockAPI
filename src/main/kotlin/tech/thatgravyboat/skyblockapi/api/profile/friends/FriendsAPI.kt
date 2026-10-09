@@ -95,7 +95,7 @@ public object FriendsAPI {
     private val foundFriends: MutableSet<String> = mutableSetOf()
 
     @Subscription(priority = Int.MIN_VALUE)
-    public fun onChat(event: ChatReceivedEvent.Pre) {
+    public fun onChat(event: ChatReceivedEvent.Pre): Unit {
         val components = event.component.splitLines()
         if (components.size == 1) {
             handleSingleLine(components.first())
@@ -163,7 +163,7 @@ public object FriendsAPI {
     private fun handleMessage(component: Component): Boolean {
         val message = component.stripped
         friendJoinLeaveRegex.findThenNull(message, "name", "action") { (name, action) ->
-            val friend = FriendStorage.addIfAbsent(name)
+            val friend: Friend = FriendStorage.addIfAbsent(name)
             val joined = action == "joined"
 
             if (joined) FriendEvent.Join(friend).post()
@@ -187,7 +187,7 @@ public object FriendsAPI {
     @Subscription
     internal fun onCommandsRegistration(event: RegisterSkyblockApiCommandsEvent) {
         val provider = SuggestionProvider<FabricClientCommandSource> { _, builder ->
-            val friends = friends.map { it.name }
+            val friends: List = friends.map { it.name }
             SharedSuggestionProvider.suggest(friends, builder)
         }
         event.register("friends") {
@@ -208,7 +208,7 @@ public object FriendsAPI {
             }
             then("list") {
                 callback {
-                    val friends = friends
+                    val friends: List = friends
                     if (friends.isEmpty()) {
                         Text.sendDebug("You have no friends. :(")
                         return@callback
@@ -236,7 +236,7 @@ public object FriendsAPI {
             then("check name", StringArgumentType.string()) {
                 callback {
                     val name = StringArgumentType.getString(this, "name") ?: return@callback
-                    val friend = FriendStorage.getFriend(name)
+                    val friend: Friend = FriendStorage.getFriend(name)
                     if (friend == null) {
                         Text.sendDebug("$name is not your friend.")
                         return@callback
@@ -267,6 +267,6 @@ public object FriendsAPI {
     }
 
     @Subscription(ServerDisconnectEvent::class)
-    public fun onDisconnect() = resetListSearch()
+    public fun onDisconnect(): Unit = resetListSearch()
 
 }

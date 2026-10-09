@@ -47,21 +47,21 @@ public object EffectsAPI {
     )
 
 
-    public val boosterCookieExpireTime get() = EffectsStorage.boosterCookieExpireTime
+    public val boosterCookieExpireTime: Instant get() = EffectsStorage.boosterCookieExpireTime
     public val godPotionDuration get() = EffectsStorage.godPotionDuration
 
     public val isBoosterCookieActive get() = EffectsStorage.boosterCookieExpireTime.until().isPositive()
     public val isGodPotionActive get() = EffectsStorage.godPotionDuration.isPositive()
 
     @Subscription
-    public fun onChat(event: ChatReceivedEvent.Pre) {
+    public fun onChat(event: ChatReceivedEvent.Pre): Unit {
         if (cookieAteRegex.contains(event.text)) {
             updateBoosterCookieExpireTime(boosterCookieExpireTime.until() + 4.days)
         }
     }
 
     @Subscription
-    public fun onInventoryFullyLoaded(event: ContainerInitializedEvent) {
+    public fun onInventoryFullyLoaded(event: ContainerInitializedEvent): Unit {
         if (event.title == "SkyBlock Menu") {
             val cookieLore = event.itemStacks.find { it.cleanName == "Booster Cookie" }?.getRawLore() ?: return
             cookieInventoryRegex.anyMatch(cookieLore, "duration") { (duration) ->
@@ -75,7 +75,7 @@ public object EffectsAPI {
     }
 
     @Subscription
-    public fun onTabFooterUpdate(event: TabListHeaderFooterChangeEvent) {
+    public fun onTabFooterUpdate(event: TabListHeaderFooterChangeEvent): Unit {
         val cookieBuffChunk = event.newFooterChunked.find { "Cookie Buff" in it }
         cookieBuffChunk?.last()?.let {
             val parsedDuration = it.parseWordDuration() ?: return@let
@@ -90,7 +90,7 @@ public object EffectsAPI {
 
     @Subscription
     @OnlyWidget(TabWidget.ACTIVE_EFFECTS)
-    public fun onTabWidgetUpdate(event: TabWidgetChangeEvent) {
+    public fun onTabWidgetUpdate(event: TabWidgetChangeEvent): Unit {
         cookieTabWidgetRegex.anyMatch(event.new, "duration") { (duration) ->
             val parsedDuration = duration.parseDuration() ?: return@anyMatch
             updateBoosterCookieExpireTime(parsedDuration)

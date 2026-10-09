@@ -27,7 +27,7 @@ public object PacketEventHandler {
     private var lastContainerCloseId: Int? = null
 
     @Subscription
-    public fun onPacketSend(event: PacketSentEvent) {
+    public fun onPacketSend(event: PacketSentEvent): Unit {
         when (event.packet) {
             is ServerboundContainerClosePacket -> {
                 lastContainerCloseId = event.packet.containerId
@@ -37,7 +37,7 @@ public object PacketEventHandler {
     }
 
     @Subscription
-    public fun onPacketReceived(event: PacketReceivedEvent) {
+    public fun onPacketReceived(event: PacketReceivedEvent): Unit {
         when (val packet = event.packet) {
             is ClientboundContainerSetContentPacket -> {
                 McClient.runNextTick {

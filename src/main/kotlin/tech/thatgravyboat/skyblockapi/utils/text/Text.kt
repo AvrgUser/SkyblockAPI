@@ -13,9 +13,9 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 
 public object Text {
 
-    public inline fun of(text: String, init: MutableComponent.() -> Unit = {}) = text.asComponent(init)
+    public inline fun of(text: String, init: MutableComponent.() -> Unit = {}): MutableComponent = text.asComponent(init)
     public inline fun of(init: MutableComponent.() -> Unit = {}): MutableComponent = Component.empty().also(init)
-    public fun of(text: String, color: Int) = of(text) { this.color = color }
+    public fun of(text: String, color: Int): MutableComponent = of(text) { this.color = color }
     public inline fun translatable(text: String, init: MutableComponent.() -> Unit = {}): MutableComponent = Component.translatable(text).also(init)
 
     public fun player(profile: ResolvableProfile, hat: Boolean = true, init: MutableComponent.() -> Unit = {}): MutableComponent {
@@ -31,7 +31,7 @@ public object Text {
     public inline fun String.asComponent(init: MutableComponent.() -> Unit = {}): MutableComponent = Component.literal(this).also(init)
 
     @JvmOverloads
-    public fun multiline(vararg lines: Any?, init: MutableComponent.() -> Unit = {}) = join(*lines, separator = CommonText.NEWLINE, init = init)
+    public fun multiline(vararg lines: Any?, init: MutableComponent.() -> Unit = {}): MutableComponent = join(*lines, separator = CommonText.NEWLINE, init = init)
 
     @JvmOverloads
     public fun join(vararg components: Any?, separator: Component? = null, init: MutableComponent.() -> Unit = {}): MutableComponent {
@@ -64,8 +64,8 @@ public object Text {
     public fun Component.repeat(n: Int): MutableComponent = join(List(n) { this })
     public fun Component.prefix(prefix: String): MutableComponent = join(prefix, this)
     public fun Component.suffix(suffix: String): MutableComponent = join(this, suffix)
-    public fun Component.wrap(prefix: String, suffix: String) = this.prefix(prefix).suffix(suffix)
-    public inline fun Component.wrap(prefix: String, suffix: String, init: MutableComponent.() -> Unit) = this.prefix(prefix).suffix(suffix).apply(init)
+    public fun Component.wrap(prefix: String, suffix: String): MutableComponent = this.prefix(prefix).suffix(suffix)
+    public inline fun Component.wrap(prefix: String, suffix: String, init: MutableComponent.() -> Unit): MutableComponent = this.prefix(prefix).suffix(suffix).apply(init)
 
     public inline fun Component.copy(block: MutableComponent.() -> Unit = {}): MutableComponent = copy().apply(block)
 
@@ -73,7 +73,7 @@ public object Text {
         McClient.chat.addClientSystemMessage(this)
     }
 
-    public fun Component.send(id: String) = McClient.chat.setMessageId(id) {
+    public fun Component.send(id: String): Unit = McClient.chat.setMessageId(id) {
         this.send()
     }
 
@@ -87,4 +87,3 @@ public object Text {
     internal fun Component.sendWithPrefix() = join(CommonText.PREFIX, CommonText.SPACE, this).send()
     internal fun Component.sendWithPrefix(id: String) = join(CommonText.PREFIX, CommonText.SPACE, this).send(id)
 }
-

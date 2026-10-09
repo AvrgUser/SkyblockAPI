@@ -32,7 +32,7 @@ public object DebugTooltips {
     private val isEnabled: Boolean get() = McClient.isDev || toggle
 
     @Subscription
-    public fun onKeyPressed(event: ScreenKeyPressedEvent.Pre) {
+    public fun onKeyPressed(event: ScreenKeyPressedEvent.Pre): Unit {
         if (!isEnabled) return
         if (keys.isEmpty()) return
         if (!McScreen.isAltDown) return
@@ -46,7 +46,7 @@ public object DebugTooltips {
     }
 
     @Subscription
-    public fun onGetDebugTooltip(event: ItemDebugTooltipEvent) {
+    public fun onGetDebugTooltip(event: ItemDebugTooltipEvent): Unit {
         if (!isEnabled) return
         val types = event.item.getDataTypes()
         if (types.isEmpty()) return

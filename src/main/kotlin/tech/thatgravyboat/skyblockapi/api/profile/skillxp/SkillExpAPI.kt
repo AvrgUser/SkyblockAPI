@@ -30,7 +30,7 @@ public object SkillExpAPI {
     @Subscription
     @OnlyOnSkyBlock
     @InventoryTitle("Your Skills")
-    public fun onInventory(event: InventoryChangeEvent) {
+    public fun onInventory(event: InventoryChangeEvent): Unit {
         if (!event.isInMainPart) return
         if (event.isSkyBlockFiller) return
 
@@ -53,7 +53,7 @@ public object SkillExpAPI {
     }
 
     @Subscription
-    public fun onActionbarLiteral(event: SkillXpLiteralActionBarWidgetChangeEvent) {
+    public fun onActionbarLiteral(event: SkillXpLiteralActionBarWidgetChangeEvent): Unit {
         val skill = event.skill ?: return
 
         // if needed is 0, they are at max level
@@ -67,7 +67,7 @@ public object SkillExpAPI {
     }
 
     @Subscription
-    public fun onActionbarPercent(event: SkillXpPercentActionBarWidgetChangeEvent) {
+    public fun onActionbarPercent(event: SkillXpPercentActionBarWidgetChangeEvent): Unit {
         val skill = event.skill ?: return
         val level = SkillExpStorage.getLevel(skill)
 
@@ -87,7 +87,7 @@ public object SkillExpAPI {
     internal fun onCommand(event: RegisterSkyblockApiCommandsEvent) {
         event.register("skill") {
             thenCallback("list") {
-                val skills = SkillExpStorage.data?.exp ?: return@thenCallback Text.of("No skill data found.").send()
+                val skills: Map = SkillExpStorage.data?.exp ?: return@thenCallback Text.of("No skill data found.").send()
                 skills.entries.sortedByDescending { it.value }.forEach { (skill, xp) ->
                     val level = skill.data.getLevelForExp(xp.toLong())
                     Text.of("${skill.name}: Level $level (${xp.toFormattedString()} XP)").send()

@@ -189,8 +189,8 @@ public fun String.stripColor(): String {
     return sb.toString()
 }
 
-public fun String.capitalize() = lowercase().split(" ", "_").joinToString(" ") { it.replaceFirstChar(Char::titlecase) }
-public fun String.toTitleCase() = capitalize()
+public fun String.capitalize(): String = lowercase().split(" ", "_").joinToString(" ") { it.replaceFirstChar(Char::titlecase) }
+public fun String.toTitleCase(): String = capitalize()
 
 public fun pluralize(n: Int, singular: String, plural: String? = null): String {
     return if (n == 1 || n == -1) singular else plural ?: "${singular}s"
@@ -202,7 +202,7 @@ public fun <A, B, C, D> Pair<A, B>.map(first: (A) -> C, second: (B) -> D): Pair<
 }
 
 /** Trims both strings in the pair */
-public fun Pair<String, String>.trim() = map(first = String::trim, second = String::trim)
+public fun Pair<String, String>.trim(): Pair<String, String> = map(first = String::trim, second = String::trim)
 
 /** Creates a pair of strings from before and after the specified [delimiter], or the entire string and an empty string if there are none. */
 public fun String.splitOnLast(delimiter: String): Pair<String, String> {
@@ -234,4 +234,4 @@ public fun String.toScreamingSnakeCase(): String {
 public fun String.removeTrailingChar(target: Char): String = dropLastWhile {  it == target }
 
 private val validChars = listOf(' ', '_', '-', ':')
-public fun String.sanitizeForCommandInput() = this.filter { it.isDigit() || it.isLetter() || it in validChars }.trim()
+public fun String.sanitizeForCommandInput(): String = this.filter { it.isDigit() || it.isLetter() || it in validChars }.trim()

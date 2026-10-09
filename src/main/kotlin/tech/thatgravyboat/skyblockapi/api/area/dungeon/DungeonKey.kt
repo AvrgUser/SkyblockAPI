@@ -8,6 +8,6 @@ public enum class DungeonKey(private val getter: () -> Int) {
     public val current: Int get() = getter()
 
     public companion object {
-        public fun getById(id: String) = entries.firstOrNull { it.name.equals(id, ignoreCase = true) }
+        public fun getById(id: String): DungeonKey? = entries.firstOrNull { it.name.equals(id, ignoreCase = true) }
     }
 }

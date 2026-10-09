@@ -4,7 +4,7 @@ import me.owdding.ktcodecs.GenerateCodec
 
 @GenerateCodec
 public data class SkyBlockArea(val name: String) {
-    public fun inArea() = LocationAPI.area == this
+    public fun inArea(): Boolean = LocationAPI.area == this
 
     public companion object {
 

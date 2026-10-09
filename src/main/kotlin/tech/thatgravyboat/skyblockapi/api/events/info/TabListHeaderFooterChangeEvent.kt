@@ -13,10 +13,10 @@ public data class TabListHeaderFooterChangeEvent(
     val newFooter: Component,
     val newHeader: Component,
 ) : SkyBlockEvent() {
-    val newFooterChunked by lazy { newFooter.chunk() }
-    val newHeaderChunked by lazy { newHeader.chunk() }
-    val oldFooterChunked by lazy { oldFooter.chunk() }
-    val oldHeaderChunked by lazy { oldHeader.chunk() }
+    val newFooterChunked: List by lazy { newFooter.chunk() }
+    val newHeaderChunked: List by lazy { newHeader.chunk() }
+    val oldFooterChunked: List by lazy { oldFooter.chunk() }
+    val oldHeaderChunked: List by lazy { oldHeader.chunk() }
 
     private fun Component.chunk() = stripped.split("\n")
         .chunked(CharSequence::isBlank)

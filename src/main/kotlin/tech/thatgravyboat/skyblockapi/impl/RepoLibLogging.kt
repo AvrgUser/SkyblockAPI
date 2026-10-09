@@ -6,7 +6,7 @@ import tech.thatgravyboat.repolib.api.RepoLibLogger
 import tech.thatgravyboat.skyblockapi.utils.debugToggle
 
 public object RepoLibLogging : RepoLibLogger, Logger by LoggerFactory.getLogger("Repo-Lib") {
-    public val enableDebugLogging by debugToggle("repo_lib_debug_logging")
+    public val enableDebugLogging: Boolean by debugToggle("repo_lib_debug_logging")
 
     private inline fun updateLogLevel(value: String, runnable: (String) -> Unit, debugLogger: (String) -> Unit = ::info) {
         if (enableDebugLogging) {

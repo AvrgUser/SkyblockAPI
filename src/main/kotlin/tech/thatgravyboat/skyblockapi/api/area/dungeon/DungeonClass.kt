@@ -10,9 +10,9 @@ public enum class DungeonClass {
     TANK,
     ;
 
-    public val displayName = toFormattedName()
+    public val displayName: String = toFormattedName()
 
     public companion object {
-        public fun getByName(name: String) = entries.find { it.displayName == name }
+        public fun getByName(name: String): DungeonClass? = entries.find { it.displayName == name }
     }
 }

@@ -47,13 +47,13 @@ public object SacksAPI {
     // [Sacks] +14 items. (Last 5s.)
     // [Sacks] -38 items. (Last 5s.)
     // [Sacks] +38 items, -1 item. (Last 8s.)
-    public val sackMessageRegex = RegexGroup.CHAT.create(
+    public val sackMessageRegex: ComponentRegex = RegexGroup.CHAT.create(
         "sackapi.message",
         "\\[Sacks] (?:(?<gained>\\+[\\d.,]+) items?,?)?\\s*(?:(?<lost>-[\\d.,]+) items?)?\\.\\s*\\(.*",
     ).toComponentRegex()
-    public val addedItemsRegex = RegexGroup.CHAT.create("sackapi.changed", " {2}(?<amount>[+-][\\d.,]+) (?<item>.+) \\(")
-    public val sackTitleRegex = RegexGroup.INVENTORY.create("sackapi.title", ".* Sack")
-    public val sackAmountRegex = RegexGroup.INVENTORY.create("sackapi.amount", "Stored: (?<amount>[\\d,.]+)/.*")
+    public val addedItemsRegex: Regex = RegexGroup.CHAT.create("sackapi.changed", " {2}(?<amount>[+-][\\d.,]+) (?<item>.+) \\(")
+    public val sackTitleRegex: Regex = RegexGroup.INVENTORY.create("sackapi.title", ".* Sack")
+    public val sackAmountRegex: Regex = RegexGroup.INVENTORY.create("sackapi.amount", "Stored: (?<amount>[\\d,.]+)/.*")
 
     public val sackItems: Map<String, Int> get() = SacksStorage.counts
 
@@ -64,7 +64,7 @@ public object SacksAPI {
 
     @Subscription
     @OnlyOnSkyBlock
-    public fun onChat(event: ChatReceivedEvent.Pre) {
+    public fun onChat(event: ChatReceivedEvent.Pre): Unit {
         sackMessageRegex.match(event.component) {
             val gainedHoverComponents = it["gained"]?.hover?.splitLines().orEmpty()
             val lostHoverComponents = it["lost"]?.hover?.splitLines().orEmpty()
@@ -93,11 +93,11 @@ public object SacksAPI {
     }
 
     @Subscription(ServerChangeEvent::class, ServerDisconnectEvent::class)
-    public fun onServerChange() = recentUpdates.invalidateAll()
+    public fun onServerChange(): Unit = recentUpdates.invalidateAll()
 
     @Subscription
     @OnlyOnSkyBlock
-    public fun onInventoryUpdate(event: InventoryChangeEvent) {
+    public fun onInventoryUpdate(event: InventoryChangeEvent): Unit {
         if (event.isInPlayerInventory) return
         if (!sackTitleRegex.matches(event.title)) return
         val item = event.item

@@ -59,7 +59,7 @@ public abstract class SkillTreeCurrencyAPI<Currency, Self> internal constructor(
 
 
     @Subscription(inherited = true)
-    public fun onTabWidgetChange(event: TabWidgetChangeEvent) {
+    public fun onTabWidgetChange(event: TabWidgetChangeEvent): Unit {
         if (event.widget !in tabWidgets) return
         widgetCurrencyRegex.matchAll(event.new, "currency", "amount") { (currency, amount) ->
             val currency = fromWidgetName(currency) ?: return@matchAll
@@ -73,7 +73,7 @@ public abstract class SkillTreeCurrencyAPI<Currency, Self> internal constructor(
 
     @Subscription(inherited = true)
     @OnlyOnSkyBlock
-    public fun onInventoryChange(event: InventoryChangeEvent) {
+    public fun onInventoryChange(event: InventoryChangeEvent): Unit {
         if (!titleRegex.matches(event.title)) return
         val mainItem = event.itemStacks.getOrNull(MAIN_SLOT) ?: return
         val resetItem = event.itemStacks.getOrNull(RESET_SLOT)

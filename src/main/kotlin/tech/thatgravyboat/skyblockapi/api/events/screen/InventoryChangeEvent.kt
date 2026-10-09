@@ -20,8 +20,8 @@ public class InventoryChangeEvent(
     public val previousItem: ItemStack,
 ) : SkyBlockEvent(), ItemDebugAttachable by item {
     public val isInPlayerInventory = slot.container is Inventory
-    public val title = titleComponent.stripped
-    public val itemStacks = inventory.map { it.item }
+    public val title: String = titleComponent.stripped
+    public val itemStacks: List = inventory.map { it.item }
 
     public val isSkyBlockFiller = item.isSkyblockFiller()
 

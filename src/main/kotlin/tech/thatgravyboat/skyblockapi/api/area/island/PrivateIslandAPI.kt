@@ -25,7 +25,7 @@ public object PrivateIslandAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.PRIVATE_ISLAND, SkyBlockIsland.GARDEN)
-    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent) {
+    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent): Unit {
         flightDurationRegex.anyMatch(event.added, "duration") { (duration) ->
             flightDuration = duration.parseColonDuration() ?: Duration.ZERO
         }

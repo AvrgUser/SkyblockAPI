@@ -15,7 +15,7 @@ public class JsonVisualizer : AbstractDataVisualizer<JsonElement, JsonVisualizer
     override val component: MutableComponent = Text.of()
     override var indentCount: Int = 0
 
-    override fun visit(data: JsonElement) {
+    override fun visit(data: JsonElement): Unit {
         when (data) {
             is JsonObject -> visitObject(data)
             is JsonArray -> visitArray(data)
@@ -40,13 +40,13 @@ public class JsonVisualizer : AbstractDataVisualizer<JsonElement, JsonVisualizer
         else -> TextColor.WHITE
     }
 
-    public fun visitPrimitive(element: JsonPrimitive) = when {
+    public fun visitPrimitive(element: JsonPrimitive): AbstractDataVisualizer = when {
         element.isBoolean -> appendToken(if (element.asBoolean) Token.TRUE else Token.FALSE)
         element.isNumber -> append(element.asNumber.toString(), Token.NUMBER)
         else -> appendToken(Token.STRING_QUOTE).append(element.asString, Token.STRING).appendToken(Token.STRING_QUOTE)
     }
 
-    public fun visitArray(element: JsonArray) {
+    public fun visitArray(element: JsonArray): Unit {
         appendToken(Token.OPEN_ARRAY).line()
         indentCount += 1
         val iterator = element.iterator()
@@ -61,7 +61,7 @@ public class JsonVisualizer : AbstractDataVisualizer<JsonElement, JsonVisualizer
         spaces().appendToken(Token.CLOSE_ARRAY)
     }
 
-    public fun visitObject(element: JsonObject) {
+    public fun visitObject(element: JsonObject): Unit {
         appendToken(Token.OPEN_OBJECT).line()
         indentCount += 1
         val iterator = element.entrySet().iterator()

@@ -13,11 +13,11 @@ import java.lang.ref.WeakReference
 
 @Module
 public object SkyBlockEntity {
-    public val mobLevelRegex = RegexGroup.ENTITY.create("mob_level", ".*(\\[Lv\\d+]).*")
+    public val mobLevelRegex: Regex = RegexGroup.ENTITY.create("mob_level", ".*(\\[Lv\\d+]).*")
 
     @OnlyOnSkyBlock
     @Subscription
-    public fun event(event: NameChangedEvent) {
+    public fun event(event: NameChangedEvent): Unit {
         event.infoLineEntity.asAccessor().`skyblockapi$attachToClosest`()
     }
 

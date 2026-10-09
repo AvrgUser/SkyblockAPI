@@ -22,7 +22,7 @@ public object ProfileLevelEventHandler {
     private var lastXp: Int = 0
 
     @Subscription
-    public fun onTabWidgetChange(event: TabWidgetChangeEvent) {
+    public fun onTabWidgetChange(event: TabWidgetChangeEvent): Unit {
         if (event.widget != TabWidget.PROFILE) return
         val level = event.new.getOrNull(1) ?: return
         levelRegex.match(level, "level", "xp", "nextXp") { (level, xp, nextXp) ->

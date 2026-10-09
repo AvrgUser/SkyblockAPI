@@ -38,16 +38,16 @@ public object DebugItems {
 
     public val isEnabled: Boolean by debugToggle("item_debug_entries")
 
-    public var selectedIndex = 0
-    public var entriesSize = 0
+    public var selectedIndex: Int = 0
+    public var entriesSize: Int = 0
     public var lastItem: ItemStack? = null
     public var lastSet: Instant = Instant.DISTANT_PAST
-    public val toggledEntries = mutableSetOf<ItemDebugCategory>()
+    public val toggledEntries: Set = mutableSetOf<ItemDebugCategory>()
 
-    public fun updateItem(new: ItemStack?) {
+    public fun updateItem(new: ItemStack?): Unit {
         val entries = new?.getEntries()
         val newEntriesCategories = entries?.keySet()?.toList().orEmpty()
-        val lastItem = this.lastItem
+        val lastItem: ItemStack = this.lastItem
         val oldEntries = lastItem?.getEntries()
         val oldEntriesCategories = oldEntries?.keySet()?.toList().orEmpty()
 
@@ -72,7 +72,7 @@ public object DebugItems {
     }
 
     @Subscription
-    public fun onKeyPressed(event: ScreenKeyPressedEvent.Pre) {
+    public fun onKeyPressed(event: ScreenKeyPressedEvent.Pre): Unit {
         if (!isEnabled) return
         if (!McScreen.isShiftDown) return
         val entries = lastItem?.getEntries() ?: return
@@ -100,7 +100,7 @@ public object DebugItems {
     }
 
     @Subscription
-    public fun onForegroundRender(event: RenderScreenForegroundEvent) {
+    public fun onForegroundRender(event: RenderScreenForegroundEvent): Unit {
         if (!isEnabled) return
         if (!McScreen.isShiftDown) return
         lastItem ?: return
@@ -124,14 +124,14 @@ public object DebugItems {
 
     @Subscription
     public context(event: TickEvent)
-    fun tick() {
+    fun tick(): Unit {
         if (this.lastItem != null && this.lastSet.since() > 5.seconds) {
             updateItem(null)
         }
     }
 
     @Subscription
-    public fun onGetDebugTooltip(event: ItemDebugTooltipEvent) {
+    public fun onGetDebugTooltip(event: ItemDebugTooltipEvent): Unit {
         val item = event.item
         val entries = item.getEntries() ?: return
         if (lastItem != item || entriesSize != entries.asMap()?.keys?.size) {

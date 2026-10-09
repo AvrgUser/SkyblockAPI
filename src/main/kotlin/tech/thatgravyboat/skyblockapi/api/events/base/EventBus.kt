@@ -14,7 +14,7 @@ public class EventBus {
     private val listeners: MutableMap<Class<*>, EventListeners> = ConcurrentHashMap()
     private val handlers: MutableMap<Class<*>, EventHandler<*>> = ConcurrentHashMap()
 
-    public fun register(instance: Any) {
+    public fun register(instance: Any): Unit {
         var clazz: Class<*>? = instance.javaClass
         while (clazz != null) {
             if (clazz == Any::class.java) break
@@ -33,7 +33,7 @@ public class EventBus {
         listeners.getOrPut(type) { EventListeners() }.addListener(callback, priority, receiveCancelled)
     }
 
-    public fun unregister(instance: Any) {
+    public fun unregister(instance: Any): Unit {
         var clazz: Class<*>? = instance.javaClass
         while (clazz != null) {
             if (clazz == Any::class.java) break

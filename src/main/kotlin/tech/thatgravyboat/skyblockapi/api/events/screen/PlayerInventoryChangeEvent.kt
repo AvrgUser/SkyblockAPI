@@ -18,7 +18,7 @@ public data class PlayerInventoryChangeEvent(
 
     //? < 26.2
     //val slot get() = slotIndex
-    val slotIndex get() = inventorySlot.index
+    val slotIndex: Int get() = inventorySlot.index
 }
 
 public data class PlayerHotbarChangeEvent(

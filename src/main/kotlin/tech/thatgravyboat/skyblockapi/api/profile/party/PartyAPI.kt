@@ -149,11 +149,11 @@ public object PartyAPI {
     private val debug by debugToggle("party_api", "Allows you to see what messages get detected by PartyAPI, and what they modify.")
 
     @Subscription
-    public fun onChat(event: ChatReceivedEvent.Pre) {
+    public fun onChat(event: ChatReceivedEvent.Pre): Unit {
         val message = event.text
         ownJoinedRegex.findThenNull(message, "leader") { (leaderName) ->
             inParty = true
-            val leader = PartyMember(leaderName, PartyRole.LEADER)
+            val leader: PartyMember = PartyMember(leaderName, PartyRole.LEADER)
             this.leader = leader
             members = listOf(leader, ownPlayer())
             debugMessage { "Joined party (L: $leaderName)" }
@@ -275,7 +275,7 @@ public object PartyAPI {
     }
 
     @Subscription
-    public fun onPartyInfo(event: PartyInfoEvent) {
+    public fun onPartyInfo(event: PartyInfoEvent): Unit {
         debugMessage { "Updated from packet" }
         this.requestedPartyInfo = false
         if (!event.inParty) return reset()

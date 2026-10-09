@@ -10,7 +10,7 @@ public class RegexSwitch {
 
     private val cases = mutableListOf<RegexSwitchCase>()
 
-    public fun case(regex: Regex, vararg groups: String = arrayOf(), action: (Destructured) -> Unit = {}) {
+    public fun case(regex: Regex, vararg groups: String = arrayOf(), action: (Destructured) -> Unit = {}): Unit {
         cases.add(RegexSwitchCase(regex, groups.toList(), action))
     }
 

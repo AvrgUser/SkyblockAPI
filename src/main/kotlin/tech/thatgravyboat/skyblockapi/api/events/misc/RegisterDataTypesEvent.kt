@@ -5,7 +5,7 @@ import tech.thatgravyboat.skyblockapi.api.events.base.SkyBlockEvent
 
 public class RegisterDataTypesEvent(private val registry: (DataType<*>) -> Unit) : SkyBlockEvent() {
 
-    public fun register(type: DataType<*>) {
+    public fun register(type: DataType<*>): Unit {
         registry(type)
     }
 }

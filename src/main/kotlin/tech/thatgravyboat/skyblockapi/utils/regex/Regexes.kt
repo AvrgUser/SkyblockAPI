@@ -31,7 +31,7 @@ public object Regexes {
         }
     }
 
-    public fun group(prefix: String) = RegexGroup(prefix)
+    public fun group(prefix: String): RegexGroup = RegexGroup(prefix)
 
     private fun validateKey(key: String) {
         if (!McClient.isDev) return
@@ -41,7 +41,7 @@ public object Regexes {
 
     @JvmStatic
     @ApiStatus.Internal
-    public fun load() {
+    public fun load(): Unit {
         if (McClient.isDev) return
         runCatchBlocking {
             val result = Http.getResult<JsonObject>(URL)

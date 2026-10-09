@@ -39,7 +39,7 @@ public object TrapperAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.THE_BARN)
-    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent) {
+    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent): Unit {
         peltsRegex.anyMatch(event.added, "pelts") { (pelts) ->
             this.pelts = pelts.parseFormattedInt()
         }
@@ -48,7 +48,7 @@ public object TrapperAPI {
     @Subscription
     @OnlyWidget(TabWidget.TRAPPER)
     @OnlyIn(SkyBlockIsland.THE_BARN)
-    public fun onTabListWidgetUpdate(event: TabWidgetChangeEvent) {
+    public fun onTabListWidgetUpdate(event: TabWidgetChangeEvent): Unit {
         peltsTabListRegex.anyMatch(event.new, "pelts") { (pelts) ->
             this.pelts = pelts.parseFormattedInt()
         }
@@ -56,7 +56,7 @@ public object TrapperAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.THE_BARN)
-    public fun onChatMessage(event: ChatReceivedEvent.Pre) {
+    public fun onChatMessage(event: ChatReceivedEvent.Pre): Unit {
         animalRegex.match(event.text, "type", "location") { (type, location) ->
             trackedType = TrapperAnimalType.fromString(type)
             trackedLocation = SkyBlockArea(location)
@@ -70,6 +70,6 @@ public object TrapperAPI {
     }
 
     @Subscription(ProfileChangeEvent::class, ServerDisconnectEvent::class)
-    public fun onProfileChange() = reset()
+    public fun onProfileChange(): Unit = reset()
 }
 

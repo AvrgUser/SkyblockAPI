@@ -27,7 +27,7 @@ public object Scheduling {
         TimeUnit.MILLISECONDS,
     )
 
-    public fun async(runnable: suspend () -> Unit) {
+    public fun async(runnable: suspend () -> Unit): Unit {
         CompletableFuture.runAsync {
             runCatchBlocking { runnable() }
         }

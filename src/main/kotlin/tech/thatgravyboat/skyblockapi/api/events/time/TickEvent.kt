@@ -4,7 +4,7 @@ import tech.thatgravyboat.skyblockapi.api.events.base.EventBus
 import tech.thatgravyboat.skyblockapi.api.events.base.SkyBlockEvent
 
 public object TickEvent : SkyBlockEvent() {
-    public var ticks = 0
+    public var ticks: Int = 0
         private set
 
     override fun post(bus: EventBus): Boolean {

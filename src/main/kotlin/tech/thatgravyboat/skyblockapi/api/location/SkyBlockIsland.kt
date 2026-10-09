@@ -30,9 +30,9 @@ public enum class SkyBlockIsland(public val id: String, displayName: String? = n
     JERRYS_WORKSHOP("winter", "Jerry's Workshop"),
     ;
 
-    public fun inIsland() = LocationAPI.island == this
+    public fun inIsland(): Boolean = LocationAPI.island == this
 
-    public val displayName = displayName ?: toFormattedName()
+    public val displayName: String = displayName ?: toFormattedName()
 
     override fun toString() = displayName
 

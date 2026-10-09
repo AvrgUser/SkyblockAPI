@@ -47,21 +47,21 @@ public object CommunityCenterAPI {
 
 
     @Subscription
-    public fun onChat(event: ChatReceivedEvent.Pre) {
+    public fun onChat(event: ChatReceivedEvent.Pre): Unit {
         if (cookieAteRegex.contains(event.text)) {
             bitsAvailable += bitsPerCookie
         }
     }
 
     @Subscription
-    public fun onBitsUpdate(event: CurrencyUpdateEvent.Bits) {
+    public fun onBitsUpdate(event: CurrencyUpdateEvent.Bits): Unit {
         val diff = event.diff
         if (diff < 0) return // You have spent bits, not gained
         bitsAvailable = (bitsAvailable - diff).coerceAtLeast(0)
     }
 
     @Subscription
-    public fun onInventoryFullyLoaded(event: ContainerInitializedEvent) {
+    public fun onInventoryFullyLoaded(event: ContainerInitializedEvent): Unit {
         when (event.title) {
             "SkyBlock Menu" -> handleSkyBlockMenu(event)
             "Booster Cookie" -> handleBoosterCookieMenu(event)

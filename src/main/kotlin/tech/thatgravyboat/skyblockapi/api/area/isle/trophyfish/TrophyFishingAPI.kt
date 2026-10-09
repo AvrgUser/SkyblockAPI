@@ -44,7 +44,7 @@ public object TrophyFishingAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.CRIMSON_ISLE)
-    public fun onChat(event: ChatReceivedEvent.Pre) {
+    public fun onChat(event: ChatReceivedEvent.Pre): Unit {
         val content = event.text.trim()
         matchWhen(content) {
             case(singleTrophyFishCaughtRegex, "type", "tier") { (type, tier) ->
@@ -69,14 +69,14 @@ public object TrophyFishingAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.CRIMSON_ISLE)
-    public fun onInventory(event: InventoryChangeEvent) {
+    public fun onInventory(event: InventoryChangeEvent): Unit {
         if (event.title != "Trophy Fish") return
         if (event.isInPlayerInventory) return
         if (!event.isInMainPart) return
         if (event.isSkyBlockFiller) return
 
         val byName = TrophyFishType.getByDisplayName(event.item.cleanName) ?: return
-        val caught = mutableMapOf<TrophyTier, Int>()
+        val caught: MutableMap<TrophyTier, Int> = mutableMapOf()
         event.item.getRawLore().forEach {
             trophyFishDescription.match(it, "tier", "amount") { match ->
                 val (tierName) = match
@@ -91,7 +91,7 @@ public object TrophyFishingAPI {
     @OptIn(SkyBlockPvRequired::class)
     @Subscription
     @OnlyOnSkyBlock
-    public fun onPv(event: SkyBlockPvOpenedEvent) {
+    public fun onPv(event: SkyBlockPvOpenedEvent): Unit {
         val obtained = event.member["trophy_fish"].asMap { key, value ->
             if (!value.isJsonPrimitive) null to 0
             else key to value.asInt(0)
@@ -100,7 +100,7 @@ public object TrophyFishingAPI {
 
         val grouped = obtained.entries.groupBy { group -> TrophyFishType.entries.find { group.key.startsWith(it.internalName, true) } }.filterKeysNotNull()
         val unlocked = grouped.mapValues { entry ->
-            val caught = getCaught(entry.key)
+            val caught: Map = getCaught(entry.key)
             entry.value.associate { value ->
                 val tier = TrophyTier.entries.find { value.key.endsWith(it.name, true) }
                 val previous = tier?.let(caught::get) ?: 0

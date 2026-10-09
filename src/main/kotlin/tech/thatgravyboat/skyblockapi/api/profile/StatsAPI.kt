@@ -48,7 +48,7 @@ public object StatsAPI {
     }
 
     @Subscription
-    public fun onActionBarWidget(event: ActionBarWidgetChangeEvent) {
+    public fun onActionBarWidget(event: ActionBarWidgetChangeEvent): Unit {
         when (event) {
             is HealthActionBarWidgetChangeEvent -> {
                 health = event.current

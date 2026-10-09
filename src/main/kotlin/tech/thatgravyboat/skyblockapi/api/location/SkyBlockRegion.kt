@@ -10,11 +10,11 @@ public data class SkyBlockRegion(
     val islands: Set<SkyBlockIsland> = emptySet(),
     val biomes: Set<SkyBlockBiome> = emptySet(),
 ) {
-    public fun inArea() = SkyBlockArea.inAnyArea(areas)
-    public fun inIsland() = SkyBlockIsland.inAnyIsland(islands)
-    public fun inBiome() = SkyBlockBiome.inAnyBiome(biomes)
+    public fun inArea(): Boolean = SkyBlockArea.inAnyArea(areas)
+    public fun inIsland(): Boolean = SkyBlockIsland.inAnyIsland(islands)
+    public fun inBiome(): Boolean = SkyBlockBiome.inAnyBiome(biomes)
 
-    public fun inAnyRegion() = inArea() || inIsland() || inBiome()
+    public fun inAnyRegion(): Boolean = inArea() || inIsland() || inBiome()
 
     public companion object {
         public val CODEC: Codec<SkyBlockRegion> = SkyblockAPICodecs.getCodec<SkyBlockRegion>()

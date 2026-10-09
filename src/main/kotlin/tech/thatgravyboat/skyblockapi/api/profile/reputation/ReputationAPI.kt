@@ -39,7 +39,7 @@ public object ReputationAPI {
 
     @Subscription
     @OnlyWidget(TabWidget.REPUTATION)
-    public fun onTabWidget(event: TabWidgetChangeEvent) {
+    public fun onTabWidget(event: TabWidgetChangeEvent): Unit {
         val matchResult = event.matchResult ?: return
         val type = Faction.byNameOrNull(matchResult.groupValues[1]) ?: return
 

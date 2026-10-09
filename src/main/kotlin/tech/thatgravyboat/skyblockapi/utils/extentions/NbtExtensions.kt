@@ -35,8 +35,8 @@ public fun CompoundTag.getObjectOrNull(key: String): CompoundTag? = this.getComp
 
 public fun CompoundTag.getUuidOrNull(key: String): UUID? = this.getStringOrNull(key)?.runCatching(UUID::fromString)?.getOrNull()
 
-public fun compoundTag(init: CompoundTag.() -> Unit) = CompoundTag().apply(init)
-public fun CompoundTag.putCompound(key: String, init: CompoundTag.() -> Unit) = this.put(key, compoundTag(init))
+public fun compoundTag(init: CompoundTag.() -> Unit): CompoundTag = CompoundTag().apply(init)
+public fun CompoundTag.putCompound(key: String, init: CompoundTag.() -> Unit): CompoundTag? = this.put(key, compoundTag(init))
 public fun CompoundTag.toData(): CustomData = CustomData.of(this)
 
 

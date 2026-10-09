@@ -21,5 +21,5 @@ public object HotfAPI : SkillTreeAPI<HotfData, HotfPerk, HotfAPI>(
         return item.getItemModel().let { it != Items.MANGROVE_ROOTS && it != Items.PALE_OAK_SAPLING && it != Items.PALE_OAK_BUTTON }
     }
 
-    override fun createPerk(level: Int, unlocked: Boolean, disabled: Boolean) = HotfPerk(level, unlocked, disabled)
+    override fun createPerk(level: Int, unlocked: Boolean, disabled: Boolean): SkillTreePerk = HotfPerk(level, unlocked, disabled)
 }

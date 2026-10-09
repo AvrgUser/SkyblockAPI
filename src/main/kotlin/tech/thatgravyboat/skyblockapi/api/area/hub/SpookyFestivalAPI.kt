@@ -48,7 +48,7 @@ public object SpookyFestivalAPI {
         private set
 
     @Subscription
-    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent) {
+    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent): Unit {
         durationRegex.anyMatch(event.added) { match ->
             val hours = match["hour"]?.takeUnless { it.isBlank() }?.toIntValue() ?: 0
             val minutes = match["min"]?.toIntValue() ?: 0
@@ -59,7 +59,7 @@ public object SpookyFestivalAPI {
     }
 
     @Subscription
-    public fun onTabListFooterUpdate(event: TabListHeaderFooterChangeEvent) {
+    public fun onTabListFooterUpdate(event: TabListHeaderFooterChangeEvent): Unit {
         candyRegex.findOrNull(event.newFooter.stripped, "green", "purple", "points") { (green, purple, points) ->
             greenCandy = green.toIntValue()
             purpleCandy = purple.toIntValue()
@@ -69,7 +69,7 @@ public object SpookyFestivalAPI {
     }
 
     @Subscription(ProfileChangeEvent::class, ServerDisconnectEvent::class)
-    public fun onProfileChange() = reset()
+    public fun onProfileChange(): Unit = reset()
 
     private fun reset() {
         onGoing = false

@@ -63,9 +63,9 @@ public object LocationAPI {
         "^.>>\\s+Achievement Unlocked: Achievement Get! Hypixel Server!"
     )
 
-    public val forceOnSkyblock by debugToggle("location/force_skyblock", "Always returns true for SkyBlock checks")
-    public val forceIsland by debugSelect<SkyBlockIsland>("location/force_island", "Force a specific island to be returned")
-    public val forceOnAlpha by debugToggle("location/force_alpha", "Always returns true when checking for onAlpha")
+    public val forceOnSkyblock: Boolean by debugToggle("location/force_skyblock", "Always returns true for SkyBlock checks")
+    public val forceIsland: SkyBlockIsland by debugSelect<SkyBlockIsland>("location/force_island", "Force a specific island to be returned")
+    public val forceOnAlpha: Boolean by debugToggle("location/force_alpha", "Always returns true when checking for onAlpha")
 
     public var isOnSkyBlock: Boolean = false
         get() = field || forceOnSkyblock
@@ -123,7 +123,7 @@ public object LocationAPI {
         private set
 
     @Subscription
-    public fun onServerChange(event: ServerChangeEvent) {
+    public fun onServerChange(event: ServerChangeEvent): Unit {
         lastServerChange = currentInstant()
         isOnSkyBlock = event.type == GameType.SKYBLOCK
         val old = island
@@ -138,27 +138,27 @@ public object LocationAPI {
     }
 
     @Subscription
-    public fun onHypixelJoin(event: HypixelJoinEvent) {
+    public fun onHypixelJoin(event: HypixelJoinEvent): Unit {
         onHypixel = true
         onAlpha = event.onAlpha
     }
 
     @Subscription
     @OnlyOnSkyBlock
-    public fun onTabListUpdate(event: TabListChangeEvent) {
+    public fun onTabListUpdate(event: TabListChangeEvent): Unit {
         val component = event.new.firstOrNull()?.firstOrNull() ?: return
         playerCount = playerCountRegex.findGroup(component.stripped.lowercase(), "count")?.toIntOrNull() ?: 0
     }
 
     @Subscription
     @OnlyOnSkyBlock
-    public fun onScoreboardTitleUpdate(event: ScoreboardTitleUpdateEvent) {
+    public fun onScoreboardTitleUpdate(event: ScoreboardTitleUpdateEvent): Unit {
         isGuest = event.new.contains("guest", ignoreCase = true)
     }
 
     @Subscription
     @OnlyOnSkyBlock
-    public fun onScoreboardChange(event: ScoreboardUpdateEvent) {
+    public fun onScoreboardChange(event: ScoreboardUpdateEvent): Unit {
         locationRegex.anyMatch(event.added, "location") { (location) ->
             val old = area
             area = SkyBlockArea(location)
@@ -179,7 +179,7 @@ public object LocationAPI {
     }
 
     @Subscription
-    public fun onChatReceivedPre(event: ChatReceivedEvent.Pre) {
+    public fun onChatReceivedPre(event: ChatReceivedEvent.Pre): Unit {
         if (!newAlphaRegex.contains(event.text)) return
         FreshHypixelAlphaDetectedEvent.post()
     }
@@ -187,9 +187,9 @@ public object LocationAPI {
 
     @OnlyOnSkyBlock
     @Subscription(TickEvent::class)
-    public fun onTick() {
+    public fun onTick(): Unit {
         val pos = McPlayer.self?.blockPosition() ?: return
-        val biome = McLevel.selfOrNull?.getBiome(pos)?.unwrapKey()?.getOrNull()?.identifier ?: run {
+        val biome: SkyBlockBiome = McLevel.selfOrNull?.getBiome(pos)?.unwrapKey()?.getOrNull()?.identifier ?: run {
             LocationAPI.biome = null
             return
         }
@@ -229,7 +229,7 @@ public object LocationAPI {
     }
 
     @Subscription(ServerDisconnectEvent::class)
-    public fun onServerDisconnect() = reset()
+    public fun onServerDisconnect(): Unit = reset()
 
     @Subscription
     internal fun onCommand(event: RegisterSkyblockApiCommandsEvent) {

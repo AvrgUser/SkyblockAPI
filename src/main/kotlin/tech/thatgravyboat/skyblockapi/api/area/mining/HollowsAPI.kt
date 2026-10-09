@@ -22,7 +22,7 @@ public object HollowsAPI {
     public val immuneToHeat: Boolean get() = heat == null
 
     @Subscription
-    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent) {
+    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent): Unit {
         if (!SkyBlockIsland.CRYSTAL_HOLLOWS.inIsland()) return
 
         val heatFound = heatPattern.anyMatch(event.added, "heat") { (heat) ->
@@ -39,5 +39,5 @@ public object HollowsAPI {
     }
 
     @Subscription
-    public fun onServerChange(event: ServerChangeEvent) = reset()
+    public fun onServerChange(event: ServerChangeEvent): Unit = reset()
 }

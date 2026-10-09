@@ -34,7 +34,7 @@ public object DebugHudElement {
     }
 
     @Subscription
-    public fun onWidgetShow(event: RenderHudElementEvent) {
+    public fun onWidgetShow(event: RenderHudElementEvent): Unit {
         if (event.element in elementsToHide) {
             event.cancel()
         }

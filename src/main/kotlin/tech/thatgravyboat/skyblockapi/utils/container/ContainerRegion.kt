@@ -36,14 +36,14 @@ public data class ContainerRegion(
         require(!pagesRange.isEmpty()) { "Page range cannot be empty" }
     }
 
-    val rowSpan = rows.span()
-    val columnSpan = columns.span()
-    val rowStart = rows.first
-    val columnStart = columns.first
+    val rowSpan: Int = rows.span()
+    val columnSpan: Int = columns.span()
+    val rowStart: Int = rows.first
+    val columnStart: Int = columns.first
     private fun IntRange.span() = (last - first) + 1
     private fun pageOffset(page: Int): Int = (page.coerceIn(pagesRange) - pagesRange.first) * size
 
-    val size = rowSpan * columnSpan
+    val size: Int = rowSpan * columnSpan
 
     public fun getId(slot: Slot, page: Int = 1, contentFlow: ContentFlow = this.contentFlow, category: ItemDebugCategory = ContainerRegion, attachable: ItemDebugAttachable = slot.item): Int? {
         if (!contains(slot)) {
@@ -92,7 +92,7 @@ public data class ContainerRegion(
     public operator fun contains(slot: Slot): Boolean = contains(slot.index)
 
     override fun iterator(): Iterator<ContainerPosition> = this.contentFlow.iterator(this.rowSpan, this.columnSpan, rowStart, columnStart)
-    public fun iterator(page: Int = 0) = iterator {
+    public fun iterator(page: Int = 0): Iterator = iterator {
         contentFlow.iterator(rowSpan, columnSpan, rowStart, columnStart).forEach {
             yield(it.apply {
                 this.page = page

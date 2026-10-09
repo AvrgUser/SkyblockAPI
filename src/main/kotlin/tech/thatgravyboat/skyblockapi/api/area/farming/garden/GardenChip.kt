@@ -20,7 +20,7 @@ public enum class GardenChip {
     ;
 
     public val apiId: String = "${name}_GARDEN_CHIP"
-    public val skyblockId = SkyBlockId.item(apiId)
+    public val skyblockId: SkyBlockId = SkyBlockId.item(apiId)
     public val itemStack: ItemStack by registryBoundLazy { SkyBlockItemsRepo.getItemStackOrDefault(apiId) }
     public val displayName: Component by lazy { itemStack.hoverName }
 }

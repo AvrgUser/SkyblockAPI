@@ -20,7 +20,7 @@ public enum class Pest(public val spray: Spray? = null, public val vinyl: Vinyl?
     FIELD_MOUSE,
     ;
 
-    public val displayName = toFormattedName()
+    public val displayName: String = toFormattedName()
 
     public companion object {
         public fun getPests(spray: Spray): List<Pest> = entries.filter { it.spray == spray }

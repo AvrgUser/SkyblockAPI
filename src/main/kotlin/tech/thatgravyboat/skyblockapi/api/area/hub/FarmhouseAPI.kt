@@ -31,7 +31,7 @@ public object FarmhouseAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.HUB, SkyBlockIsland.GARDEN)
-    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent) {
+    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent): Unit {
         goldMedalsRegex.anyMatch(event.added, "gold") { (gold) -> goldMedals = gold.toIntValue() }
         silverMedalsRegex.anyMatch(event.added, "silver") { (silver) -> silverMedals = silver.toIntValue() }
         bronzeMedalsRegex.anyMatch(event.added, "bronze") { (bronze) -> bronzeMedals = bronze.toIntValue() }
@@ -44,5 +44,5 @@ public object FarmhouseAPI {
     }
 
     @Subscription(ServerChangeEvent::class, ServerDisconnectEvent::class)
-    public fun onServerChange() = reset()
+    public fun onServerChange(): Unit = reset()
 }

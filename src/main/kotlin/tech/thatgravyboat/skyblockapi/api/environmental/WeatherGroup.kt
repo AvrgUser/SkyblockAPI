@@ -17,7 +17,7 @@ public enum class WeatherIntensity(public val color: Int, public val displayName
     EXTREME(TextColor.RED, "EXTREME"),
     ;
 
-    public val component = Text.of(displayName, color)
+    public val component: MutableComponent = Text.of(displayName, color)
 }
 
 public enum class WeatherType(public val icon: Char, public val color: Int, weatherName: String? = null) {

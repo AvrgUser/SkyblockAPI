@@ -128,7 +128,7 @@ public object GiveCommands {
         }
     }
 
-    public fun findBy(flags: Map<FindFlag, Any>, search: String, converter: (SkyBlockId) -> String) {
+    public fun findBy(flags: Map<FindFlag, Any>, search: String, converter: (SkyBlockId) -> String): Unit {
         val caseInsensitive = !flags.containsKey(FindFlag.MATCH_CASE)
         val give = flags.containsKey(FindFlag.GIVE)
         val tag = flags[FindFlag.CUSTOM_DATA] as? Tag
@@ -215,7 +215,7 @@ public object GiveCommands {
         }
     }
 
-    public fun fillAndGiveShulkers(items: List<ItemStack>) {
+    public fun fillAndGiveShulkers(items: List<ItemStack>): Unit {
         val maxAmount = items.size
         items.chunked(28).mapIndexed { index, items ->
             when ((index + 10) % 16) {

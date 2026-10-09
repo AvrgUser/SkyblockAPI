@@ -68,7 +68,7 @@ public class LazyItemStack {
         return this.cached!!
     }
 
-    public fun invalidate() {
+    public fun invalidate(): Unit {
         this.cached = null
     }
 

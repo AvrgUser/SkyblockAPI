@@ -66,7 +66,7 @@ public object PetsAPI {
 
     @Subscription
     @OnlyWidget(TabWidget.PET)
-    public fun onTabWidgetChange(event: TabWidgetChangeEvent) {
+    public fun onTabWidgetChange(event: TabWidgetChangeEvent): Unit {
         this.reset()
         if (event.new.size < 2) return
         petRegex.anyMatch(event.newComponents, "level", "pet") { (level, pet) ->

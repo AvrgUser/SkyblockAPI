@@ -32,7 +32,7 @@ public object DebugActionBar {
     }
 
     @Subscription
-    public fun onWidgetShow(event: RenderActionBarWidgetEvent) {
+    public fun onWidgetShow(event: RenderActionBarWidgetEvent): Unit {
         if (event.widget in widgetsToHide) {
             event.cancel()
         }

@@ -48,19 +48,19 @@ public object EquipmentWardrobeAPI {
 
     private val emptyEquipment = mutableListOf(ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY)
 
-    public var inWardrobe = false
+    public var inWardrobe: Boolean = false
         private set
 
     /** 0 if not in wardrobe */
-    public var currentPage = 0
+    public var currentPage: Int = 0
         private set
 
-    public val slots get() = LoadoutStorage.equipment?.slots ?: emptyList()
+    public val slots: List get() = LoadoutStorage.equipment?.slots ?: emptyList()
     public val currentSlot: Int? get() = LoadoutStorage.equipment?.currentSlot
 
     public val currentSet: Map<EquipmentSlot, ItemStack>
         get() {
-            val slots = slots.find { it.id == currentSlot }?.slots ?: return emptyMap()
+            val slots: List = slots.find { it.id == currentSlot }?.slots ?: return emptyMap()
             return mapOf(
                 EquipmentSlot.NECKLACE to slots[0],
                 EquipmentSlot.CLOAK to slots[1],
@@ -112,7 +112,7 @@ public object EquipmentWardrobeAPI {
         return slot in first..last
     }
 
-    public fun clearPotentiallyDesyncedEquipment() {
+    public fun clearPotentiallyDesyncedEquipment(): Unit {
         val storedEquipmentUUIDs =
             EquipmentSlot.entries.associateWith { equipmentSlot -> EquipmentAPI.islandEquipment[equipmentSlot]?.getData(DataTypes.UUID) }
         val currentSetUUIDs =
@@ -126,27 +126,27 @@ public object EquipmentWardrobeAPI {
     }
 
     @Subscription
-    public fun onInventoryUpdate(event: InventoryChangeEvent) {
+    public fun onInventoryUpdate(event: InventoryChangeEvent): Unit {
         inWardrobe = inventoryNameRegex.matches(event.title)
 
         if (inWardrobe) processInventory(event.title, event.itemStacks)
     }
 
     @Subscription
-    public fun onInventoryOpen(event: ContainerInitializedEvent) {
+    public fun onInventoryOpen(event: ContainerInitializedEvent): Unit {
         inWardrobe = inventoryNameRegex.matches(event.title)
 
         if (inWardrobe) processInventory(event.title, event.itemStacks)
     }
 
     @Subscription(ContainerCloseEvent::class)
-    public fun onInventoryClose() {
+    public fun onInventoryClose(): Unit {
         inWardrobe = false
         currentPage = 0
     }
 
     @Subscription(ProfileChangeEvent::class)
-    public fun onProfileSwitch() {
+    public fun onProfileSwitch(): Unit {
         val slotCount = max(
             slots.size.roundToNextMultipleOf(WARDROBE_SLOTS_PER_PAGE),
             WARDROBE_SLOTS_PER_PAGE * 3,
@@ -163,7 +163,7 @@ public object EquipmentWardrobeAPI {
 
     @Subscription
     public context(event: LoadoutChangeEvent)
-    fun onLoadoutSwitch() {
+    fun onLoadoutSwitch(): Unit {
         LoadoutStorage.equipment?.currentSlot = event.new?.equipment.value() ?: return
         if (currentSlot != -1) EquipmentStorage.setEquipment(LoadoutStorage.equipment?.slots[currentSlot!!])
         debugString(loadoutDebug) { "Setting equipment!" }
@@ -177,8 +177,8 @@ public object EquipmentWardrobeAPI {
         event.register("wardrobe equipment") {
             then("copy") {
                 callback {
-                    val currentSlot = "Current Slot: $currentSlot"
-                    val slots =
+                    val currentSlot: Integer = "Current Slot: $currentSlot"
+                    val slots: List =
                         slots.map { "Id: ${it.id} - Equipment: ${it.slots.map { a -> a.hoverName.stripped }} - Locked: ${it.locked}" }
 
                     Text.sendDebug("Copied Equipment Wardrobe Data to clipboard.")

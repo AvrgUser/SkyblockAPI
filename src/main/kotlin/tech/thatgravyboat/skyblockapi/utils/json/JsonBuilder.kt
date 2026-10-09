@@ -20,18 +20,18 @@ public class JsonObjectBuilder {
 
     private val json = JsonObject()
 
-    public operator fun set(key: String, value: String) = json.addProperty(key, value)
-    public operator fun set(key: String, value: Number) = json.addProperty(key, value)
-    public operator fun set(key: String, value: Boolean) = json.addProperty(key, value)
-    public operator fun set(key: String, value: JsonElement) = json.add(key, value)
+    public operator fun set(key: String, value: String): Unit = json.addProperty(key, value)
+    public operator fun set(key: String, value: Number): Unit = json.addProperty(key, value)
+    public operator fun set(key: String, value: Boolean): Unit = json.addProperty(key, value)
+    public operator fun set(key: String, value: JsonElement): Unit = json.add(key, value)
 
-    public fun obj(key: String, builder: (JsonObjectBuilder) -> Unit) {
+    public fun obj(key: String, builder: (JsonObjectBuilder) -> Unit): Unit {
         val child = JsonObjectBuilder()
         builder(child)
         json.add(key, child.build())
     }
 
-    public fun arr(key: String, builder: (JsonArrayBuilder) -> Unit) {
+    public fun arr(key: String, builder: (JsonArrayBuilder) -> Unit): Unit {
         val child = JsonArrayBuilder()
         builder(child)
         json.add(key, child.build())
@@ -46,10 +46,10 @@ public class JsonArrayBuilder {
 
     private val json = JsonArray()
 
-    public fun add(value: String) = json.add(value)
-    public fun add(value: Number) = json.add(value)
-    public fun add(value: Boolean) = json.add(value)
-    public fun add(value: JsonElement) = json.add(value)
+    public fun add(value: String): JsonArray = json.add(value)
+    public fun add(value: Number): JsonArray = json.add(value)
+    public fun add(value: Boolean): JsonArray = json.add(value)
+    public fun add(value: JsonElement): JsonArray = json.add(value)
 
     public fun obj(builder: (JsonObjectBuilder) -> Unit) {
         val child = JsonObjectBuilder()

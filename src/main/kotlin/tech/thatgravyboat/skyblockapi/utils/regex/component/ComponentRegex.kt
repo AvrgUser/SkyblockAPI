@@ -12,10 +12,10 @@ public class ComponentRegex(private val regex: Regex) {
     public fun find(input: Component): ComponentMatchResult? = regex.find(input.stripped)?.let { ComponentMatchResult(input, it) }
     public fun match(input: Component): ComponentMatchResult? = regex.matchEntire(input.stripped)?.let { ComponentMatchResult(input, it) }
 
-    public fun matches(input: Component) = matches(input.stripped)
-    public fun contains(input: Component) = contains(input.stripped)
-    public fun matches(input: String) = regex.matches(input)
-    public fun contains(input: String) = regex.contains(input)
+    public fun matches(input: Component): Boolean = matches(input.stripped)
+    public fun contains(input: Component): Boolean = contains(input.stripped)
+    public fun matches(input: String): Boolean = regex.matches(input)
+    public fun contains(input: String): Boolean = regex.contains(input)
 
     public fun replace(component: Component, replacement: Component): Component = replace(component) { _ -> replacement }
     public fun replace(component: Component, transform: (ComponentMatchResult) -> Component): Component {
@@ -40,7 +40,7 @@ public class ComponentRegex(private val regex: Regex) {
         return builder
     }
 
-    public fun regex() = this.regex
+    public fun regex(): Regex = this.regex
 }
 
 public class Destructured internal constructor(private val match: ComponentMatchResult, private vararg val keys: String) {
@@ -98,4 +98,4 @@ public fun List<ComponentRegex>.find(input: Component, vararg groups: String = a
 public fun ComponentRegex.anyFound(input: List<Component>, vararg groups: String = arrayOf(), action: (Destructured) -> Unit = {}): Boolean =
     input.any { find(it, groups = groups, action = action) }
 
-public fun Regex.toComponentRegex() = ComponentRegex(this)
+public fun Regex.toComponentRegex(): ComponentRegex = ComponentRegex(this)

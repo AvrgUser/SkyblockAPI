@@ -10,6 +10,6 @@ public enum class KuudraTier(public val tier: Int) {
     INFERNAL(5);
 
     public companion object {
-        public fun getByName(name: String) = valueOfOrNull<KuudraTier>(name.uppercase())
+        public fun getByName(name: String): KuudraTier? = valueOfOrNull<KuudraTier>(name.uppercase())
     }
 }

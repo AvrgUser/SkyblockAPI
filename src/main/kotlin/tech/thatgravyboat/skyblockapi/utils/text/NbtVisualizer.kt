@@ -17,7 +17,7 @@ import net.minecraft.nbt.StringTag
 import net.minecraft.nbt.Tag
 import net.minecraft.network.chat.MutableComponent
 
-public fun Tag.asComponent() = NbtVisualizer().visualize(this)
+public fun Tag.asComponent(): MutableComponent = NbtVisualizer().visualize(this)
 
 public class NbtVisualizer : AbstractDataVisualizer<Tag, NbtVisualizer.Token> {
 
@@ -41,7 +41,7 @@ public class NbtVisualizer : AbstractDataVisualizer<Tag, NbtVisualizer.Token> {
     }
 
 
-    public fun visitArray(collectionTag: CollectionTag, type: Token?) {
+    public fun visitArray(collectionTag: CollectionTag, type: Token?): Unit {
         appendToken(Token.LIST_OPEN)
         if (type != null) {
             appendToken(type).appendToken(Token.LIST_TYPE_SEPARATOR)
@@ -63,40 +63,40 @@ public class NbtVisualizer : AbstractDataVisualizer<Tag, NbtVisualizer.Token> {
         spaces().appendToken(Token.LIST_CLOSE)
     }
 
-    public fun visitByte(byteTag: ByteTag) {
+    public fun visitByte(byteTag: ByteTag): Unit {
         append(byteTag.value.toString(), Token.NUMBER)
         if (!ignoreSuffix) appendToken(Token.BYTE_SUFFIX)
     }
 
-    public fun visitDouble(doubleTag: DoubleTag) {
+    public fun visitDouble(doubleTag: DoubleTag): Unit {
         append(doubleTag.value.toString(), Token.NUMBER)
         if (!ignoreSuffix) appendToken(Token.DOUBLE_SUFFIX)
     }
 
-    public fun visitFloat(floatTag: FloatTag) {
+    public fun visitFloat(floatTag: FloatTag): Unit {
         append(floatTag.value.toString(), Token.NUMBER)
         if (!ignoreSuffix) appendToken(Token.FLOAT_SUFFIX)
     }
 
-    public fun visitInt(intTag: IntTag) {
+    public fun visitInt(intTag: IntTag): Unit {
         append(intTag.value.toString(), Token.NUMBER)
     }
 
-    public fun visitLong(longTag: LongTag) {
+    public fun visitLong(longTag: LongTag): Unit {
         append(longTag.value.toString(), Token.NUMBER)
         if (!ignoreSuffix) appendToken(Token.LONG_SUFFIX)
     }
 
-    public fun visitShort(shortTag: ShortTag) {
+    public fun visitShort(shortTag: ShortTag): Unit {
         append(shortTag.value.toString(), Token.NUMBER)
         if (!ignoreSuffix) appendToken(Token.SHORT_SUFFIX)
     }
 
-    public fun visitString(stringTag: StringTag) {
+    public fun visitString(stringTag: StringTag): Unit {
         appendToken(Token.STRING_QUOTE).append(stringTag.value, Token.STRING).appendToken(Token.STRING_QUOTE)
     }
 
-    public fun visitCompound(compoundTag: CompoundTag) {
+    public fun visitCompound(compoundTag: CompoundTag): Unit {
         appendToken(Token.STRUCT_OPEN).line()
         indentCount += 1
         val iterator = compoundTag.entrySet().iterator()

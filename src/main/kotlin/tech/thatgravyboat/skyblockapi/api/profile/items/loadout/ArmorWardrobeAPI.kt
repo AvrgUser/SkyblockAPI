@@ -43,14 +43,14 @@ public object ArmorWardrobeAPI {
 
     private val emptyArmor = mutableListOf(ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY, ItemStack.EMPTY)
 
-    public var inWardrobe = false
+    public var inWardrobe: Boolean = false
         private set
 
     /** 0 if not in wardrobe */
-    public var currentPage = 0
+    public var currentPage: Int = 0
         private set
 
-    public val slots get() = LoadoutStorage.armor?.slots ?: emptyList()
+    public val slots: List get() = LoadoutStorage.armor?.slots ?: emptyList()
     public val currentSlot: Int? get() = LoadoutStorage.armor?.currentSlot
 
     private fun processInventory(title: String, items: List<ItemStack>) {
@@ -95,27 +95,27 @@ public object ArmorWardrobeAPI {
     }
 
     @Subscription
-    public fun onInventoryUpdate(event: InventoryChangeEvent) {
+    public fun onInventoryUpdate(event: InventoryChangeEvent): Unit {
         inWardrobe = inventoryNameRegex.matches(event.title)
 
         if (inWardrobe) processInventory(event.title, event.itemStacks)
     }
 
     @Subscription
-    public fun onInventoryOpen(event: ContainerInitializedEvent) {
+    public fun onInventoryOpen(event: ContainerInitializedEvent): Unit {
         inWardrobe = inventoryNameRegex.matches(event.title)
 
         if (inWardrobe) processInventory(event.title, event.itemStacks)
     }
 
     @Subscription(ContainerCloseEvent::class)
-    public fun onInventoryClose() {
+    public fun onInventoryClose(): Unit {
         inWardrobe = false
         currentPage = 0
     }
 
     @Subscription(ProfileChangeEvent::class)
-    public fun onProfileSwitch() {
+    public fun onProfileSwitch(): Unit {
         val slotCount = max(
             slots.size.roundToNextMultipleOf(WARDROBE_SLOTS_PER_PAGE),
             WARDROBE_SLOTS_PER_PAGE * 3,
@@ -132,7 +132,7 @@ public object ArmorWardrobeAPI {
 
     @Subscription
     public context(event: LoadoutChangeEvent)
-    fun onLoadoutSwitch() {
+    fun onLoadoutSwitch(): Unit {
         LoadoutStorage.armor?.currentSlot = event.new?.armor.value() ?: return
         debugString(loadoutDebug) { "Setting wardrobe!" }
     }
@@ -144,8 +144,8 @@ public object ArmorWardrobeAPI {
         event.register("wardrobe armor") {
             then("copy") {
                 callback {
-                    val currentSlot = "Current Slot: $currentSlot"
-                    val slots =
+                    val currentSlot: Integer = "Current Slot: $currentSlot"
+                    val slots: List =
                         slots.map { "Id: ${it.id} - Armor: ${it.slots.map { a -> a.hoverName.stripped }} - Locked: ${it.locked}" }
 
                     Text.sendDebug("Copied Armor Wardrobe Data to clipboard.")

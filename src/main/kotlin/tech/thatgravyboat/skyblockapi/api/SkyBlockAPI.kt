@@ -40,7 +40,7 @@ public object SkyBlockAPI : Logger by LoggerFactory.getLogger("SkyBlockAPI") {
     public const val NAMESPACE: String = "skyblockapi"
 
     @JvmStatic
-    public val eventBus = EventBus()
+    public val eventBus: EventBus = EventBus()
 
     internal val logger: Logger = this
 
@@ -48,7 +48,7 @@ public object SkyBlockAPI : Logger by LoggerFactory.getLogger("SkyBlockAPI") {
 
     @JvmStatic
     @ApiStatus.Internal
-    public fun init() {
+    public fun init(): Unit {
         debug("Starting sbapi!")
         RepoLibLogger.setInstance(RepoLibLogging)
         SkyblockAPIModules.init { eventBus.register(it) }
@@ -67,7 +67,7 @@ public object SkyBlockAPI : Logger by LoggerFactory.getLogger("SkyBlockAPI") {
 
     @JvmStatic
     @ApiStatus.Internal
-    public fun postInit() {
+    public fun postInit(): Unit {
         DataTypesRegistry.load()
     }
 

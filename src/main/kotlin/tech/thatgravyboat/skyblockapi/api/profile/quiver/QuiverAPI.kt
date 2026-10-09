@@ -67,7 +67,7 @@ public object QuiverAPI {
         get() = QuiverStorage.arrows
 
     @Subscription
-    public fun onPlayerInventoryChange(event: PlayerInventoryChangeEvent) {
+    public fun onPlayerInventoryChange(event: PlayerInventoryChangeEvent): Unit {
         val item = event.item
         if (item.getData(DataTypes.QUIVER_ARROW) != true) return
         arrowCountRegex.anyFound(item.getRawLore(), "amount") { (amount) ->
@@ -78,12 +78,12 @@ public object QuiverAPI {
     }
 
     @Subscription
-    public fun onInventoryInitialized(event: ContainerInitializedEvent) {
+    public fun onInventoryInitialized(event: ContainerInitializedEvent): Unit {
         handleQuiverInventory(event.title, event.itemStacks)
     }
 
     @Subscription
-    public fun onInventoryChange(event: InventoryChangeEvent) {
+    public fun onInventoryChange(event: InventoryChangeEvent): Unit {
         handleQuiverInventory(event.title, event.itemStacks)
     }
 

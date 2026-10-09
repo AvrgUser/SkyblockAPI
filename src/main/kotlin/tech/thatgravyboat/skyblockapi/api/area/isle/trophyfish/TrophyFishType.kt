@@ -109,12 +109,12 @@ public enum class TrophyFishType(
     );
 
     public val internalName: String = internalName.takeUnless { it.isEmpty() } ?: name
-    public val strippedName = displayName.stripped
+    public val strippedName: String = displayName.stripped
 
-    public val bronze by registryBoundLazy { SkyBlockItemsRepo.getItemStackOrDefault("${this.internalName}_BRONZE") }
-    public val silver by registryBoundLazy { SkyBlockItemsRepo.getItemStackOrDefault("${this.internalName}_SILVER") }
-    public val gold by registryBoundLazy { SkyBlockItemsRepo.getItemStackOrDefault("${this.internalName}_GOLD") }
-    public val diamond by registryBoundLazy { SkyBlockItemsRepo.getItemStackOrDefault("${this.internalName}_DIAMOND") }
+    public val bronze: ItemStack by registryBoundLazy { SkyBlockItemsRepo.getItemStackOrDefault("${this.internalName}_BRONZE") }
+    public val silver: ItemStack by registryBoundLazy { SkyBlockItemsRepo.getItemStackOrDefault("${this.internalName}_SILVER") }
+    public val gold: ItemStack by registryBoundLazy { SkyBlockItemsRepo.getItemStackOrDefault("${this.internalName}_GOLD") }
+    public val diamond: ItemStack by registryBoundLazy { SkyBlockItemsRepo.getItemStackOrDefault("${this.internalName}_DIAMOND") }
 
     public fun getItem(tier: TrophyTier): ItemStack {
         return when (tier) {

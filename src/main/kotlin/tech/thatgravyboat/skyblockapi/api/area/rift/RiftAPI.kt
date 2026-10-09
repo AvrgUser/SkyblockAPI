@@ -81,13 +81,13 @@ public object RiftAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.THE_RIFT)
-    public fun onActionBarWidgetChange(event: RiftTimeActionBarWidgetChangeEvent) {
+    public fun onActionBarWidgetChange(event: RiftTimeActionBarWidgetChangeEvent): Unit {
         time = event.time
     }
 
     @Subscription
     @OnlyIn(SkyBlockIsland.THE_RIFT)
-    public fun onScoreboardChange(event: ScoreboardUpdateEvent) {
+    public fun onScoreboardChange(event: ScoreboardUpdateEvent): Unit {
         effigiesRegex.anyMatch(event.newComponents, "e1", "e2", "e3", "e4", "e5", "e6") { (one, two, three, four, five, six) ->
             effieges[0].enabled = one.style.color?.value == TextColor.RED
             effieges[1].enabled = two.style.color?.value == TextColor.RED
@@ -101,7 +101,7 @@ public object RiftAPI {
     @Subscription
     @OnlyIn(SkyBlockIsland.THE_RIFT)
     @OnlyWidget(TabWidget.GOOD_TO_KNOW)
-    public fun onTabWidgetChange(event: TabWidgetChangeEvent) {
+    public fun onTabWidgetChange(event: TabWidgetChangeEvent): Unit {
         visitedRiftRegex.anyFound(event.new, "visited") { (visited) ->
             timesVisted = visited.toIntValue()
         }

@@ -224,7 +224,7 @@ public object ElectionAPI {
             ElectionStorage.storedMinister = null
         }
 
-        val nextElection = calculateNextElection()
+        val nextElection: Instant = calculateNextElection()
         this.nextElection = nextElection
         ElectionStorage.nextMayorTime = nextElection
 
@@ -242,7 +242,7 @@ public object ElectionAPI {
 
     @TimePassed("1s")
     @Subscription(TickEvent::class)
-    public fun onTick() {
+    public fun onTick(): Unit {
         if (!MayorPerks.PERKPOCALYPSE.active) return
         val jerryInfo = currentJerryCandidate
         if (jerryInfo != null) {
@@ -285,7 +285,7 @@ public object ElectionAPI {
     }
 
     @Subscription
-    public fun onChat(event: ChatReceivedEvent.Pre) {
+    public fun onChat(event: ChatReceivedEvent.Pre): Unit {
         if (electionOverRegex.matches(event.text)) {
             // When the Election is over, schedule a check every minute until a new mayor is found, then schedule every 20 minutes
             updateScheduler(1.minutes, 20.minutes)

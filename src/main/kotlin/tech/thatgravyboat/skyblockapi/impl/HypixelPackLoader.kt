@@ -41,9 +41,9 @@ public object HypixelPackLoader {
         }
     }
 
-    public fun downloadAndApplyStablePack() = downloadAndApplyPack("stable")
+    public fun downloadAndApplyStablePack(): Unit = downloadAndApplyPack("stable")
 
-    public fun downloadAndApplyPack(path: String) {
+    public fun downloadAndApplyPack(path: String): Unit {
         if (LocationAPI.isOnSkyBlock) {
             Text.of("Pack Downloading doesn't work on SkyBlock").sendWithPrefix()
             return

@@ -19,9 +19,9 @@ public data class SlayerInfo(val entity: Entity) {
             ?.substringAfterLast(":")?.trim()
     }
 
-    val owner by DiscoverableValue(::discoverOwner)
+    val owner: String by DiscoverableValue(::discoverOwner)
     val isOwnedByPlayer: Boolean get() = owner == McPlayer.name
-    val type by DiscoverableValue(::discoverTypeIfNeeded)
+    val type: SlayerMob by DiscoverableValue(::discoverTypeIfNeeded)
 
     override fun toString(): String {
         return "SlayerInfo(owner=$owner, isOwnedByPlayer=$isOwnedByPlayer, type=$type)"

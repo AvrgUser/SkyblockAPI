@@ -12,12 +12,12 @@ public object VaultStorage {
         "vault.json",
     )
 
-    public fun invalidate() {
+    public fun invalidate(): Unit {
         ACCESSORY_BAG.get()?.clear()
         ACCESSORY_BAG.save()
     }
 
-    public fun addItem(item: ItemStack) {
+    public fun addItem(item: ItemStack): Unit {
         ACCESSORY_BAG.get()?.add(item)
         ACCESSORY_BAG.save()
     }

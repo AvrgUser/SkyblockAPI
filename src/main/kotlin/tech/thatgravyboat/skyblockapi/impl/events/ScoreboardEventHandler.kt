@@ -24,7 +24,7 @@ public object ScoreboardEventHandler {
     @OnlyOnSkyBlock
     @TimePassed("1s")
     @Subscription(TickEvent::class)
-    public fun onTick() {
+    public fun onTick(): Unit {
         if (!ProfileAPI.isLoaded) return
 
         handleScoreboard(McClient.scoreboard.toList())
@@ -32,7 +32,7 @@ public object ScoreboardEventHandler {
     }
 
     @Subscription(ServerChangeEvent::class)
-    public fun onServerSwitch() = handleScoreboard(emptyList())
+    public fun onServerSwitch(): Unit = handleScoreboard(emptyList())
 
     private fun handleScoreboard(new: List<Component>) {
         val newStripped = new.map { it.stripped }

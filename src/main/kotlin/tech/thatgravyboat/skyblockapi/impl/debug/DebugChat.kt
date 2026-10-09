@@ -35,7 +35,7 @@ public object DebugChat {
     private val messages = mutableListOf<Pair<Instant, Component>>()
 
     @Subscription(priority = Int.MIN_VALUE, receiveCancelled = true)
-    public fun onMessage(event: ChatReceivedEvent.Pre) {
+    public fun onMessage(event: ChatReceivedEvent.Pre): Unit {
         messages.add(Clock.System.now() to event.component)
         while (messages.size > maxMessages) messages.removeFirst()
     }

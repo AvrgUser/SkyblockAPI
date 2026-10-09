@@ -10,7 +10,7 @@ public enum class ArmorStack(public val char: Char) {
 
     public companion object {
         public fun fromString(string: String?): ArmorStack? {
-            val char = string?.firstOrNull() ?: return null
+            val char: Char = string?.firstOrNull() ?: return null
             return entries.find { it.char == char }
         }
     }

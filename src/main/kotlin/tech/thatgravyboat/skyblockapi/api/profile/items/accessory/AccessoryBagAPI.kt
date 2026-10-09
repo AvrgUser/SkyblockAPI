@@ -21,7 +21,7 @@ public object AccessoryBagAPI {
     @Subscription
     @MustBeContainer
     @IgnoreFiller
-    public fun onInventory(event: InventoryChangeEvent) {
+    public fun onInventory(event: InventoryChangeEvent): Unit {
         if (event.isInBottomRow) return
         titleRegex.match(event.title) { destructured ->
             val currentPage = destructured["currentPage"]?.toIntValue() ?: 1

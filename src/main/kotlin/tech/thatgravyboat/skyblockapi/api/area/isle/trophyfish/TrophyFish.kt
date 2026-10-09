@@ -23,7 +23,7 @@ public data class TrophyFish(val type: TrophyFishType, @get:JvmName("getTrophyTi
         Text.join(type.displayName, " ", tier.nameSuffix)
     }
 
-    val apiName by lazy {
+    val apiName: String by lazy {
         if (tier == TrophyTier.NONE) {
             return@lazy type.internalName.lowercase()
         }

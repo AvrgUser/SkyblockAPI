@@ -139,7 +139,7 @@ public object SimpleItemAPI {
 
     @Subscription(RepoEvent.Reload::class)
     @OnRepoStatus(RepoStatus.SUCCESS)
-    public fun onRepoStatus() {
+    public fun onRepoStatus(): Unit {
         setupCache()
     }
 

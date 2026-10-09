@@ -63,7 +63,7 @@ public object MineshaftAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.MINESHAFT)
-    public fun onWidgetUpdate(event: TabWidgetChangeEvent) {
+    public fun onWidgetUpdate(event: TabWidgetChangeEvent): Unit {
         when (event.widget) {
             TabWidget.AREA -> {
                 scrapRegex.anyFound(event.new, "scrap") { (scrap) ->
@@ -92,7 +92,7 @@ public object MineshaftAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.MINESHAFT)
-    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent) {
+    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent): Unit {
         mineshaftTypeRegex.anyFound(event.added, "type", "variant") { (type, variant) ->
             this.mineshaftType = MineshaftType.fromId(type)
             this.mineshaftVariant = MineshaftVariant.fromId(variant).takeUnless { _ -> this.mineshaftType == MineshaftType.LITTLE }
@@ -102,7 +102,7 @@ public object MineshaftAPI {
 
     @Subscription
     @OnlyIn(SkyBlockIsland.DWARVEN_MINES)
-    public fun onChat(event: ChatReceivedEvent.Pre) {
+    public fun onChat(event: ChatReceivedEvent.Pre): Unit {
         if (mineshaftFoundRegex.matches(event.text)) {
             MineshaftFoundEvent.post()
         }
@@ -116,5 +116,5 @@ public object MineshaftAPI {
     }
 
     @Subscription(ServerChangeEvent::class, ServerDisconnectEvent::class)
-    public fun onWorldChange() = reset()
+    public fun onWorldChange(): Unit = reset()
 }

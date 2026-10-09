@@ -17,7 +17,7 @@ public object MiningEventsAPI {
         private set
 
     @Subscription
-    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent) {
+    public fun onScoreboardUpdate(event: ScoreboardUpdateEvent): Unit {
         if (event.removed.any { eventsRegex.matches(it) }) {
             this.event = null
         } else if (this.event == null) {

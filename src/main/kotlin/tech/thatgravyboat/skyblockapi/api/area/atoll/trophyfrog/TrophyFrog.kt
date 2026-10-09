@@ -15,7 +15,7 @@ public data class TrophyFrog(val type: TrophyFrogType, val tier: TrophyTier) {
         Text.join(type.displayName, " ", tier.nameSuffix)
     }
 
-    val apiName by lazy {
+    val apiName: String by lazy {
         if (tier == TrophyTier.NONE) {
             return@lazy type.internalName.lowercase()
         }

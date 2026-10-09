@@ -94,7 +94,7 @@ public object WeatherAPI {
                         )
                     }
 
-                    val nextIntensity = nextIntensity
+                    val nextIntensity: WeatherIntensity = nextIntensity
                     val nextWeatherInstant = nextWeatherAt
                     if (nextIntensity != null && nextWeatherInstant != null) {
                         add(

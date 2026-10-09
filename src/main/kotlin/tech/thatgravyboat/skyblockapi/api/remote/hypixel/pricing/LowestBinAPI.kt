@@ -15,7 +15,7 @@ private const val URL = "https://skyblock-pv.thatgravyboat.tech/auctions"
 @Module
 public object LowestBinAPI {
     /** Hypixel Item Id to Prices */
-    public var items = mapOf<String, AuctionItem>()
+    public var items: Map = mapOf<String, AuctionItem>()
         private set
 
     public fun getPrice(id: String?): AuctionItem? = items.entries.find { it.key.equals(id, ignoreCase = true) }?.value
