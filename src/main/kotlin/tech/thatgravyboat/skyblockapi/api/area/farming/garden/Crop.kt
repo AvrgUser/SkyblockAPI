@@ -7,7 +7,7 @@ import net.minecraft.world.level.block.StemBlock
 import net.minecraft.world.level.block.state.BlockState
 import tech.thatgravyboat.skyblockapi.api.remote.api.SkyBlockId
 
-public enum class Crop(val tool: FarmingTool, vararg block: Block, skyBlockId: String? = null) {
+public enum class Crop(public val tool: FarmingTool, vararg block: Block, skyBlockId: String? = null) {
     WHEAT(FarmingTool.THEORETICAL_HOE_WHEAT, Blocks.WHEAT),
     CARROT(FarmingTool.THEORETICAL_HOE_CARROT, Blocks.CARROTS),
     POTATO(FarmingTool.THEORETICAL_HOE_POTATO, Blocks.POTATOES),

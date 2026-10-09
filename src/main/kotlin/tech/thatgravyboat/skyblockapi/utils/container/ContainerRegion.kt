@@ -103,7 +103,7 @@ public data class ContainerRegion(
 
 }
 
-public enum class Anchor(val invertColumns: Boolean, val invertRows: Boolean) {
+public enum class Anchor(public val invertColumns: Boolean, public val invertRows: Boolean) {
     TOP_LEFT(false, false),
     TOP_RIGHT(true, false),
     BOTTOM_LEFT(false, true),

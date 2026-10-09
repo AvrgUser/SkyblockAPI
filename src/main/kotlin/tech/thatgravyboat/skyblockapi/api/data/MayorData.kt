@@ -116,7 +116,7 @@ public data class MayorPerk internal constructor(
     }
 }
 
-public enum class FoxyExtraEventType(val eventName: String) {
+public enum class FoxyExtraEventType(public val eventName: String) {
     SPOOKY_FESTIVAL("Spooky Festival"),
     MINING_FIESTA("Mining Fiesta"),
     FISHING_FESTIVAL("Fishing Festival"),

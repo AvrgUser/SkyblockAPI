@@ -52,7 +52,7 @@ public data class CoinCost(
     }
 }
 
-public abstract class Cost(val type: CostTypes) {
+public abstract class Cost(public val type: CostTypes) {
     public companion object {
         internal val CODEC: Codec<Cost> = SkyblockAPICodecs.CostCodec.codec()
 

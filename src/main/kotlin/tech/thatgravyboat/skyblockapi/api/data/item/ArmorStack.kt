@@ -1,6 +1,6 @@
 package tech.thatgravyboat.skyblockapi.api.data.item
 
-public enum class ArmorStack(val char: Char) {
+public enum class ArmorStack(public val char: Char) {
     AURORA('Ѫ'),
     TERROR('⁑'),
     HOLLOW('⚶'),

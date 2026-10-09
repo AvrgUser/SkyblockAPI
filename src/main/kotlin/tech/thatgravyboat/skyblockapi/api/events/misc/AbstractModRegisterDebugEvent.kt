@@ -19,7 +19,7 @@ import kotlin.reflect.KProperty0
 import kotlin.time.Instant
 import kotlin.time.toJavaInstant
 
-public abstract class AbstractModRegisterDebugEvent(val prefix: Component, val withDebug: Boolean = false, val base: AbstractModRegisterCommandsEvent) :
+public abstract class AbstractModRegisterDebugEvent(public val prefix: Component, public val withDebug: Boolean = false, public val base: AbstractModRegisterCommandsEvent) :
     SkyBlockEvent() {
 
     public open fun register(name: String, commandName: String = name.lowercase().replace(" ", "_"), init: DebugBuilder.() -> Unit) = register(Text.of(name), commandName, init)
@@ -35,7 +35,7 @@ public abstract class AbstractModRegisterDebugEvent(val prefix: Component, val w
 internal class RegisterSkyblockApiDebugEvent(base: RegisterSkyblockApiCommandsEvent) :
     AbstractModRegisterDebugEvent(CommonText.PREFIX, false, base)
 
-public open class DebugBuilder(val prefix: Component, val name: Component) {
+public open class DebugBuilder(public val prefix: Component, public val name: Component) {
     public val fields: MutableList<Component> = mutableListOf()
 
     public open fun fields(vararg fields: KProperty0<Any?>) = fields.forEach(::field)

@@ -26,7 +26,7 @@ public data class BuilderDsl<Consumer>(val consumer: (Consumer) -> Unit) {
     }
 }
 
-public class RegisterCommandsEvent(private val dispatcher: CommandDispatcher<FabricClientCommandSource>, val buildContext: CommandBuildContext?) : SkyBlockEvent() {
+public class RegisterCommandsEvent(private val dispatcher: CommandDispatcher<FabricClientCommandSource>, public val buildContext: CommandBuildContext?) : SkyBlockEvent() {
 
     @Deprecated("Also provide build context")
     public constructor(dispatcher: CommandDispatcher<FabricClientCommandSource>) : this(dispatcher, null)

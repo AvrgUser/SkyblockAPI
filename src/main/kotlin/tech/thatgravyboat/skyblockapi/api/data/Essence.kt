@@ -4,7 +4,7 @@ import com.mojang.serialization.Codec
 import me.owdding.ktcodecs.IncludedCodec
 import tech.thatgravyboat.skyblockapi.generated.EnumCodec
 
-public enum class Essence(val canBeSold: Boolean = true) {
+public enum class Essence(public val canBeSold: Boolean = true) {
     WITHER,
     UNDEAD,
     DRAGON,

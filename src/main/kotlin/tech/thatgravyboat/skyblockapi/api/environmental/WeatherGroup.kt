@@ -12,7 +12,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextBuilder.append
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 
-public enum class WeatherIntensity(val color: Int, val displayName: String) {
+public enum class WeatherIntensity(public val color: Int, public val displayName: String) {
     MILD(TextColor.YELLOW, "Mild"),
     EXTREME(TextColor.RED, "EXTREME"),
     ;
@@ -20,7 +20,7 @@ public enum class WeatherIntensity(val color: Int, val displayName: String) {
     public val component = Text.of(displayName, color)
 }
 
-public enum class WeatherType(val icon: Char, val color: Int, weatherName: String? = null) {
+public enum class WeatherType(public val icon: Char, public val color: Int, weatherName: String? = null) {
     RAIN('\uE09A', TextColor.AQUA),
     THUNDERSTORM('\uE000', TextColor.YELLOW),
     SMOG('\uE09D', TextColor.GRAY),

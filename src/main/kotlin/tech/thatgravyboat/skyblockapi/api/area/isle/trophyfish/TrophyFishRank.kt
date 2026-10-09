@@ -5,7 +5,7 @@ import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 
 @Deprecated("Use TrophyRank instead")
-public enum class TrophyFishRank(val displayName: Component) {
+public enum class TrophyFishRank(public val displayName: Component) {
     NOVICE(displayName = Text.of("Novice") { withStyle(ChatFormatting.DARK_GRAY) }),
     ADEPT(displayName = Text.of("Adept") { withStyle(ChatFormatting.GRAY) }),
     EXPERT(displayName = Text.of("Expert") { withStyle(ChatFormatting.GOLD) }),

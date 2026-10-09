@@ -7,7 +7,7 @@ import net.minecraft.util.StringDecomposer
 import java.util.*
 import kotlin.jvm.optionals.getOrNull
 
-public enum class StateResult(val match: Boolean, val continuation: Boolean) {
+public enum class StateResult(public val match: Boolean, public val continuation: Boolean) {
     // Mismatch, break
     BREAK(false, false),
 

@@ -6,7 +6,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 
-public enum class CrystalType(val textColor: Int, skyblockId: String? = null) {
+public enum class CrystalType(public val textColor: Int, skyblockId: String? = null) {
     JADE(TextColor.GREEN),
     AMBER(TextColor.GOLD),
     AMETHYST(TextColor.DARK_PURPLE),

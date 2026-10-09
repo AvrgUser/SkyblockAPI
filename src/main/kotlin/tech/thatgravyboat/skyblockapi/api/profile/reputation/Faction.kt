@@ -1,6 +1,6 @@
 package tech.thatgravyboat.skyblockapi.api.profile.reputation
 
-public enum class Faction(val apiId: String) {
+public enum class Faction(public val apiId: String) {
     MAGE("mages"),
     BARBARIAN("barbarians"),
     ;

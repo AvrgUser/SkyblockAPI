@@ -4,7 +4,7 @@ import net.minecraft.world.item.ItemStack
 import tech.thatgravyboat.skyblockapi.api.item.calculator.sources.*
 import tech.thatgravyboat.skyblockapi.utils.extentions.getSkyBlockId
 
-public enum class ItemValueSource(val calc: Calculator) : Calculator by calc {
+public enum class ItemValueSource(public val calc: Calculator) : Calculator by calc {
     BASE_ITEM(BaseItemSource),
     RECOMBOBULATOR(RecombobulatorCalculator),
     REFORGE(ReforgeCalculator),

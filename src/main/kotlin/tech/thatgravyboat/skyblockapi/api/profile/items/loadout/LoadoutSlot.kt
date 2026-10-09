@@ -28,7 +28,7 @@ public data class LoadoutSlot(
     fun value(value: String?) = StringMatch(value, source, currentInstant())
 }
 
-public enum class DataSource(val multiplier: Double) {
+public enum class DataSource(public val multiplier: Double) {
     API(0.5),
     OVERVIEW(0.5),
     EDIT(1.0),

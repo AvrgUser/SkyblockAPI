@@ -36,7 +36,7 @@ public enum class GemstoneQuality {
     ;
 }
 
-public enum class GemstoneSlot(vararg val gemstones: Gemstone) {
+public enum class GemstoneSlot(vararg public val gemstones: Gemstone) {
     JADE(Gemstone.JADE), // exists
     AMBER(Gemstone.AMBER), // exists
     TOPAZ(Gemstone.TOPAZ),

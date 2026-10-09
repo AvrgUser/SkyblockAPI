@@ -2,7 +2,7 @@ package tech.thatgravyboat.skyblockapi.api.location
 
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedName
 
-public enum class SkyBlockIsland(val id: String, displayName: String? = null) {
+public enum class SkyBlockIsland(public val id: String, displayName: String? = null) {
     PRIVATE_ISLAND("dynamic"),
     HUB("hub"),
     DUNGEON_HUB("dungeon_hub"),

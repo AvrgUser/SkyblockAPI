@@ -2,7 +2,7 @@ package tech.thatgravyboat.skyblockapi.api.events.info
 
 import tech.thatgravyboat.skyblockapi.api.events.base.SkyBlockEvent
 
-public sealed class CurrencyUpdateEvent<N : Number>(val new: N, val old: N) : SkyBlockEvent() {
+public sealed class CurrencyUpdateEvent<N : Number>(public val new: N, public val old: N) : SkyBlockEvent() {
 
     public class Purse(new: Double, old: Double) : CurrencyUpdateEvent<Double>(new, old)
     public class Bank(new: Long, old: Long) : CurrencyUpdateEvent<Long>(new, old)

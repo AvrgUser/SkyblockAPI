@@ -29,7 +29,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 public typealias SkyBlockItemId = SkyBlockId
 
 @JvmInline
-public value class SkyBlockId private constructor(val id: String) {
+public value class SkyBlockId private constructor(public val id: String) {
     public companion object Companion {
         @JvmStatic
         @get:JvmName("getIdResolverKind")

@@ -3,7 +3,7 @@ package tech.thatgravyboat.skyblockapi.api.area.farming.garden.pests
 import tech.thatgravyboat.skyblockapi.api.area.farming.garden.Crop
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedName
 
-public enum class Pest(val spray: Spray? = null, val vinyl: Vinyl? = null, val crop: Crop? = null) {
+public enum class Pest(public val spray: Spray? = null, public val vinyl: Vinyl? = null, public val crop: Crop? = null) {
     BEETLE(Spray.DUNG, Vinyl.BEETLE, Crop.NETHER_WART),
     CRICKET(Spray.HONEY_JAR, Vinyl.CRICKET_CHOIR, Crop.CARROT),
     FLY(Spray.DUNG, Vinyl.PRETTY_FLY, Crop.WHEAT),

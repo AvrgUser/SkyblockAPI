@@ -4,7 +4,7 @@ import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component
 import tech.thatgravyboat.skyblockapi.utils.text.Text
 
-public enum class TrophyRank(val displayName: Component) {
+public enum class TrophyRank(public val displayName: Component) {
     NOVICE(displayName = Text.of("Novice") { withStyle(ChatFormatting.DARK_GRAY) }),
     ADEPT(displayName = Text.of("Adept") { withStyle(ChatFormatting.GRAY) }),
     EXPERT(displayName = Text.of("Expert") { withStyle(ChatFormatting.GOLD) }),

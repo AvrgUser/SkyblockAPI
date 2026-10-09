@@ -2,7 +2,7 @@ package tech.thatgravyboat.skyblockapi.api.area.isle.kuudra
 
 import tech.thatgravyboat.skyblockapi.utils.extentions.valueOfOrNull
 
-public enum class KuudraTier(val tier: Int) {
+public enum class KuudraTier(public val tier: Int) {
     BASIC(1),
     HOT(2),
     BURNING(3),

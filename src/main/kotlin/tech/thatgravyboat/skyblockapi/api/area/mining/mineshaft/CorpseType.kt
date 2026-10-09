@@ -2,7 +2,7 @@ package tech.thatgravyboat.skyblockapi.api.area.mining.mineshaft
 
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedName
 
-public enum class CorpseType(val key: String? = null) {
+public enum class CorpseType(public val key: String? = null) {
     LAPIS,
     TUNGSTEN("TUNGSTEN_KEY"),
     UMBER("UMBER_KEY"),

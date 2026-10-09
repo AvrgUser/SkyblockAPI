@@ -20,7 +20,7 @@ public abstract class ChatReceivedEvent : SkyBlockEvent() {
         override val coloredText: String = component.string
     }
 
-    public class Post(override var component: Component, var id: String? = null) : ChatReceivedEvent()
+    public class Post(override var component: Component, public var id: String? = null) : ChatReceivedEvent()
 
     override fun post(bus: EventBus) = bus.post(this, null, onError)
 

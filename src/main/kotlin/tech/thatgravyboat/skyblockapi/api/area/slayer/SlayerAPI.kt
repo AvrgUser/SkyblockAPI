@@ -203,12 +203,12 @@ public enum class SlayerMiniBoss(
     BURNINGSOUL_DEMON("Burningsoul Demon", 4, SlayerType.INFERNO_DEMONLORD, true),
 }
 
-public enum class SlayerDemon(override val displayName: String, val slayerType: SlayerType) : SlayerMob {
+public enum class SlayerDemon(override val displayName: String, public val slayerType: SlayerType) : SlayerMob {
     QUAZII("ⓆⓊⒶⓏⒾⒾ", SlayerType.INFERNO_DEMONLORD),
     TYPHOEUS("ⓉⓎⓅⒽⓄⒺⓊⓈ", SlayerType.INFERNO_DEMONLORD)
 }
 
-public enum class SlayerType(override val displayName: String, val otherName: String) : SlayerMob {
+public enum class SlayerType(override val displayName: String, public val otherName: String) : SlayerMob {
     REVENANT_HORROR("Revenant Horror", "Zombie") {
         override val inGameNames = listOf("Revenant Horror", "Atoned Horror")
     },

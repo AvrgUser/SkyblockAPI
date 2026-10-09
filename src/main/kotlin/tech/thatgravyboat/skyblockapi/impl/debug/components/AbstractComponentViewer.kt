@@ -32,7 +32,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.asComponent
 
 public val BACKGROUND = Identifier.withDefaultNamespace("popup/background")
 
-public class AbstractComponentViewer(val map: Map<ComponentViewerCategory, ComponentViewerData>) : Screen(CommonComponents.EMPTY) {
+public class AbstractComponentViewer(public val map: Map<ComponentViewerCategory, ComponentViewerData>) : Screen(CommonComponents.EMPTY) {
     public val categories = map.keys
     public var selectedCategory = map.keys.firstOrNull()
     public var scroll = 0

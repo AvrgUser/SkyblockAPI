@@ -18,7 +18,7 @@ import tech.thatgravyboat.skyblockapi.utils.regex.RegexUtils.match
 
 public data class Commission(val name: String, val area: CommissionArea, var progress: Float)
 
-public enum class CommissionArea(val area: String, val areaCheck: () -> Boolean) {
+public enum class CommissionArea(public val area: String, public val areaCheck: () -> Boolean) {
     DWARVEN_MINES("Dwarven Mines", { SkyBlockIsland.DWARVEN_MINES.inIsland() && !GlaciteAPI.inGlaciteTunnels() }),
     CRYSTAL_HOLLOWS("Crystal Hollows", { SkyBlockIsland.CRYSTAL_HOLLOWS.inIsland() }),
     GLACITE_TUNNELS("Glacite Tunnels", { GlaciteAPI.inGlaciteTunnels() }),

@@ -2,7 +2,7 @@ package tech.thatgravyboat.skyblockapi.api.area.mining.mineshaft
 
 import tech.thatgravyboat.skyblockapi.utils.extentions.toFormattedName
 
-public enum class MineshaftType(val id: String) {
+public enum class MineshaftType(public val id: String) {
     TOPAZ("TOPA"),
     SAPPHIRE("SAPP"),
     AMETHYST("AMET"),
@@ -30,7 +30,7 @@ public enum class MineshaftType(val id: String) {
     }
 }
 
-public enum class MineshaftVariant(val id: String) {
+public enum class MineshaftVariant(public val id: String) {
     ONE("1"),
     TWO("2"),
     CRYSTAL("C");

@@ -7,7 +7,7 @@ import tech.thatgravyboat.skyblockapi.utils.text.Text
 import tech.thatgravyboat.skyblockapi.utils.text.TextColor
 import tech.thatgravyboat.skyblockapi.utils.text.TextStyle.color
 
-public enum class SkyBlockRarity(val color: Int, val skyBlockColor: Int, vararg val alternativeNames: String) {
+public enum class SkyBlockRarity(public val color: Int, public val skyBlockColor: Int, vararg public val alternativeNames: String) {
     COMMON(TextColor.WHITE, SkyBlockColor.WHITE),
     UNCOMMON(TextColor.GREEN, SkyBlockColor.GREEN),
     RARE(TextColor.BLUE, SkyBlockColor.BLUE),
