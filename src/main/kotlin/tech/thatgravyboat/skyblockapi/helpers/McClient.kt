@@ -46,7 +46,7 @@ public object McClient {
         { it.profile.name.lowercase() },
     )
 
-    public val isDev: Boolean = FabricLoader.getInstance().isDevelopmentEnvironment
+    internal val isDev: Boolean = FabricLoader.getInstance().isDevelopmentEnvironment
     public val config: Path = FabricLoader.getInstance().configDir
 
     @Deprecated("Use mcVersion instead")
@@ -204,4 +204,3 @@ public object McClient {
     public fun anyModInstalled(modIds: Collection<String>): Boolean = modIds.any { FabricLoader.getInstance().isModLoaded(it) }
     public fun anyModInstalled(vararg modIds: String): Boolean = anyModInstalled(modIds.asList())
 }
-
